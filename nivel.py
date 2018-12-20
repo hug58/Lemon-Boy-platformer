@@ -16,7 +16,75 @@ ANCHO,ALTO = 1000,520
 	Mejorar la decteción de colisión con respecto al salto	
 """
 	
-		
+map1 =[ "#------------------------",
+			"#------------------------",
+			"#------------------------",
+			"##-----------------------",
+			"#E-------P-------B-----S-",
+			"####---###-----####---###",
+			"#-----XX#-----#######--##",
+			"#-----###-----########--#",
+			"##------#-----####-----##",
+			"#X----###-----####----###",
+			"##------------L------####",
+			"####------XX--###########",
+			"#########################"]
+map2 =[ "#########################",
+			"#-----------------------#",
+			"#-----------------------#",
+			"#-----XX----------------#",
+			"#L-x--##-T-P------------#",
+			"#####---###########---###",
+			"#-------------------#--##",
+			"#-------------####-###--#",
+			"##----------B#---------##",
+			"#X--------#####------x###",
+			"###----X#########----####",
+			"#-E---#############X---S-",
+			"#########################"] 				
+
+map3 =	 [  "#########################",
+			"###----------------------",
+			"##-----------------------",
+			"#-----------------B----S-",
+			"#-----------T---X########",
+			"###---#######---#-------#",
+			"#-P-#-----#-------------#",
+			"#######X----#--##-----L-#",
+			"#------##----------x-##-#",
+			"#--------##--------#----#",
+			"#------------##---------#",
+			"#E---------------##-----#",
+			"#########################"]
+
+map4 =[ "#########################",
+			"#-----------------------#",
+			"#------------L----------#",
+			"#-----------##----------#",
+			"#-------P-B---T-X##--####",
+			"#-------####--#-##-----##",
+			"#---------------##-------",
+			"#-----------T---##-X-X---",
+			"#E----------#---##-#-#---",
+			"##------------T-##-----S-",
+			"#--P##--##----#-##--#--##",
+			"#XX###XXX#X##XXXX#XXX#---",
+			"#########################"]
+
+map5 =		[ "#########################",
+			"#-----------------------#",
+			"#-----------------------#",
+			"#-----------------------#",
+			"#-----------------------#",
+			"#-----------------------#",
+			"#-----------------------#",
+			"#-----------------------#",
+			"#-----------------------#",
+			"#-----------------------#",
+			"#------------------------",
+			"#E-L-------------------S-",
+			"#########################"] 
+
 class Nivel(pygame.sprite.Sprite):
 
 	def __init__(self):
@@ -27,6 +95,7 @@ class Nivel(pygame.sprite.Sprite):
 		self.group_dead = pygame.sprite.Group()
 		self.group_lemones = pygame.sprite.Group()
 		self.group_enemy = pygame.sprite.Group()
+		self.group_sprites = pygame.sprite.Group()
 
 		"""
 				ALFHA RECOSTRUIR
@@ -34,24 +103,23 @@ class Nivel(pygame.sprite.Sprite):
 
 		self.prox_nivel = None
 		self.prox_escena = None
-
 		self.colision = colisiones.Colisiones()
-		self.colision_enemy = colisiones.Colisiones()
-		self.map = None
 		
+		self.cont  = 0
+		self.maps = [map1,map2,map3,map4,map5]
+		self.map = self.maps[0]
+		
+
 	def update(self):
 		self.group_general.update()
 		self.player.update()		
-		self.colision.estaticos(self.player,self.group_inmovil)
-		self.colision.salto(self.player,self.group_trampolin)
-		self.colision.muerto(self.player,self.group_dead,self.llave)
-		self.colision.lemon(self.player,self.group_lemones)		
 
-		for enemy in self.group_enemy:
-			self.colision_enemy.estaticos(enemy,self.group_inmovil)
-			self.colision_enemy.salto(enemy,self.group_trampolin)
-			self.colision_enemy.muerto(enemy,self.group_dead,self.llave)
-			self.colision_enemy.lemon(enemy,self.group_lemones)	
+
+		for sprites in self.group_sprites:
+			self.colision.estaticos(sprites,self.group_inmovil)
+			self.colision.salto(sprites,self.group_trampolin)
+			self.colision.muerto(sprites,self.group_dead,self.llave)
+			self.colision.lemon(sprites,self.group_lemones)	
 			
 
 		if self.player.rect.colliderect(self.llave.rect):
@@ -61,14 +129,18 @@ class Nivel(pygame.sprite.Sprite):
 			
 		if self.player.rect.colliderect(self.puerta.rect):
 			if self.player.llave == True:
+				
+				self.cont +=1
+				self.map = self.maps[self.cont]
 				self.puerta.activar_animacion = True
-				self.prox_escena = self.prox_nivel
-						
+
 
 	def draw(self,VENTANA):
 		
 		self.group_general.draw(VENTANA)
 		VENTANA.blit(self.player.image,self.player.rect)
+
+	
 
 	def generate(self):
 
@@ -87,9 +159,8 @@ class Nivel(pygame.sprite.Sprite):
 					self.player = None
 					j = Player.Player(x,y)
 					self.player = j
-					#self.player.rect.x = x
-					#self.player.rect.y = y
-					#self.group_general.add(self.player)
+					self.group_sprites.add(j)
+
 
 				elif self.map[i][j] == "#":
 					j = Elementos.Block(x,y,(20*2,20*2),(0,0))
@@ -126,20 +197,28 @@ class Nivel(pygame.sprite.Sprite):
 					self.group_trampolin.add(j)
 
 				elif self.map[i][j] == "B":	
-					pass
+					j = Player.Enemy(x,y)
+					self.group_general.add(j)
+					self.group_enemy.add(j)
+					self.group_sprites.add(j)
 
 
 				x +=40
 
 
+
+
 			x = 0
 			y +=40
 
-		x,y = 0,0
+		for i in self.group_enemy:
+			i.player = self.player
+		#x,y = 0,0
 
 
 
-		for i in range(len(self.map)):
+
+		"""for i in range(len(self.map)):
 			for j in range(len(self.map[0])):
 				if self.map[i][j] == "B":	
 					j = Player.Enemy(x,y,self.player)
@@ -155,84 +234,4 @@ class Nivel(pygame.sprite.Sprite):
 		
 
 		print(len(self.group_enemy))
-
-
-class Nivel1(Nivel):
-	def __init__(self):
-		Nivel.__init__(self)
-		self.prox_nivel = Nivel3()
-		self.prox_escena = None
-		self.map =[ "#------------------------",
-					"#------------------------",
-					"#------------------------",
-					"##-----------------------",
-					"#E-------P-------B-----S-",
-					"####---###-----####---###",
-					"#-----XX#-----#######--##",
-					"#-----###-----########--#",
-					"##------#-----####-----##",
-					"#X----###-----####----###",
-					"##------------L------####",
-					"####------XX--###########",
-					"#########################"] 
-
-class Nivel2(Nivel):
-	def __init__(self):
-		Nivel.__init__(self)
-		self.prox_nivel = Nivel3()
-		self.prox_escena = None
-		self.map =[ "#########################",
-					"#-----------------------#",
-					"#-----------------------#",
-					"#-----XX----------------#",
-					"#L-x--##-T-P------------#",
-					"####----###########---###",
-					"#-------------------#--##",
-					"#-------------####-###--#",
-					"##----------B#---------##",
-					"#X--------#####------x###",
-					"###----X#########----####",
-					"#-E---#############X---S-",
-					"#########################"] 
-
-class Nivel3(Nivel):
-	def __init__(self):
-		Nivel.__init__(self)
-		self.prox_nivel = Nivel4()
-		self.prox_escena = None
-		self.map =[ "#########################",
-					"###----------------------",
-					"##-----------------------",
-					"#-----------------B----S-",
-					"#-----------T---X########",
-					"###---#-#####---#-------#",
-					"#-P-#-----#-------------#",
-					"#######X----#--##-----L-#",
-					"#------##----------x-##-#",
-					"#--------##--------#----#",
-					"#------------##---------#",
-					"#E---------------##-----#",
-					"#########################"] 
-
-class Nivel4(Nivel):
-	def __init__(self):
-		Nivel.__init__(self)
-		self.prox_nivel  = None
-		self.prox_escena = None
-		self.map =[ "#########################",
-					"#-----------------------#",
-					"#------------L----------#",
-					"#-----------##----------#",
-					"#-------P-B---T-X##--####",
-					"#-------####--#-##-----##",
-					"#---------------##-------",
-					"#-----------T---##-X-X---",
-					"#E----------#---##-#-#---",
-					"##------------T-##-----S-",
-					"#--P##--##----#-##--#--##",
-					"#XX###XXX#X##XXXX#XXX#---",
-					"#########################"] 
-
-
-
-
+		"""

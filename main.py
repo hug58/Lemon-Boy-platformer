@@ -20,11 +20,10 @@ class Fondo(pygame.sprite.Sprite):
 
 class Escena():
 	def __init__(self):
-		self.escena = nivel.Nivel1()
+		self.escena = nivel.Nivel()
 		self.escena.generate()
 		#print(len(self.escena.group_inmovil))
-		self.fondo = Fondo()
-
+		#self.fondo = Fondo()
 		self.cerrar = False
 		self.clock = pygame.time.Clock()
 		
@@ -39,6 +38,8 @@ class Escena():
 		self.escena.group_dead.empty()
 		self.escena.group_lemones.empty()
 		self.escena.group_enemy.empty()
+		self.escena.group_sprites.empty()
+		self.escena.group_trampolin.empty()
 		self.escena.generate()		
 
 	def loop(self):
@@ -47,8 +48,7 @@ class Escena():
 			self.clock.tick(40)
 			self.escena.update()
 			
-			if self.escena.player.reset_automatico == True:
-				self.reset()
+
 
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
@@ -78,18 +78,17 @@ class Escena():
 			#		self.escena.player.direccionx = -1
 			#		self.escena.player.vlx -=1
 
-
-			if self.escena.prox_escena != None:
-				self.escena = self.escena.prox_escena
+			if self.escena.player.reset_automatico == True:
 				self.reset()
-			
-			#print(self.joystick.get_name())			
-			#print(self.joystick.get_button(3))
+
+			if self.escena.puerta.activar_animacion == True:
+				self.reset()
+				
+				
+
 			VENTANA.fill(COLOR)
-			#VENTANA.blit(self.fondo.image,self.fondo.rect)
 			self.escena.draw(VENTANA)
 			
-
 		
 			pygame.display.flip()
 
