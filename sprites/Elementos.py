@@ -149,7 +149,6 @@ class Trampolin(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect()
 		self.rect.x = x + 10
 		self.rect.y = y + self.rect.height + 20
-		#self.add(group)
 		self.vlx = 0
 		self.vly = 0
 		self.activar_animacion= False
@@ -195,13 +194,13 @@ class Puerta(pygame.sprite.Sprite):
 		self.rect.y = y -40
 		self.list_frame = [(356*2,89*2),(408*2,89*2),(510*2,89*2)]
 		self.frame_current = 0
-		self.activar_animacion= False
+		self.activar_animacion= None
 		self.animacion = Animation.Animation(len(self.list_frame),(39*2,42*2),self.puerta)
 
 	def update(self):
 		
 		if self.activar_animacion == True:
-			self.image = self.animacion.basic(self.list_frame,4)
+			self.image = self.animacion.basic(self.list_frame,0)
 			if self.animacion.cont >= 3:
 				self.image = self.puerta.subsurface(self.pos_inicial)		
 				self.activar_animacion = False

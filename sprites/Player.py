@@ -150,7 +150,7 @@ class Player(pygame.sprite.Sprite):
 		
 				
 class Enemy(pygame.sprite.Sprite):
-	def __init__(self,x,y,player):
+	def __init__(self,x,y):
 		pygame.sprite.Sprite.__init__(self)
 
 		self.hoja_sprite = pygame.image.load(os.path.abspath("sprites") + "/image/enemy.png")
@@ -172,12 +172,16 @@ class Enemy(pygame.sprite.Sprite):
 		self.direccionx = 1
 		self.direcciony = 0
 		self.fuerza_gravitatoria = 2.0
-		self.player = player
-		self.distancia = math.sqrt(	(	(self.rect.x - self.player.rect.x )**2 + (self.rect.y - self.player.rect.y)**2	)	)
-		
+		self.player = None
+
+			
 	def update(self):
 		if self.dead == False:
-			self.seguir()
+			try:
+				self.seguir()
+			except:
+				pass
+			
 		else:
 			self.kill()
 
