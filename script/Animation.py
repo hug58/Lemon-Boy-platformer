@@ -11,6 +11,7 @@ class Animation:
 		self.tamano = tamano
 		self.lados = lados	
 		self.limite = 20
+		
 	def sprites(self,vlx,vly,direccion_x,pos_frame,salto = None):
 		if vlx == 0:
 			if self.lados != None:
@@ -52,12 +53,13 @@ class Animation:
 	def basic(self,lista,repetir = 0,loop = False ):
 				
 		self.image = self.hoja_sprite.subsurface(lista[self.frame_current],self.tamano)	
-		if self.frame_current < self.frame -1:
+		if self.frame_current < self.frame-1:
 			self.step +=5
 			if self.step >= self.limite:			
 				self.frame_current +=1
 				self.step = 0
 		else:
+
 			if loop == False:		
 				self.cont +=1
 				if self.cont < repetir:
@@ -83,6 +85,7 @@ class New_Animation:
 			self.image = self.hoja.subsurface(self.posiciones[self.frame_current], self.tamano )				
 		elif flip == False:
 			self.image = pygame.transform.flip(self.hoja.subsurface(self.posiciones[self.frame_current], self.tamano ),True,False)					
+		
 		if self.frame_current < len(self.posiciones) -1:
 			self.step +=5
 			if self.step >=30:	
@@ -93,6 +96,10 @@ class New_Animation:
 			self.frame_current = 0	
 
 		return self.image
+
+class New_new_animation():
+	def __init__(self):
+		pass
 
 def main():
 	pass
