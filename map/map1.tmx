@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="40" height="24" tilewidth="20" tileheight="20" infinite="0" nextobjectid="11">
+ <tileset firstgid="1" source="pasto.tsx"/>
+ <tileset firstgid="2" source="night.tsx"/>
+ <layer name="Capa de Patrones 1" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztziESACAMA7DS/z96fodDYCLi0yQFAABYzsXvE7wYU0wHfA==
+  </data>
+ </layer>
+ <layer name="pasto" width="40" height="24">
+  <data encoding="base64" compression="zlib">
+   eJzt0LEJAEAIBEHtv+lvQFAeM2dg0wsuAgAAgB9ZdFn1x8Y33e60Bx6EACA=
+  </data>
+ </layer>
+ <objectgroup name="plataform">
+  <object id="1" name="plataform" x="0" y="460.013" width="160.364" height="20.1692"/>
+  <object id="2" name="plataform" x="240.036" y="420" width="99.9644" height="20.0021"/>
+  <object id="3" name="plataform" x="440" y="459.994" width="360.072" height="20.0056"/>
+  <object id="6" name="plataform" x="379.996" y="379.996" width="100.027" height="20.0127"/>
+ </objectgroup>
+ <objectgroup name="objs">
+  <object id="5" name="Door" type="YELLOW" x="752.364" y="401.273" width="6.72727" height="6.18182"/>
+  <object id="7" name="Key" x="419.568" y="360.273" width="7.25" height="4"/>
+  <object id="8" name="Player" x="15" y="435.25" width="6.5" height="5"/>
+ </objectgroup>
+</map>
