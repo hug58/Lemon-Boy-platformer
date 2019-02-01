@@ -29,11 +29,11 @@ class Trap(pygame.sprite.Sprite):
 		pygame.sprite.Sprite.__init__(self)
 		self.trap = pygame.image.load(ruta_base + "spikes.png")
 		self.frames = 8
-		self.image = self.trap.subsurface((0,0),(30,30))
+		self.image = self.trap.subsurface((0,0),(32,32))
 		self.rect = self.image.get_rect()
 		self.rect.x = x 
 		self.rect.y = y 
-		self.mask = None
+		self.mask = pygame.mask.from_surface(self.image)
 		self.position = 0
 		self.activate = False
 		self.cont = 0
@@ -43,7 +43,8 @@ class Trap(pygame.sprite.Sprite):
 
 	def animation(self):
 		if self.activate == False:
-			self.image = self.trap.subsurface((32*self.position,0),(32,32)) 			
+			self.image = self.trap.subsurface((32*self.position,0),(32,32)) 
+			self.mask = pygame.mask.from_surface(self.image)			
 			self.position +=1
 			if self.position == self.frames:
 				self.activate = True
@@ -63,7 +64,8 @@ class Trap(pygame.sprite.Sprite):
 				if self.cont == 35:
 					self.activate = False
 
-			self.image = self.trap.subsurface((32*self.position,0),(32,32)) 	
+			self.image = self.trap.subsurface((32*self.position,0),(32,32)) 
+			self.mask = pygame.mask.from_surface(self.image)	
 			
 			
 
