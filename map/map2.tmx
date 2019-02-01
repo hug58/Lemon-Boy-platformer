@@ -1,54 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="20" tileheight="20" infinite="0" nextobjectid="99">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="60" height="20" tilewidth="32" tileheight="32" infinite="0" nextobjectid="32">
  <tileset firstgid="1" source="pasto.tsx"/>
- <tileset firstgid="2" source="night.tsx"/>
- <layer name="background" width="32" height="32">
+ <layer name="background" width="60" height="20">
   <data encoding="base64" compression="zlib">
-   eJztwwEJAAAMBKHj+4dej6HgqqmqqqqvHyPACAE=
+   eJztwTEBAAAAwqD1T20ND6AAAAAA4NcAEsAAAQ==
   </data>
  </layer>
- <layer name="plataform" width="32" height="32">
+ <layer name="plts" width="60" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt1ksKACAIBNC6/6VbtKxIys8o86C1I4rUGtFed3i3mp4k+aqJ7lNrbxBkyouay0qWuZy8ZtXq0fruS+pWhLiXzLFCmg9NUXcoYg+samX/c9GfAaOoAI4=
+   eJztlEsKwCAMRLX2e/8LVxcFCUlItILCPJhNnSZOTQ0BAAAAAGB9YtYmKBn9nG9W9qxD0Gn0c75ZubJuQY/Rz/lmoczjSvPXSzmfmc8D+PDev6N6Sr1q7x94798WaD5Pr3p/Wu3EPOO+5ci8X1+pfm/eKLxPM2lrf+bVarfkpf8AraHNj7bG+agonMea1Zr3BYfNA0I=
   </data>
  </layer>
- <objectgroup name="plts">
-  <object id="1" name="plataform" x="0.08333" y="560.06" width="199.892" height="19.9394"/>
-  <object id="4" name="plataform" x="200.002" y="520.046" width="99.8101" height="20.0706"/>
-  <object id="5" name="plataform" x="319.979" y="500.042" width="320.021" height="19.9695"/>
-  <object id="6" name="plataform" x="199.968" y="439.982" width="80.042" height="20.0441"/>
-  <object id="7" name="plataform" x="140" y="420" width="59.9465" height="19.899"/>
-  <object id="9" name="plataform" x="99.8333" y="400" width="60.25" height="20.0417"/>
-  <object id="12" name="plataform" x="-1.33333" y="380.022" width="121.366" height="19.9778"/>
-  <object id="16" name="plataform" x="519.943" y="260" width="120.057" height="19.9792"/>
-  <object id="18" name="plataform" x="379.917" y="199.994" width="140.083" height="20.0056"/>
-  <object id="19" name="plataform" x="0.04167" y="180.011" width="279.969" height="20"/>
-  <object id="20" name="plataform" x="60.0145" y="119.913" width="19.8887" height="20.0724"/>
-  <object id="21" name="plataform" x="139.991" y="79.998" width="499.053" height="19.9855"/>
-  <object id="24" name="Player" x="8.15151" y="540.031" width="11.3334" height="8.66663"/>
-  <object id="28" name="plataform" x="299.984" y="500.022" width="20.0652" height="39.9783"/>
-  <object id="29" name="plataform" x="159.5" y="339.996" width="60.5" height="20.004"/>
-  <object id="34" name="plataform" x="200" y="319.875" width="399.5" height="20.125"/>
-  <object id="35" name="plataform" x="480" y="299.989" width="20.0078" height="19.8747"/>
-  <object id="38" name="plataform" x="599.967" y="219.989" width="40.0222" height="20.0215"/>
-  <object id="47" name="plataform" x="0" y="160" width="40.125" height="20"/>
-  <object id="55" name="Trampoline" x="381" y="178" width="22" height="21"/>
-  <object id="60" name="plataform" x="200.015" y="299.94" width="19.9855" height="19.9717"/>
-  <object id="65" name="plataform" x="0" y="1.33333" height="578.667"/>
-  <object id="68" name="plataform" x="640" y="0.125" height="642.542"/>
-  <object id="73" name="plataform" x="79.9276" y="100" width="79.7391" height="40.0729"/>
-  <object id="97" name="plataform" x="200" y="540.005" width="19.9961" height="40.245"/>
- </objectgroup>
  <objectgroup name="objs">
-  <object id="58" name="Door" type="YELLOW" x="587" y="21.1667" width="16" height="13"/>
-  <object id="81" name="arrow" type="right" x="482.333" y="309" width="6" height="6"/>
-  <object id="83" name="arrow" type="left" x="211.67" y="308" width="6" height="6"/>
-  <object id="95" name="Key" x="616.333" y="476" width="7.66667" height="7.33333"/>
- </objectgroup>
- <objectgroup name="enemies">
-  <object id="48" name="Dog" type="left" x="463.667" y="470.583" width="13.6667" height="9"/>
-  <object id="49" name="Dog" type="right" x="270" y="52.833" width="10.1667" height="5.66667"/>
-  <object id="50" name="gentleman" x="422" y="180" width="15" height="13"/>
-  <object id="53" name="gentleman" x="489.5" y="49" width="15" height="10"/>
+  <object id="11" name="plataform" x="1824" y="480" width="96.5" height="159.5"/>
+  <object id="12" name="plataform" x="1471.33" y="480.333" width="193" height="159.333"/>
+  <object id="13" name="plataform" x="1343.82" y="512" width="127.682" height="32.25"/>
+  <object id="14" name="plataform" x="1280" y="544" width="64.5" height="64"/>
+  <object id="15" name="plataform" x="1119.99" y="607.667" width="160.011" height="32.3222"/>
+  <object id="16" name="Player" x="26.6667" y="562.667" width="8" height="10"/>
+  <object id="17" name="plataform" x="0.00390625" y="608" width="160.004" height="32"/>
+  <object id="18" name="plataform" x="159.979" y="543.996" width="96.0206" height="63.8217"/>
+  <object id="19" name="plataform" x="256.05" y="608.008" width="63.9806" height="31.9866"/>
+  <object id="20" name="plataform" x="319.996" y="544" width="160.008" height="64.0078"/>
+  <object id="21" name="plataform" x="480" y="607.984" width="64" height="32.0234"/>
+  <object id="22" name="plataform" x="544.017" y="480" width="255.978" height="128.022"/>
+  <object id="23" name="plataform" x="800" y="608" width="192" height="32"/>
+  <object id="24" name="plataform" x="799.967" y="288.011" width="255.533" height="95.9833"/>
+  <object id="26" name="plataform" x="1183.98" y="287.999" width="192.028" height="96.0236"/>
+  <object id="27" name="Door" type="YELLOW" x="1852.83" y="421.83" width="4" height="10.5"/>
+  <object id="29" name="plataform" x="127.909" y="574.974" width="32.0625" height="32.0241"/>
+  <object id="30" name="plataform" x="671.938" y="384" width="64.0625" height="63.75"/>
+  <object id="31" name="Key" type="YELLOW" x="1275" y="262" width="8" height="8.5"/>
  </objectgroup>
 </map>
