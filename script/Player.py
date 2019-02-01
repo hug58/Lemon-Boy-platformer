@@ -2,9 +2,7 @@ import pygame
 import os.path
 from script import Animation
 from script import Sprite
-ANCHO,ALTO = 1000,700
-CANDY = (252,156,238)
-RED = pygame.Color("#C65065")
+
 ruta_base =  os.path.abspath("")
 ruta_base += "/image/"
 
@@ -12,7 +10,7 @@ ruta_base += "/image/"
 #ruta_sound += "/sound/"
 
 class Player(Sprite.Sprite):
-	def __init__(self,x,y,group):
+	def __init__(self,x,y,game):
 		Sprite.Sprite.__init__(self)
 		 
 		self.hoja_sprites = pygame.image.load(ruta_base +"Hugo_Juego.png")
@@ -22,7 +20,7 @@ class Player(Sprite.Sprite):
 		self.frame_salto = pygame.Rect(	(234,45), (16,29)	)		
 		self.run = Animation.Animation(len(self.list_frame),(16,29),self.hoja_sprites,lados = self.frame_estatico)
 		self.image = self.pedazo_frame
-		#self.mask = pygame.mask.from_surface(self.image)
+		self.mask = pygame.mask.from_surface(self.image)
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y -self.rect.height
@@ -30,10 +28,10 @@ class Player(Sprite.Sprite):
 		self.vlx = 0
 		self.direccionx = 1
 		self.direcciony = 0
-		self.dead = False
+		self.dead = None
 		self.detener = False
 		self.fuerza_gravitatoria = 1.6
-		self.group = group
+		self.game = game
 		self.cont_jump = 2
 		self.keys = {	'KEY_YELLOW': False,'KEY_BLUE': False,
 						'KEY_RED': False,
@@ -46,7 +44,7 @@ class Player(Sprite.Sprite):
 	def update(self):
 		
 		self.image = self.run.sprites(self.vlx,self.vly,self.direccionx,self.list_frame,self.frame_salto)
-		#self.mask = pygame.mask.from_surface(self.image)
+		self.mask = pygame.mask.from_surface(self.image)
 		self.move()
 		self.life()
 			
@@ -65,6 +63,7 @@ class Player(Sprite.Sprite):
 		self.cont_jump = 0
 		self.gravity()
 		self.collided()
+		self.collided_trap()
 
 
 	def move(self):

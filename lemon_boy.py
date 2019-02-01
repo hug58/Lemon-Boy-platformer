@@ -67,17 +67,16 @@ class Plataform(pygame.sprite.Sprite):
 		self.rect.y = y
 
 class Spikes(pygame.sprite.Sprite):
-	def __init__(self,x,y,w,h,player):
+	def __init__(self,x,y,w,h,game):
 		pygame.sprite.Sprite.__init__(self)
 		self.rect = pygame.Rect((x,y),(w,h))
 		self.rect.x = x
 		self.rect.y = y
-		self.player = player
+		self.game = game
 
 	def update(self):
-		if self.rect.colliderect(self.player.rect):
-			self.player.dead = True
-
+		if self.rect.colliderect(self.game.player.rect):
+			self.game.player.dead = True
 
 class Game:
 	def __init__(self):
@@ -100,12 +99,12 @@ class Game:
 		for sprite in self.map.tmxdata.objectgroups:
 			for tile_object in sprite:
 				if tile_object.name == "Player":
-					self.player = Player.Player(tile_object.x,tile_object.y,self.plataform)
+					self.player = Player.Player(tile_object.x,tile_object.y,self)
 
 		for tile_object in self.map.tmxdata.objects:
 			if tile_object.name == "Door":
 				if tile_object.type == "YELLOW":
-					self.objs.add(Element.Door(tile_object.x,tile_object.y,self.player,"YELLOW"))
+					self.objs.add(Element.Door(tile_object.x,tile_object.y,self,"YELLOW"))
 
 			elif tile_object.name == "Spike_trap":
 					self.trap.add(Element.Trap(tile_object.x,tile_object.y))
@@ -114,22 +113,22 @@ class Game:
 				self.plataform.add(Plataform(tile_object.x,tile_object.y,tile_object.width,tile_object.height))
 
 			elif tile_object.name == "Skull":
-				self.enemies.add(Enemies.Skull(tile_object.x,tile_object.y,self.plataform,self.player.rect))
+				self.enemies.add(Enemies.Skull(tile_object.x,tile_object.y,self))
 
 			elif tile_object.name == "Dog":
 				if tile_object.type == "left":
-					self.enemies.add(Enemies.Dog(tile_object.x,tile_object.y,self.plataform,"left"))
+					self.enemies.add(Enemies.Dog(tile_object.x,tile_object.y,self,"left"))
 				elif tile_object.type == "right":
-					self.enemies.add(Enemies.Dog(tile_object.x,tile_object.y,self.plataform,"right"))
+					self.enemies.add(Enemies.Dog(tile_object.x,tile_object.y,self,"right"))
 
 			elif tile_object.name == "Key":
-				self.objs.add(Element.Key(tile_object.x,tile_object.y,self.player))
+				self.objs.add(Element.Key(tile_object.x,tile_object.y,self))
 
 			elif tile_object.name == "Spike":
-				self.spike.add(Spikes(tile_object.x,tile_object.y,tile_object.width,tile_object.height,self.player))
+				self.spike.add(Spikes(tile_object.x,tile_object.y,tile_object.width,tile_object.height,self))
 
 			elif tile_object.name == "jump":
-				self.objs.add(Element.Trampoline(tile_object.x,tile_object.y,self.player))
+				self.objs.add(Element.Trampoline(tile_object.x,tile_object.y,self))
 		
 
 	def update(self):

@@ -26,14 +26,14 @@ class Enemy(Sprite.Sprite):
 				self.vl *=-1
 
 	def follow(self):
-		self.distancia = math.sqrt(	(	(self.rect.x - self.player.rect.x )**2 + (self.rect.y - self.player.rect.y)**2	)	)
+		self.distancia = math.sqrt(	(	(self.rect.x - self.game.player.rect.x )**2 + (self.rect.y - self.game.player.rect.y)**2	)	)
 		if self.distancia < 200:
-			if self.player.rect.left < self.rect.left:
+			if self.game.player.rect.left < self.rect.left:
 				self.vlx = -self.vl
-			elif self.player.rect.right > self.rect.right:
+			elif self.game.player.rect.right > self.rect.right:
 				self.vlx = self.vl
 			
-			if self.player.rect.left == self.rect.right or self.player.rect.right == self.rect.left:
+			if self.game.player.rect.left == self.rect.right or self.game.player.rect.right == self.rect.left:
 				self.vlx = 0
 
 		else:
@@ -61,8 +61,9 @@ class Enemy_Rect(Enemy):
 
 
 class Skull(Enemy):
-	def __init__(self,x,y,group,Object,sentido = True):
+	def __init__(self,x,y,game,sentido = True):
 		Enemy.__init__(self)
+		self.game = game
 		self.position = 1 
 		self.position_state = 1
 		self.sentido = sentido
@@ -79,15 +80,9 @@ class Skull(Enemy):
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y
-		#self.pos_patrullandox = 0
-		#self.player = player
 		self.distancia = None
 		self.delay = 20
 		self.cont = 0
-		self.group = group
-		self.element = "skull"
-		
-		self.Object = Object
 		self.cont_bullet = 0
 		
 		
@@ -100,7 +95,7 @@ class Skull(Enemy):
 		self.collided()
 			
 	def seguimiento(self):
-		self.distancia = math.sqrt(	(	(self.Object.x - self.rect.x )**2 + (self.Object.y - self.rect.y)**2	)	)
+		self.distancia = math.sqrt(	(	(self.game.player.x - self.rect.x )**2 + (self.game.player.y - self.rect.y)**2	)	)
 		self.cont += 5
 		if self.distancia < 250:			
 			if self.cont >= self.delay:		
@@ -159,7 +154,6 @@ class Skull(Enemy):
 			if bullet.rect.x <= 0:
 				bullet.kill()
 
-
 class Lord_of_the_flies(Enemy):
 	def __init__(self,x,y,group):
 		Enemy.__init__(self)
@@ -191,7 +185,7 @@ class Lord_of_the_flies(Enemy):
 		self.collided()
 
 class Dog(Enemy):
-	def __init__(self,x,y,group,sentido):#player):
+	def __init__(self,x,y,game,sentido):#player):
 		Enemy.__init__(self)
 		frames = [pygame.image.load(ruta_base + "sprites/dog1.png"),
 				  pygame.image.load(ruta_base + "sprites/dog2.png"),
@@ -205,7 +199,7 @@ class Dog(Enemy):
 		self.rect.y = y
 		self.animacion = Sprite.animation(frames,self.scale_x,self.scale_y)
 		self.animacion.limite = 3
-		self.group = group
+		self.game = game
 		#self.player = player
 		self.pos_patrullandox = self.rect.x
 

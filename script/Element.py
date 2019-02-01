@@ -1,7 +1,7 @@
 import pygame
 import os.path
 import random
-from script import Animation
+
 
 WHITE2 =  (252,252,238)
 LEMON = (249,215,0)
@@ -9,7 +9,6 @@ GREEN = (140,196,51)
 
 ruta_base =  os.path.abspath("")
 ruta_base += "/image/"
-
 
 class Block(pygame.sprite.Sprite):
 	def __init__(self,x,y,scale):
@@ -36,6 +35,7 @@ class Trap(pygame.sprite.Sprite):
 		self.mask = pygame.mask.from_surface(self.image)
 		self.position = 0
 		self.activate = False
+		self.activate_spike = False
 		self.cont = 0
 
 	def update(self):
@@ -43,6 +43,7 @@ class Trap(pygame.sprite.Sprite):
 
 	def animation(self):
 		if self.activate == False:
+			self.activate_spike = False
 			self.image = self.trap.subsurface((32*self.position,0),(32,32)) 
 			self.mask = pygame.mask.from_surface(self.image)			
 			self.position +=1
@@ -61,36 +62,31 @@ class Trap(pygame.sprite.Sprite):
 			
 			elif self.position == 0:
 				self.cont +=1
+				self.activate_spike = True
 				if self.cont == 35:
 					self.activate = False
 
 			self.image = self.trap.subsurface((32*self.position,0),(32,32)) 
 			self.mask = pygame.mask.from_surface(self.image)	
 			
-			
-
-
-
-
-
 class Key(pygame.sprite.Sprite):
-	def __init__(self,x,y,Object):
+	def __init__(self,x,y,game):
 		pygame.sprite.Sprite.__init__(self)
 		self.image =pygame.transform.scale( pygame.image.load(ruta_base + "key.png"),(8,15))	
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y
-		self.Object = Object
+		self.game = game
 
 	def update(self):
-		if self.rect.colliderect(self.Object.rect):
-			print(self.Object.keys['KEY_YELLOW'])
-			self.Object.keys['KEY_YELLOW'] = True
-			print(self.Object.keys['KEY_YELLOW'])
+		if self.rect.colliderect(self.game.player.rect):
+			print(self.game.player.keys['KEY_YELLOW'])
+			self.game.player.keys['KEY_YELLOW'] = True
+			print(self.game.player.keys['KEY_YELLOW'])
 			self.kill()
 
 class Trampoline(pygame.sprite.Sprite):
-	def __init__(self,x,y,player):
+	def __init__(self,x,y,game):
 		pygame.sprite.Sprite.__init__(self)
 		self.frames = [(0,0),(21,0),(41,0),(58,0),(76,0),(21,20),(39,20),(56,20),(76,20)]
 		
@@ -107,13 +103,13 @@ class Trampoline(pygame.sprite.Sprite):
 		#self.cont = 0
 		self.position = 0
 
-		self.player = player
+		self.game = game
 		self.activate = False
 
 	def update(self):
-		if self.rect.colliderect(self.player.rect):
+		if self.rect.colliderect(self.game.player.rect):
 			self.activate = True
-			self.player.vly = self.jump()
+			self.game.player.vly = self.jump()
 
 		self.animation()
 
@@ -134,16 +130,13 @@ class Trampoline(pygame.sprite.Sprite):
 			self.image = self.tramp.subsurface(self.frames[self.position],(13,9)) 			
 			self.image = pygame.transform.scale(self.image,(32,32))
 
-
 		return self.image
-		
-		
+				
 	def jump(self, vl = -20):
 		return vl
 
-
 class Door(pygame.sprite.Sprite):
-	def __init__(self,x,y,Object,Type):
+	def __init__(self,x,y,game,Type):
 		pygame.sprite.Sprite.__init__(self)
 		self.position = 1
 		if Type == "YELLOW":
@@ -153,7 +146,7 @@ class Door(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y 
-		self.Object = Object
+		self.game = game
 		
 		self.open = False
 		self.cont = 0
@@ -162,8 +155,8 @@ class Door(pygame.sprite.Sprite):
 		self.next = None
 
 	def update(self):
-		if self.rect.colliderect(self.Object.rect):
-			if self.Object.keys['KEY_YELLOW'] == True:
+		if self.rect.colliderect(self.game.player.rect):
+			if self.game.player.keys['KEY_YELLOW'] == True:
 				self.open = True
 
 		if self.open == True: 			
@@ -183,7 +176,6 @@ class Door(pygame.sprite.Sprite):
 			self.cont = 0 
 
 		return self.image
-
 		
 class Lemon(pygame.sprite.Sprite):
 	def __init__(self,x,y):
