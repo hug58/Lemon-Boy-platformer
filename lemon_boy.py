@@ -1,5 +1,6 @@
 import pygame
 import pytmx
+#import script 
 from script import Player
 from script import Enemies
 from script import Element
@@ -11,7 +12,7 @@ WIDTH = 420
 HEIGHT = 420
 
 SCREEN = pygame.display.set_mode((WIDTH,HEIGHT))
-pygame.display.set_caption("Project Lemon 0.4.0")
+pygame.display.set_caption("Project Hugo")
  
 
 class TileMap:
@@ -179,7 +180,7 @@ def Main():
 	clock = pygame.time.Clock()
 	game = Game()
 	game.load()
-	cont = 0
+
 	while exit == False:
 		clock.tick(35)
 		for event in pygame.event.get():

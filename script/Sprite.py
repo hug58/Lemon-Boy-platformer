@@ -117,7 +117,6 @@ class Sprite(pygame.sprite.Sprite):
 
 	def life(self):
 		if self.lifes < len(self.list_lifes) and len(self.list_lifes) > 0:
-			#self.list_lifes.append(Lifes(self.list_lifes[-1].x +20,self.list_lifes[-1].y) )
 			self.list_lifes.pop()
 		elif self.lifes > len(self.list_lifes):
 			self.list_lifes.append(Lifes(self.list_lifes[-1].x +20,self.list_lifes[-1].y) )
