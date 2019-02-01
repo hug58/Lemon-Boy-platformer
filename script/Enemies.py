@@ -187,13 +187,13 @@ class Lord_of_the_flies(Enemy):
 class Dog(Enemy):
 	def __init__(self,x,y,game,sentido):#player):
 		Enemy.__init__(self)
-		frames = [pygame.image.load(ruta_base + "sprites/dog1.png"),
-				  pygame.image.load(ruta_base + "sprites/dog2.png"),
-				  pygame.image.load(ruta_base + "sprites/dog3.png")]
+		frames = [pygame.image.load(ruta_base + "sprites/apple1.png"),
+				  pygame.image.load(ruta_base + "sprites/apple2.png"),
+				  pygame.image.load(ruta_base + "sprites/apple3.png")]
 				
 		self.scale_x = 30
 		self.scale_y = 25
-		self.image = pygame.transform.scale(frames[0],(self.scale_x,self.scale_y))
+		self.image = pygame.transform.flip(pygame.transform.scale(frames[0],(self.scale_x,self.scale_y)),True,False)
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y
@@ -203,16 +203,16 @@ class Dog(Enemy):
 		#self.player = player
 		self.pos_patrullandox = self.rect.x
 
-		self.vl = 3 if sentido == "left" else -3
+		self.vl = 4 if sentido == "left" else -4
 		
 		#print(self.vl)
 	def update(self):
 
 		if self.vlx < 0:
-			self.image = self.animacion.update(True)
+			self.image = pygame.transform.flip(self.animacion.update(True),True,False)
 
 		if self.vlx > 0:
-			self.image = self.animacion.update(False)
+			self.image = pygame.transform.flip(self.animacion.update(False),True,False)
 		
 		self.patroling()
 		#self.follow()
