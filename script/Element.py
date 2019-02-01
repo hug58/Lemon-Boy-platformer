@@ -24,6 +24,52 @@ class Block(pygame.sprite.Sprite):
 		self.x = x
 		self.y = y
 
+class Trap(pygame.sprite.Sprite):
+	def __init__(self,x,y):
+		pygame.sprite.Sprite.__init__(self)
+		self.trap = pygame.image.load(ruta_base + "spikes.png")
+		self.frames = 8
+		self.image = self.trap.subsurface((0,0),(30,30))
+		self.rect = self.image.get_rect()
+		self.rect.x = x 
+		self.rect.y = y 
+		self.mask = None
+		self.position = 0
+		self.activate = False
+		self.cont = 0
+
+	def update(self):
+		self.animation()
+
+	def animation(self):
+		if self.activate == False:
+			self.image = self.trap.subsurface((32*self.position,0),(32,32)) 			
+			self.position +=1
+			if self.position == self.frames:
+				self.activate = True
+
+		else:
+			if self.position != 4 and self.position > 0:
+				self.position -=1
+				self.cont = 0
+
+			elif self.position == 4:
+				self.cont +=1
+				if self.cont == 35:
+					self.position -=1	
+			
+			elif self.position == 0:
+				self.cont +=1
+				if self.cont == 35:
+					self.activate = False
+
+			self.image = self.trap.subsurface((32*self.position,0),(32,32)) 	
+			
+			
+
+
+
+
 
 class Key(pygame.sprite.Sprite):
 	def __init__(self,x,y,Object):
@@ -41,45 +87,57 @@ class Key(pygame.sprite.Sprite):
 			print(self.Object.keys['KEY_YELLOW'])
 			self.kill()
 
-class Trampolin(pygame.sprite.Sprite):
-	def __init__(self,x,y):
+class Trampoline(pygame.sprite.Sprite):
+	def __init__(self,x,y,player):
 		pygame.sprite.Sprite.__init__(self)
-		self.trampolin = pygame.transform.scale2x(pygame.image.load( ruta_base + "Hugo_Juego.png"))
-		self.list_frame = [(447*2,39*2),(468*2,39*2),(488*2,39*2),(505*2,39*2),(523*2,39*2),(468*2,59*2),
-							(486*2,59*2),(503*2,59*2),(523*2,59*2)]
-		self.pos_inicial = pygame.Rect(	self.list_frame[0] ,  (13*2,9*2))
-		self.image = self.trampolin.subsurface(self.pos_inicial)
-		self.frame_current = 0
+		self.frames = [(0,0),(21,0),(41,0),(58,0),(76,0),(21,20),(39,20),(56,20),(76,20)]
+		
+		self.tramp = pygame.image.load( ruta_base + "trampoline.png")
+		self.image = self.tramp.subsurface(self.frames[0],(13,9))
+		self.image = pygame.transform.scale(self.image,(32,32))
+
 		self.rect = self.image.get_rect()
 		self.rect.x = x 
-		self.rect.y = y +22
-		self.vlx = 0
-		self.vly = 0
+		self.rect.y = y 
 		
-		self.activar_animacion= False
-		self.frame_current = 0
-		self.frame = len(self.list_frame)
-		self.step = 0
-		#self.animacion = Animation.Animation(len(self.list_frame),(13*2,9*2),self.trampolin)
+		self.frame = len(self.frames)
+		#self.delay = 5
+		#self.cont = 0
+		self.position = 0
+
+		self.player = player
+		self.activate = False
 
 	def update(self):
-		self.image = self.trampolin.subsurface(self.list_frame[self.frame_current],(13*2,9*2))
-		if self.activar_animacion == True:
-			if self.frame_current < self.frame-1:
-				self.step +=5
-				if self.step >= 10:				
-					self.frame_current +=1
-					self.step = 0
-			else:		
-				self.frame_current = 0
-				self.activar_animacion = False
-		
-		
+		if self.rect.colliderect(self.player.rect):
+			self.activate = True
+			self.player.vly = self.jump()
 
-				
-	def jump(self):
-		self.vly = 21
-		return -(self.vly)
+		self.animation()
+
+	def animation(self):
+		
+		if self.activate == True:
+			self.image = self.tramp.subsurface(self.frames[self.position],(13,9)) 			
+			self.image = pygame.transform.scale(self.image,(32,32))
+			self.position +=1
+			
+			if self.position >= self.frame:
+				self.activate = False
+			self.cont = 0
+				 
+		else:
+			
+			self.position = 0
+			self.image = self.tramp.subsurface(self.frames[self.position],(13,9)) 			
+			self.image = pygame.transform.scale(self.image,(32,32))
+
+
+		return self.image
+		
+		
+	def jump(self, vl = -20):
+		return vl
 
 
 class Door(pygame.sprite.Sprite):
@@ -89,7 +147,7 @@ class Door(pygame.sprite.Sprite):
 		if Type == "YELLOW":
 			self.image = pygame.image.load(ruta_base + "door1.png")
 		
-		self.image = pygame.transform.scale(self.image,(60,62))
+		self.image = pygame.transform.scale(self.image,(62,64))
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y 

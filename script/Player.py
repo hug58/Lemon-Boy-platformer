@@ -8,7 +8,8 @@ RED = pygame.Color("#C65065")
 ruta_base =  os.path.abspath("")
 ruta_base += "/image/"
 
-
+#ruta_sound = os.path.abspath("")
+#ruta_sound += "/sound/"
 
 class Player(Sprite.Sprite):
 	def __init__(self,x,y,group):
@@ -40,6 +41,7 @@ class Player(Sprite.Sprite):
 		
 		self.lifes = 3
 		self.list_lifes = [Sprite.Lifes(column*25,10) for column in range(self.lifes)]
+		#self.sound_jump = pygame.mixer.Sound(ruta_sound + "Pickup_Coin.wav")
 
 	def update(self):
 		
@@ -60,8 +62,10 @@ class Player(Sprite.Sprite):
 			else:
 				self.detener = False
 						
+		self.cont_jump = 0
 		self.gravity()
 		self.collided()
+
 
 	def move(self):
 		pulsar = pygame.key.get_pressed()
@@ -73,6 +77,9 @@ class Player(Sprite.Sprite):
 			self.direccionx = 1
 			self.vlx += 1			
 			self.detener = False			
+
+
+
 
 			
 
