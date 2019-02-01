@@ -5,20 +5,23 @@ from script import Enemies
 from script import Element
 
 pygame.display.init()
+#pygame.mixer.init()
 
 WIDTH = 420
 HEIGHT = 420
 
 SCREEN = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("Project Lemon 0.4.0")
-
+ 
 
 class TileMap:
 	def __init__(self,filename):
 		tm = pytmx.load_pygame(filename,pixelaplha = True)
 		self.width = tm.width * tm.tilewidth
+		
 		self.height = tm.height * tm.tileheight
 		self.tmxdata = tm
+
 	def render(self,surface):
 		ti = self.tmxdata.get_tile_image_by_gid
 		for layer in self.tmxdata.visible_layers:
@@ -63,6 +66,19 @@ class Plataform(pygame.sprite.Sprite):
 		self.rect.x = x
 		self.rect.y = y
 
+class Spikes(pygame.sprite.Sprite):
+	def __init__(self,x,y,w,h,player):
+		pygame.sprite.Sprite.__init__(self)
+		self.rect = pygame.Rect((x,y),(w,h))
+		self.rect.x = x
+		self.rect.y = y
+		self.player = player
+
+	def update(self):
+		if self.rect.colliderect(self.player.rect):
+			self.player.dead = True
+
+
 class Game:
 	def __init__(self):
 		self.maps= ["map/map1.tmx","map/map2.tmx"]
@@ -71,46 +87,56 @@ class Game:
 		self.Maprect = self.Mapimage.get_rect()
 		self.camera = Camera(self.map.width,self.map.height)
 		
-	def collided(self):
-		if pygame.sprite.spritecollide(self.player,self.enemies,False,False):
-			pass
-			#self.player.lifes -=1
-
 						
-	
 	def load(self):
-		
+		#self.map.tmxdata
 		#self.group = pygame.sprite.Group()
 		self.plataform = pygame.sprite.Group()
 		self.enemies = pygame.sprite.Group()
 		self.objs = pygame.sprite.Group()
+		self.spike = pygame.sprite.Group()
+		self.trap = pygame.sprite.Group()
 		
-		for tile_object in self.map.tmxdata.objects:
-			if tile_object.name == "Player":
-				self.player = Player.Player(tile_object.x,tile_object.y,self.plataform)
-				#self.player.lifes = lifes
-			elif tile_object.name == "plataform":
-				self.plataform.add(Plataform(tile_object.x,tile_object.y,tile_object.width,tile_object.height))
-
-				#self.objs.add(Element.)
+		for sprite in self.map.tmxdata.objectgroups:
+			for tile_object in sprite:
+				if tile_object.name == "Player":
+					self.player = Player.Player(tile_object.x,tile_object.y,self.plataform)
 
 		for tile_object in self.map.tmxdata.objects:
 			if tile_object.name == "Door":
 				if tile_object.type == "YELLOW":
 					self.objs.add(Element.Door(tile_object.x,tile_object.y,self.player,"YELLOW"))
+
+			elif tile_object.name == "Spike_trap":
+					self.trap.add(Element.Trap(tile_object.x,tile_object.y))
+
+			elif tile_object.name == "plataform":
+				self.plataform.add(Plataform(tile_object.x,tile_object.y,tile_object.width,tile_object.height))
+
 			elif tile_object.name == "Skull":
 				self.enemies.add(Enemies.Skull(tile_object.x,tile_object.y,self.plataform,self.player.rect))
+
 			elif tile_object.name == "Dog":
 				if tile_object.type == "left":
 					self.enemies.add(Enemies.Dog(tile_object.x,tile_object.y,self.plataform,"left"))
 				elif tile_object.type == "right":
 					self.enemies.add(Enemies.Dog(tile_object.x,tile_object.y,self.plataform,"right"))
+
 			elif tile_object.name == "Key":
 				self.objs.add(Element.Key(tile_object.x,tile_object.y,self.player))
 
+			elif tile_object.name == "Spike":
+				self.spike.add(Spikes(tile_object.x,tile_object.y,tile_object.width,tile_object.height,self.player))
+
+			elif tile_object.name == "jump":
+				self.objs.add(Element.Trampoline(tile_object.x,tile_object.y,self.player))
 		
+
 	def update(self):
 		self.camera.update(self.player)
+		self.spike.update()
+		self.trap.update()
+
 		self.enemies.update()
 		for objs in self.objs:
 			objs.update()
@@ -125,16 +151,26 @@ class Game:
 			except:
 				pass
 
+
+		if self.player.dead == True:
+			self.load()
+
+			
 		self.player.update()
-		#self.collided()
+
+
 
 	def draw(self):
-		
-		SCREEN.blit(self.Mapimage,self.camera.apply_rect(self.Maprect))
+
+		SCREEN.blit(self.Mapimage,self.camera.apply_rect(self.Maprect))	
 		for enemies in self.enemies:
-			SCREEN.blit(enemies.image,self.camera.apply(enemies))
+			SCREEN.blit(enemies.image,self.camera.apply(enemies))	
 		for objs in self.objs:
 			SCREEN.blit(objs.image,self.camera.apply(objs))
+
+		for trap in self.trap:
+			SCREEN.blit(trap.image,self.camera.apply(trap))
+
 		SCREEN.blit(self.player.image,self.camera.apply(self.player))
 		
 	
@@ -144,15 +180,17 @@ def Main():
 	clock = pygame.time.Clock()
 	game = Game()
 	game.load()
-
+	cont = 0
 	while exit == False:
-		clock.tick(40)
+		clock.tick(35)
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				exit = True
 			if event.type == pygame.KEYDOWN:
+
 				if event.key == pygame.K_UP:
-					game.player.vly = -14.5 if game.player.cont_jump > 0 else game.player.vly
+					#game.player.sound_jump.play()
+					game.player.vly = -15 if game.player.cont_jump > 0 else game.player.vly
 					game.player.cont_jump -=1
 
 			if event.type == pygame.KEYUP:
