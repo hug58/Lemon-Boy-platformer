@@ -86,7 +86,6 @@ class Game:
 		self.Mapimage = self.map.make_map()
 		self.Maprect = self.Mapimage.get_rect()
 		self.camera = Camera(self.map.width,self.map.height)
-		
 						
 	def load(self):
 		#self.map.tmxdata
@@ -116,11 +115,11 @@ class Game:
 			elif tile_object.name == "Skull":
 				self.enemies.add(Enemies.Skull(tile_object.x,tile_object.y,self))
 
-			elif tile_object.name == "Dog":
+			elif tile_object.name == "Apple":
 				if tile_object.type == "left":
-					self.enemies.add(Enemies.Dog(tile_object.x,tile_object.y,self,"left"))
+					self.enemies.add(Enemies.Apple(tile_object.x,tile_object.y,self,"left"))
 				elif tile_object.type == "right":
-					self.enemies.add(Enemies.Dog(tile_object.x,tile_object.y,self,"right"))
+					self.enemies.add(Enemies.Apple(tile_object.x,tile_object.y,self,"right"))
 
 			elif tile_object.name == "Key":
 				self.objs.add(Element.Key(tile_object.x,tile_object.y,self))
@@ -131,7 +130,6 @@ class Game:
 			elif tile_object.name == "jump":
 				self.objs.add(Element.Trampoline(tile_object.x,tile_object.y,self))
 		
-
 	def update(self):
 		self.camera.update(self.player)
 		self.spike.update()
@@ -154,11 +152,8 @@ class Game:
 
 		if self.player.dead == True:
 			self.load()
-
-			
+		
 		self.player.update()
-
-
 
 	def draw(self):
 
@@ -172,8 +167,7 @@ class Game:
 			SCREEN.blit(trap.image,self.camera.apply(trap))
 
 		SCREEN.blit(self.player.image,self.camera.apply(self.player))
-		
-	
+			
 def Main():
 
 	exit = False
@@ -187,7 +181,7 @@ def Main():
 			if event.type == pygame.QUIT:
 				exit = True
 			if event.type == pygame.KEYDOWN:
-
+				
 				if event.key == pygame.K_UP:
 					#game.player.sound_jump.play()
 					game.player.vly = -15 if game.player.cont_jump > 0 else game.player.vly
@@ -196,14 +190,9 @@ def Main():
 			if event.type == pygame.KEYUP:
 				game.player.detener = True
 
-
-
-
 		game.update()
 		game.draw()
 		pygame.display.flip()
-
-
 
 
 if __name__ == "__main__":

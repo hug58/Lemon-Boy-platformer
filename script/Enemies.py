@@ -39,8 +39,6 @@ class Enemy(Sprite.Sprite):
 		else:
 			self.vlx = 0
 
-
-
 class Enemy_Rect(Enemy):
 	def __init__(self,x,y,group):
 		Enemy.__init__(self)
@@ -57,7 +55,6 @@ class Enemy_Rect(Enemy):
 		self.gravity()
 		self.patroling()
 		self.collided()
-
 
 
 class Skull(Enemy):
@@ -184,38 +181,42 @@ class Lord_of_the_flies(Enemy):
 		self.gravity()
 		self.collided()
 
-class Dog(Enemy):
+class Apple(Enemy):
 	def __init__(self,x,y,game,sentido):#player):
 		Enemy.__init__(self)
 		frames = [pygame.image.load(ruta_base + "sprites/apple1.png"),
 				  pygame.image.load(ruta_base + "sprites/apple2.png"),
-				  pygame.image.load(ruta_base + "sprites/apple3.png")]
+				  pygame.image.load(ruta_base + "sprites/apple3.png"),
+				  pygame.image.load(ruta_base + "sprites/apple4.png"),]
 				
-		self.scale_x = 30
-		self.scale_y = 25
+		self.scale_x = 32
+		self.scale_y = 22
 		self.image = pygame.transform.flip(pygame.transform.scale(frames[0],(self.scale_x,self.scale_y)),True,False)
+		self.mask = pygame.mask.from_surface(self.image)	
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y
 		self.animacion = Sprite.animation(frames,self.scale_x,self.scale_y)
 		self.animacion.limite = 3
 		self.game = game
-		#self.player = player
 		self.pos_patrullandox = self.rect.x
 
 		self.vl = 4 if sentido == "left" else -4
 		
-		#print(self.vl)
 	def update(self):
 
 		if self.vlx < 0:
 			self.image = pygame.transform.flip(self.animacion.update(True),True,False)
+			self.mask = pygame.mask.from_surface(self.image)	
 
 		if self.vlx > 0:
 			self.image = pygame.transform.flip(self.animacion.update(False),True,False)
+			self.mask = pygame.mask.from_surface(self.image)	
 		
 		self.patroling()
 		#self.follow()
 		self.gravity()
 		self.collided()
-		
+
+if __name__ == "__main__":
+	Main()

@@ -194,4 +194,4 @@ class Lemon(pygame.sprite.Sprite):
 		self.rect.y += self.vly
 
 if __name__ == '__main__':
-	main()
+	Main()

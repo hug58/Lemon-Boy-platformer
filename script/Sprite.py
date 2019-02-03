@@ -22,7 +22,7 @@ class animation():
 		self.frame = len(self.sheet)
 		self.scale_x = scale_x
 		self.scale_y = scale_y
-		self.limite = 5
+		self.limite = 6
 	def update(self,flip):
 		
 		if flip == True:
@@ -107,6 +107,12 @@ class Sprite(pygame.sprite.Sprite):
 				self.game.player.dead = True
 				#return True
 
+		for enemy in self.game.enemies:
+			colision = pygame.sprite.collide_mask(self.game.player,enemy)
+			if colision != None:
+				self.game.player.dead = True
+
+
 
 	def gravity(self):
 		if self.vly == 0:
@@ -122,12 +128,6 @@ class Sprite(pygame.sprite.Sprite):
 			self.list_lifes.append(Lifes(self.list_lifes[-1].x +20,self.list_lifes[-1].y) )
 
 
-
-
-def main():
-	pass
-
-
 if __name__ == '__main__':
-	main()
+	Main()
 	

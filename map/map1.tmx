@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="60" height="22" tilewidth="32" tileheight="32" backgroundcolor="#2e3436" nextobjectid="123">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="60" height="22" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="123">
  <tileset firstgid="1" source="pasto.tsx"/>
  <tileset firstgid="10" source="spikes.tsx"/>
  <layer name="background" width="60" height="22">
@@ -25,11 +25,10 @@
   <object id="118" name="Spike_trap" x="449" y="576" width="31" height="32"/>
   <object id="119" name="Spike" x="1216" y="234" width="16" height="12"/>
   <object id="121" name="Spike" x="1232" y="238" width="12" height="4"/>
-  
  </objectgroup>
  <layer name="plts" width="60" height="22">
   <data encoding="base64" compression="zlib">
-   eJztl0sOgDAIRG391ftfWDa4aEYsSm2NvGRWIDCJlToMjuNYEUiRNLYe5CVWUiJtrQfphNR6AMec2HoAx3EOeMciob2L8r+0nyfSfKKlMB/l9QrfKZDQPQPl934f6W2n8Bn5C3xG/oKlX+33t1ZPqZelX+339w65P20vya/0T4piNf1yv7P6T/2Gi+cnEKvpV6p9x29+BvIaUlx6t6QaGpV6verF8R3kxwNd
+   eJztl0sOgCAMRAF/eP8L201dkKFSBdHQl8yqte0k/HTOMIxaeFIgTb0HeYmNFEl770E+Quw9gFGd0HsAwzBO+I5FQvcuyv/T/TyTlozWwnyU91X4TYGE3hko394jOniPjALvkVGo6Vd7/rbqKfWq6Vd7/t4h9aftJfmV/klRrKVf7per/9Svv/h+BrGWfqXad/ymeyCtIcWltSXV0KjU61Uvjh/WdwNb
   </data>
  </layer>
  <layer name="spikes" width="60" height="22">
@@ -54,8 +53,8 @@
   <object id="27" name="Door" type="YELLOW" x="1868" y="383" width="4" height="10.5"/>
   <object id="29" name="plataform" x="128" y="640" width="32.0625" height="32.0241"/>
   <object id="30" name="plataform" x="704" y="448" width="32.0005" height="32"/>
-  <object id="32" name="Dog" type="right" x="919" y="313.833" width="13" height="11"/>
-  <object id="33" name="Dog" type="left" x="664.333" y="519.667" width="15.3333" height="9.33333"/>
+  <object id="32" name="Apple" type="right" x="919" y="313.833" width="13" height="11"/>
+  <object id="33" name="Apple" type="left" x="664.333" y="519.667" width="15.3333" height="9.33333"/>
   <object id="52" name="plataform" x="1024.01" y="96.0114" width="96.0028" height="63.9886"/>
   <object id="55" name="Spike" x="1056" y="426" width="28" height="12"/>
   <object id="57" name="Spike" x="1156" y="362" width="28.0435" height="11.9565"/>
