@@ -11,7 +11,7 @@ ruta_base += "/image/"
 class Enemy(Sprite.Sprite):
 	def __init__(self):
 		Sprite.Sprite.__init__(self)
-		self.limite_x = 50
+		self.limite_x = 60
 		self.vl = 3
 	def patroling(self):
 		if self.vl > 0:

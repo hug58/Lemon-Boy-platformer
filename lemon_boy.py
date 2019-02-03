@@ -176,7 +176,7 @@ def Main():
 	game.load()
 
 	while exit == False:
-		clock.tick(35)
+		clock.tick(40)
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				exit = True

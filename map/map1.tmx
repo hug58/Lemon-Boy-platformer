@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="60" height="22" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="123">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="60" height="22" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="125">
  <tileset firstgid="1" source="pasto.tsx"/>
  <tileset firstgid="10" source="spikes.tsx"/>
  <layer name="background" width="60" height="22">
@@ -16,7 +16,7 @@
   <object id="95" name="Spike" x="1770" y="644" width="12.0386" height="28.0707"/>
   <object id="96" name="Spike" x="1802" y="644" width="12.0386" height="28.0707"/>
   <object id="97" name="Spike" x="1834" y="644" width="12.0386" height="28.0707"/>
-  <object id="102" name="Spike" x="1290" y="192" width="12" height="28.043"/>
+  <object id="102" name="Spike" x="1289.94" y="195.938" width="12" height="28.043"/>
   <object id="103" name="Spike" x="1252" y="170" width="28.1321" height="12.0323"/>
   <object id="109" name="Spike" x="1120" y="106" width="27.8182" height="11.9091"/>
   <object id="110" name="Spike" x="1120" y="138" width="27.9091" height="12"/>
@@ -28,12 +28,12 @@
  </objectgroup>
  <layer name="plts" width="60" height="22">
   <data encoding="base64" compression="zlib">
-   eJztl0sOgCAMRAF/eP8L201dkKFSBdHQl8yqte0k/HTOMIxaeFIgTb0HeYmNFEl770E+Quw9gFGd0HsAwzBO+I5FQvcuyv/T/TyTlozWwnyU91X4TYGE3hko394jOniPjALvkVGo6Vd7/rbqKfWq6Vd7/t4h9aftJfmV/klRrKVf7per/9Svv/h+BrGWfqXad/ymeyCtIcWltSXV0KjU61Uvjh/WdwNb
+   eJztl0kOgCAMRREn9P4H8KiWRV2QUq2ASOhL/qq17U+YNEZRlFwMIAsaaw/yESvIgbbag/wEV3sAJTu29gCKolzgHUuJundj+T53N+YoP3EaE2iOaBHk+9wW/OKbghL1zojl+9wW/P4B3CO9gHukF3L6lZ6/pXpyvXL6lZ6/bwj9SXtxfrl/UipW0i/2i9VP9TvcfD8RsZJ+udpv/IZ7IKzBxbm1xdWQ6KnXu14YPwGdZQVo
   </data>
  </layer>
  <layer name="spikes" width="60" height="22">
   <data encoding="base64" compression="zlib">
-   eJzt1EEKQCEIRVHHrbKltZSWVsNPRASlfukeaJSUDzIRABqSSPHuwdJreUc9f/buwVrPXL17sPD62wb+YOeP/c7qqj7CTJN3WlN26iPkBQDoSMOa7WnecXrWrR6jaubOCks=
+   eJzt1MENABAMheGeTWk0oxiNo4gDQUv6f4mThr6EigC4IYgk6x40ecvbq/mjdQ/aauZs3YMG728beMHMjG3/6u8zmbzDmrRSDwDwJ3RrtHfzjt2zTvX4qwKU1whN
   </data>
  </layer>
  <objectgroup name="plataform">
@@ -49,12 +49,20 @@
   <object id="22" name="plataform" x="544.017" y="544" width="255.978" height="128.022"/>
   <object id="23" name="plataform" x="800" y="672" width="480" height="32"/>
   <object id="24" name="plataform" x="799.967" y="352" width="256.033" height="95.9943"/>
-  <object id="26" name="plataform" x="1183.98" y="351.999" width="192.028" height="96.0236"/>
-  <object id="27" name="Door" type="YELLOW" x="1868" y="383" width="4" height="10.5"/>
+  <object id="26" name="plataform" x="1183.98" y="351.999" width="228.012" height="96.0236"/>
+  <object id="27" name="Door" type="YELLOW" x="1867.78" y="384.241" width="4" height="10.5"/>
   <object id="29" name="plataform" x="128" y="640" width="32.0625" height="32.0241"/>
   <object id="30" name="plataform" x="704" y="448" width="32.0005" height="32"/>
-  <object id="32" name="Apple" type="right" x="919" y="313.833" width="13" height="11"/>
-  <object id="33" name="Apple" type="left" x="664.333" y="519.667" width="15.3333" height="9.33333"/>
+  <object id="32" name="Apple" type="right" x="919" y="313.833" width="13" height="11">
+   <properties>
+    <property name="area" type="int" value="70"/>
+   </properties>
+  </object>
+  <object id="33" name="Apple" type="left" x="664.333" y="519.667" width="15.3333" height="9.33333">
+   <properties>
+    <property name="area" type="int" value="60"/>
+   </properties>
+  </object>
   <object id="52" name="plataform" x="1024.01" y="96.0114" width="96.0028" height="63.9886"/>
   <object id="55" name="Spike" x="1056" y="426" width="28" height="12"/>
   <object id="57" name="Spike" x="1156" y="362" width="28.0435" height="11.9565"/>
@@ -73,12 +81,17 @@
   <object id="73" name="Spike" x="771" y="426" width="28.1818" height="12.1818"/>
   <object id="75" name="Spike" x="772" y="394" width="27.9375" height="11.9375"/>
   <object id="77" name="Spike" x="772" y="362" width="28.125" height="12.1875"/>
-  <object id="79" name="Spike" x="1376" y="362" width="27.875" height="11.9905"/>
-  <object id="80" name="Spike" x="1376" y="394" width="28.0313" height="12.0703"/>
-  <object id="83" name="Spike" x="1376" y="426" width="28" height="12.0889"/>
+  <object id="79" name="Spike" x="1412" y="362" width="27.9861" height="11.9905"/>
+  <object id="80" name="Spike" x="1412" y="394.002" width="27.9788" height="12.0203"/>
+  <object id="83" name="Spike" x="1412" y="426.004" width="28.0111" height="12.0108"/>
   <object id="98" name="plataform" x="1664" y="672" width="191.969" height="32.0097"/>
   <object id="100" name="plataform" x="1280.15" y="160" width="32" height="31.9091"/>
   <object id="105" name="plataform" x="1184" y="224.182" width="32" height="31.9091"/>
+  <object id="123" name="Apple" type="left" x="1272.17" y="319.833" width="13" height="11">
+   <properties>
+    <property name="area" type="int" value="70"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="wall">
   <object id="111" name="plataform" x="-0.30303" y="527.333" width="0.363636" height="144.646"/>
@@ -90,7 +103,7 @@
   <object id="44" name="jump" x="863.5" y="639.75" width="0.25"/>
   <object id="53" name="Key" type="YELLOW" x="1053.67" y="80.6667" width="6" height="5.66667"/>
   <object id="90" name="jump" x="1761" y="552"/>
-  <object id="99" name="jump" x="1288" y="320" width="6" height="2.66667"/>
+  <object id="99" name="jump" type="left" x="1288" y="320" width="6" height="2.66667"/>
   <object id="107" name="jump" x="1184" y="192.5" width="1.5" height="0.25"/>
  </objectgroup>
  <objectgroup name="sprite">
