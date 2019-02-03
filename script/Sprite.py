@@ -23,6 +23,7 @@ class animation():
 		self.scale_x = scale_x
 		self.scale_y = scale_y
 		self.limite = 6
+		
 	def update(self,flip):
 		
 		if flip == True:
@@ -127,7 +128,3 @@ class Sprite(pygame.sprite.Sprite):
 		elif self.lifes > len(self.list_lifes):
 			self.list_lifes.append(Lifes(self.list_lifes[-1].x +20,self.list_lifes[-1].y) )
 
-
-if __name__ == '__main__':
-	Main()
-	

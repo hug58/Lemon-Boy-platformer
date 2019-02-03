@@ -12,18 +12,27 @@ ruta_base += "/image/"
 class Player(Sprite.Sprite):
 	def __init__(self,x,y,game):
 		Sprite.Sprite.__init__(self)
-		 
-		self.hoja_sprites = pygame.image.load(ruta_base +"Hugo_Juego.png")
-		self.frame_estatico = pygame.Rect(	(169,45),  (16,29))
-		self.pedazo_frame = self.hoja_sprites.subsurface(self.frame_estatico)
-		self.list_frame = [(273,153),(310,153),(344,153)]
-		self.frame_salto = pygame.Rect(	(234,45), (16,29)	)		
-		self.run = Animation.Animation(len(self.list_frame),(16,29),self.hoja_sprites,lados = self.frame_estatico)
-		self.image = self.pedazo_frame
+		self.state = pygame.image.load(ruta_base + "sprites/state.png")
+		
+		self.walk = [	
+						pygame.image.load(ruta_base + "sprites/walk/walk1.png"),
+						pygame.image.load(ruta_base + "sprites/walk/walk2.png"),													
+						pygame.image.load(ruta_base + "sprites/walk/walk3.png"),
+						pygame.image.load(ruta_base + "sprites/walk/walk4.png"),												
+																				]
+
+		self.animation_walk = Sprite.animation(self.walk,16,24)
+
+		self.jump = [	pygame.image.load(ruta_base + "sprites/jump/jump0.png"),
+						pygame.image.load(ruta_base + "sprites/jump/jump1.png"),
+						pygame.image.load(ruta_base + "sprites/jump/jump2.png"),													
+																				]
+
+		self.image = self.state
 		self.mask = pygame.mask.from_surface(self.image)
 		self.rect = self.image.get_rect()
 		self.rect.x = x
-		self.rect.y = y -self.rect.height
+		self.rect.y = y 
 		self.vly = 0
 		self.vlx = 0
 		self.direccionx = 1
@@ -42,9 +51,25 @@ class Player(Sprite.Sprite):
 		#self.sound_jump = pygame.mixer.Sound(ruta_sound + "Pickup_Coin.wav")
 
 	def update(self):
+		if self.vlx == 0:
+			if self.direccionx > 0:
+				self.image = pygame.transform.flip(self.state,1,0)
+
+			if self.direccionx < 0:
+				self.image = self.state
 		
-		self.image = self.run.sprites(self.vlx,self.vly,self.direccionx,self.list_frame,self.frame_salto)
+		elif self.vlx > 0:
+			self.image = self.animation_walk.update(True) 
+
+		elif self.vlx < 0:
+			self.image = self.animation_walk.update(False)
+		
 		self.mask = pygame.mask.from_surface(self.image)
+
+		if self.vly < 0:
+			pass
+
+
 		self.move()
 		self.life()
 			
@@ -65,7 +90,6 @@ class Player(Sprite.Sprite):
 		self.collided()
 		self.collided_trap()
 
-
 	def move(self):
 		pulsar = pygame.key.get_pressed()
 		if pulsar[pygame.K_LEFT]:
@@ -77,10 +101,6 @@ class Player(Sprite.Sprite):
 			self.vlx += 1			
 			self.detener = False			
 
-
-
-
-			
 
 class NPC(pygame.sprite.Sprite):
 	def __init__(self,x,y):
@@ -95,7 +115,3 @@ class NPC(pygame.sprite.Sprite):
 	def update(self):
 		pass
 
-
-
-if __name__ == '__main__':
-	Main()

@@ -218,5 +218,3 @@ class Apple(Enemy):
 		self.gravity()
 		self.collided()
 
-if __name__ == "__main__":
-	Main()

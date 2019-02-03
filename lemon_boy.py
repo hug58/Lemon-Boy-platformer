@@ -32,6 +32,7 @@ class TileMap:
 					if tile:
 						surface.blit(tile,(x* self.tmxdata.tilewidth,y* self.tmxdata.tileheight))
 	def make_map(self):
+
 		temp_surface = pygame.Surface((self.width,self.height))
 		self.render(temp_surface)
 		return temp_surface
@@ -163,10 +164,12 @@ class Game:
 		for objs in self.objs:
 			SCREEN.blit(objs.image,self.camera.apply(objs))
 
+		SCREEN.blit(self.player.image,self.camera.apply(self.player))
+
 		for trap in self.trap:
 			SCREEN.blit(trap.image,self.camera.apply(trap))
 
-		SCREEN.blit(self.player.image,self.camera.apply(self.player))
+		
 			
 def Main():
 
