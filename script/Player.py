@@ -12,25 +12,28 @@ ruta_base += "/image/"
 class Player(Sprite.Sprite):
 	def __init__(self,x,y,game):
 		Sprite.Sprite.__init__(self)
-		self.state = pygame.image.load(ruta_base + "sprites/state.png")
+		self.state = [	pygame.image.load(ruta_base + "sprites/hug/hug0.png"),
+						pygame.image.load(ruta_base + "sprites/hug/hug1.png"),
+																			]
 		
 		self.walk = [	
-						pygame.image.load(ruta_base + "sprites/walk/walk1.png"),
-						pygame.image.load(ruta_base + "sprites/walk/walk2.png"),													
-						pygame.image.load(ruta_base + "sprites/walk/walk3.png"),
-						pygame.image.load(ruta_base + "sprites/walk/walk4.png"),												
+						pygame.image.load(ruta_base + "sprites/hug/hug2.png"),
+						pygame.image.load(ruta_base + "sprites/hug/hug3.png"),													
+						pygame.image.load(ruta_base + "sprites/hug/hug4.png"),
+						pygame.image.load(ruta_base + "sprites/hug/hug5.png"),												
 																				]
 
-		self.animation_walk = Sprite.animation(self.walk,16,24)
-
-		self.jump = [	pygame.image.load(ruta_base + "sprites/jump/jump0.png"),
-						pygame.image.load(ruta_base + "sprites/jump/jump1.png"),
-						pygame.image.load(ruta_base + "sprites/jump/jump2.png"),													
+		self.jump = [	pygame.image.load(ruta_base + "sprites/hug/hug6.png"),
 																				]
 
-		self.image = self.state
+		self.animation_state = Sprite.animation(self.state,32,52)
+		self.animation_walk = Sprite.animation(self.walk,32,52)
+
+
+		self.image = self.state[0]
 		self.mask = pygame.mask.from_surface(self.image)
-		self.rect = self.image.get_rect()
+		self.rect = pygame.Rect((x,y),(25,52))
+		#self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y 
 		self.vly = 0
@@ -51,19 +54,26 @@ class Player(Sprite.Sprite):
 		#self.sound_jump = pygame.mixer.Sound(ruta_sound + "Pickup_Coin.wav")
 
 	def update(self):
+		#print(self.vly)
 		if self.vlx == 0:
 			if self.direccionx > 0:
-				self.image = pygame.transform.flip(self.state,1,0)
-
+				self.image = self.animation_state.update(False)
 			if self.direccionx < 0:
-				self.image = self.state
+				self.image = self.animation_state.update(True)
 		
 		elif self.vlx > 0:
-			self.image = self.animation_walk.update(True) 
+			self.image = self.animation_walk.update(False) 
 
 		elif self.vlx < 0:
-			self.image = self.animation_walk.update(False)
+			self.image = self.animation_walk.update(True)
+
+		if self.direcciony < 0:	
+			if self.direccionx > 0:
+				self.image = self.jump[0]
 		
+			else:
+				self.image = pygame.transform.flip(self.jump[0],1,0)
+
 		self.mask = pygame.mask.from_surface(self.image)
 
 

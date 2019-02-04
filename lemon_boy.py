@@ -189,6 +189,7 @@ def Main():
 					#game.player.sound_jump.play()
 					game.player.vly = -8 if game.player.cont_jump > 0 else game.player.vly
 					game.player.cont_jump -=1
+					game.player.direcciony = -1
 
 			if event.type == pygame.KEYUP:
 				game.player.detener = True

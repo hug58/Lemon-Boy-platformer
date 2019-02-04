@@ -133,6 +133,7 @@ class Trampoline(pygame.sprite.Sprite):
 		return self.image
 				
 	def jump(self, vl = -12):
+		self.game.player.direcciony = -1
 		return vl
 
 class Door(pygame.sprite.Sprite):
