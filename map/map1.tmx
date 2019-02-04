@@ -86,7 +86,7 @@
   <object id="83" name="Spike" x="1412" y="426.004" width="28.0111" height="12.0108"/>
   <object id="98" name="plataform" x="1664" y="672" width="191.969" height="32.0097"/>
   <object id="100" name="plataform" x="1275.85" y="128.136" width="68.1621" height="31.9091"/>
-  <object id="105" name="plataform" x="1184" y="224.182" width="32" height="31.9091"/>
+  <object id="105" name="plataform" x="1184" y="224.182" width="35.625" height="31.9091"/>
   <object id="123" name="Apple" type="left" x="1272.17" y="319.833" width="13" height="11">
    <properties>
     <property name="area" type="int" value="70"/>
