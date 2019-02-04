@@ -39,7 +39,7 @@ class Player(Sprite.Sprite):
 		self.direcciony = 0
 		self.dead = None
 		self.detener = False
-		self.fuerza_gravitatoria = 1.6
+		self.fuerza_gravitatoria = 0.65
 		self.game = game
 		self.cont_jump = 2
 		self.keys = {	'KEY_YELLOW': False,'KEY_BLUE': False,
@@ -66,17 +66,14 @@ class Player(Sprite.Sprite):
 		
 		self.mask = pygame.mask.from_surface(self.image)
 
-		if self.vly < 0:
-			pass
-
 
 		self.move()
 		self.life()
 			
-		if self.vlx >= 7:
-			self.vlx = 7
-		elif self.vlx <= -7:
-			self.vlx = -7	
+		if self.vlx >= 5:
+			self.vlx = 5
+		elif self.vlx <= -5:
+			self.vlx = -5	
 		if self.detener == True:
 			if self.vlx > 0:
 				self.vlx -=1
@@ -94,7 +91,7 @@ class Player(Sprite.Sprite):
 		pulsar = pygame.key.get_pressed()
 		if pulsar[pygame.K_LEFT]:
 			self.direccionx = -1
-			self.vlx -=1  			
+			self.vlx +=-1  			
 			self.detener = False
 		if pulsar[pygame.K_RIGHT]:
 			self.direccionx = 1

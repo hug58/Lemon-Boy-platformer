@@ -187,7 +187,7 @@ def Main():
 				
 				if event.key == pygame.K_UP:
 					#game.player.sound_jump.play()
-					game.player.vly = -15 if game.player.cont_jump > 0 else game.player.vly
+					game.player.vly = -8 if game.player.cont_jump > 0 else game.player.vly
 					game.player.cont_jump -=1
 
 			if event.type == pygame.KEYUP:
