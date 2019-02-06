@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="60" height="22" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="127">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="60" height="22" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="130">
  <tileset firstgid="1" source="spikes.tsx"/>
  <tileset firstgid="9" source="pasto.tsx"/>
  <layer name="background" width="60" height="22">
@@ -28,7 +28,7 @@
  </objectgroup>
  <layer name="plts" width="60" height="22">
   <data encoding="base64" compression="zlib">
-   eJztl0EKwCAMBNOj/v8BfWqvImqyNYGgO7AnbeyUoFaEEOJFaXIDtcmIm74FORP2LyF5KEqQ+Y/IG//Ge1QlyHz65iDbmXLbPW11Zz0Rb19k/41cb4a3L7If/aH3Qtey/INpZ+Oonrev5rfr29eePdePRflaPa2+Wp+sxi39NaqBBPXV6ny6nQnG
+   eJztl0EKwCAMBNOj/v8BfWpPBRE1WY0gZgdyik06JagVIYR4kYqIQC6iRaRvQe6E80vIOSQlkPWPyLv/jdfISiDr6XsGp50p0e5pozvrjXj7Ivvvzn49vH2R/WiG2gvtZfkH087GVj1vX81v1beu3Xuuzu3wRTytvtqcjPKW+WrVsAbqOur15z/GVQnQ
   </data>
  </layer>
  <layer name="spikes" width="60" height="22">
@@ -92,6 +92,7 @@
     <property name="area" type="int" value="70"/>
    </properties>
   </object>
+  <object id="127" name="plataform" x="1248" y="639.818" width="32" height="32.2727"/>
  </objectgroup>
  <objectgroup name="wall">
   <object id="111" name="plataform" x="-0.30303" y="527.333" width="0.363636" height="144.646"/>
@@ -109,5 +110,6 @@
  </objectgroup>
  <objectgroup name="sprite">
   <object id="115" name="Player" x="30.5" y="614.5" width="9" height="6"/>
+  <object id="129" name="Apple" type="right" x="1565" y="516.667"/>
  </objectgroup>
 </map>

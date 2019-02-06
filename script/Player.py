@@ -6,8 +6,8 @@ from script import Sprite
 ruta_base =  os.path.abspath("")
 ruta_base += "/image/"
 
-#ruta_sound = os.path.abspath("")
-#ruta_sound += "/sound/"
+ruta_sound = os.path.abspath("")
+ruta_sound += "/sound/"
 
 class Player(Sprite.Sprite):
 	def __init__(self,x,y,game):
@@ -51,7 +51,7 @@ class Player(Sprite.Sprite):
 		
 		self.lifes = 3
 		self.list_lifes = [Sprite.Lifes(column*25,10) for column in range(self.lifes)]
-		#self.sound_jump = pygame.mixer.Sound(ruta_sound + "Pickup_Coin.wav")
+		self.sound_jump = pygame.mixer.Sound(ruta_sound + "Jump.wav")
 
 	def update(self):
 		#print(self.vly)

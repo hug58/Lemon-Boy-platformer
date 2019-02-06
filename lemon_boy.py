@@ -6,7 +6,7 @@ from script import Enemies
 from script import Element
 
 pygame.display.init()
-#pygame.mixer.init()
+pygame.mixer.init()
 
 WIDTH = 420
 HEIGHT = 420
@@ -179,16 +179,18 @@ def Main():
 	game.load()
 
 	while exit == False:
-		clock.tick(40)
+		clock.tick(60)
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				exit = True
 			if event.type == pygame.KEYDOWN:
 				
 				if event.key == pygame.K_UP:
-					#game.player.sound_jump.play()
-					game.player.vly = -8 if game.player.cont_jump > 0 else game.player.vly
-					game.player.cont_jump -=1
+					if game.player.cont_jump > 0:
+						game.player.sound_jump.play()
+						game.player.vly = -8 
+						game.player.cont_jump -=1
+
 					game.player.direcciony = -1
 
 			if event.type == pygame.KEYUP:

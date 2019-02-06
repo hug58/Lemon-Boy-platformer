@@ -57,13 +57,13 @@ class Trap(pygame.sprite.Sprite):
 
 			elif self.position == 4:
 				self.cont +=1
-				if self.cont == 35:
+				if self.cont == 55:
 					self.position -=1	
 			
 			elif self.position == 0:
 				self.cont +=1
 				self.activate_spike = True
-				if self.cont == 35:
+				if self.cont == 55:
 					self.activate = False
 
 			self.image = self.trap.subsurface((32*self.position,0),(32,32)) 
