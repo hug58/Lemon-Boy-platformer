@@ -7,7 +7,6 @@ from script import Element
 
 pygame.display.init()
 pygame.mixer.init()
-
 WIDTH = 420
 HEIGHT = 420
 
