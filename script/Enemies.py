@@ -189,8 +189,8 @@ class Apple(Enemy):
 				  pygame.image.load(ruta_base + "sprites/apple3.png"),
 				  pygame.image.load(ruta_base + "sprites/apple4.png"),]
 				
-		self.scale_x = 32
-		self.scale_y = 22
+		self.scale_x = 42
+		self.scale_y = 32
 		self.image = pygame.transform.flip(pygame.transform.scale(frames[0],(self.scale_x,self.scale_y)),True,False)
 		self.mask = pygame.mask.from_surface(self.image)	
 		self.rect = self.image.get_rect()

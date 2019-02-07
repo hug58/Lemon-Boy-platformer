@@ -7,8 +7,8 @@ from script import Element
 
 pygame.display.init()
 pygame.mixer.init()
-WIDTH = 420
-HEIGHT = 420
+WIDTH = 620
+HEIGHT = 620
 
 SCREEN = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("Project Hugo")
@@ -81,7 +81,7 @@ class Spikes(pygame.sprite.Sprite):
 
 class Game:
 	def __init__(self):
-		self.maps= ["map/map1.tmx","map/map2.tmx"]
+		self.maps= ["map/map2.tmx","map/map1.tmx"]
 		self.map = TileMap(self.maps[0])
 		self.Mapimage = self.map.make_map()
 		self.Maprect = self.Mapimage.get_rect()

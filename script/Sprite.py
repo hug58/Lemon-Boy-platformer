@@ -70,7 +70,7 @@ class Sprite(pygame.sprite.Sprite):
 				self.cont_jump = 1
 				self.rect.bottom = block.rect.top
 				self.direcciony = 1
-				#self.vly = 0
+				self.vly = 0
 			elif self.vly < 0:
 				self.rect.top = block.rect.bottom
 
@@ -126,4 +126,5 @@ class Sprite(pygame.sprite.Sprite):
 			self.list_lifes.pop()
 		elif self.lifes > len(self.list_lifes):
 			self.list_lifes.append(Lifes(self.list_lifes[-1].x +20,self.list_lifes[-1].y) )
+
 

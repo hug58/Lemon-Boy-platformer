@@ -1,6 +1,5 @@
 import pygame
 import os.path
-from script import Animation
 from script import Sprite
 
 ruta_base =  os.path.abspath("")
@@ -26,6 +25,9 @@ class Player(Sprite.Sprite):
 		self.jump = [	pygame.image.load(ruta_base + "sprites/hug/hug6.png"),
 																				]
 
+
+		self.activate_jump = False
+
 		self.animation_state = Sprite.animation(self.state,32,52)
 		self.animation_walk = Sprite.animation(self.walk,32,52)
 
@@ -38,6 +40,7 @@ class Player(Sprite.Sprite):
 		self.rect.y = y 
 		self.vly = 0
 		self.vlx = 0
+		
 		self.direccionx = 1
 		self.direcciony = 0
 		self.dead = None
@@ -56,6 +59,7 @@ class Player(Sprite.Sprite):
 	def update(self):
 		#print(self.vly)
 		if self.vlx == 0:
+			self.animation_state.limite = 10
 			if self.direccionx > 0:
 				self.image = self.animation_state.update(False)
 			if self.direccionx < 0:
@@ -91,8 +95,7 @@ class Player(Sprite.Sprite):
 				self.vlx +=1
 			else:
 				self.detener = False
-						
-		self.cont_jump = 0
+
 		self.gravity()
 		self.collided()
 		self.collided_trap()
@@ -108,6 +111,18 @@ class Player(Sprite.Sprite):
 			self.vlx += 1			
 			self.detener = False			
 
+	#def func_jump(self):
+	#	
+	#	if self.cont_jump > 0:		
+	#		self.vly -=4
+	#		
+	#		if self.vly >= -4:
+	#			self.sound_jump.play()
+	#		if self.vly <= -8:
+	#			self.cont_jump -=1
+	#	else:
+	#		self.activate_jump = False
+	#	self.direcciony = -1
 
 class NPC(pygame.sprite.Sprite):
 	def __init__(self,x,y):
