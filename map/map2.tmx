@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="61" height="22" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="196">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="61" height="22" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="200">
  <tileset firstgid="1" source="spikes.tsx"/>
  <tileset firstgid="9" source="pasto.tsx"/>
  <objectgroup name="spikes">
   <object id="131" x="1865.95" y="639.996" width="12.1423" height="27.9131"/>
   <object id="133" name="Spike_trap" x="384.038" y="320.076" width="32" height="32"/>
-  <object id="134" name="Spike_trap" x="32.1875" y="416.125" width="32" height="32"/>
-  <object id="135" name="Spike_trap" x="64.1875" y="416.062" width="31.6875" height="32"/>
-  <object id="136" name="Spike" x="228" y="170.062" width="28" height="12"/>
-  <object id="137" name="Spike" x="319.969" y="169.938" width="28" height="12"/>
-  <object id="138" name="Spike" x="388.061" y="170.091" width="28" height="12"/>
+  <object id="134" name="Spike_trap" x="96.5208" y="416.458" width="32" height="32"/>
   <object id="139" name="Spike" x="224.083" y="393.89" width="28" height="12"/>
-  <object id="140" name="Spike" x="479.958" y="169.917" width="28" height="12"/>
   <object id="141" name="Spike" x="224.091" y="361.364" width="28" height="12"/>
   <object id="142" name="Spike" x="223.875" y="425.875" width="28" height="12"/>
   <object id="143" name="Spike" x="835.958" y="522.083" width="28" height="12"/>
@@ -30,18 +25,17 @@
   <object id="183" name="Spike" x="521.94" y="479.983" width="12.0702" height="27.9447"/>
   <object id="187" name="Spike" x="420.182" y="361.455" width="28" height="76.3636"/>
   <object id="188" name="Spike" x="393.818" y="576.091" width="44.2727" height="27.8182"/>
-  <object id="189" name="Spike" x="746.039" y="256.069" width="11.9723" height="27.9801"/>
-  <object id="190" name="Spike" x="746.014" y="324.067" width="11.9723" height="27.9801"/>
-  <object id="192" name="Spike" x="771.949" y="298" width="28" height="12"/>
+  <object id="189" name="Spike" x="778.039" y="256.069" width="11.9723" height="27.9801"/>
+  <object id="190" name="Spike" x="777.772" y="323.885" width="11.9723" height="27.9801"/>
  </objectgroup>
  <layer name="plts" width="61" height="22">
   <data encoding="base64" compression="zlib">
-   eJztlkEOwCAIBO3R/v8BfUqfVg/10oBFRCmUSfZgonEXlZhSEATWybf+SG4ImktdHwSe2ZT3X/HGoHddch8Ltv4MJe+p7YGDpZ4s5W0H5B2PmS3c2YCG5zNs/Z29/ouhfvOmymgNtOrKyVx9PccYWBZKXXuh3FNO5l6f2BypzLPySInqj9NnZma+AMwBCgY=
+   eJztl0EOgCAMBPGo/3+QT9NEuZjWlgI2rTvJHggk7rZApBQAQHTWW9I8pei8ZesRANlZHL/9xRnD2b44+7x7e2glUt9GedsIZSdj5ij7Fshk7t8f/4up+0ZSpbcGXnW1ZK6+nmMOLoumrq1o9qklc6tPbs2ozLPyjJLWn/UNPsv3AZ8HCf4=
   </data>
  </layer>
  <layer name="spikes" width="61" height="22">
   <data encoding="base64" compression="zlib">
-   eJzt1NEOgCAIBVB8tK/00/zU6g1dJC8B0j2bW3OuuIYSAcDOClHzriGqa286e27SHADYsTh39esPGCreBRiT+oPf3dkg8zDfbSsBb3+7425VOTKdh0M5ds5caOznTJnf+pSvmbM92SWz9L9Wa6R3SZnnvolMk5WvjeQEUkYLRw==
+   eJzt1EEOgCAMBMD2iK/0aTxVvQGx2otbijsJF9JAN1ZEiCgzFdmjeyAi8kK8WeXrC4A0ugEwaz7O/YrtBIeZu/2K7YSi/e2NuxTnWul/2Jwrc2aVfp5Xyvw0p23NmO1OlszW93qrsc6yMo9zMzNP1rZ2JgcDRglD
   </data>
  </layer>
  <objectgroup name="wall">
@@ -58,15 +52,18 @@
   <object id="181" name="jump" x="447.875" y="575.875" width="16.875" height="12.25"/>
   <object id="194" name="jump" x="1439.94" y="576.003" width="32.3253" height="31.7101"/>
   <object id="195" name="jump" x="1824.33" y="161.667" width="31.3333" height="29"/>
+  <object id="198" name="Lemon" x="320.455" y="320.091" width="30.4545" height="27.4545"/>
+ </objectgroup>
+ <objectgroup name="enemies">
+  <object id="196" name="Apple" type="left" x="536.5" y="106.083" width="6.75" height="5.08333"/>
  </objectgroup>
  <objectgroup name="plataform">
   <object id="115" name="Player" x="34.5" y="90.5" width="9" height="6"/>
-  <object id="153" name="plataform" x="0.666667" y="159.333" width="227.333" height="33"/>
-  <object id="154" name="plataform" x="348" y="159.333" width="39.3333" height="32.6667"/>
-  <object id="155" name="plataform" x="508.029" y="160.333" width="196.304" height="31.6667"/>
-  <object id="156" name="plataform" x="575.958" y="288" width="192.114" height="32"/>
+  <object id="153" name="plataform" x="0.666667" y="159.333" width="703.333" height="33"/>
+  <object id="155" name="plataform" x="192.029" y="128" width="225.637" height="31.6667"/>
+  <object id="156" name="plataform" x="575.958" y="288" width="224.781" height="32"/>
   <object id="157" name="plataform" x="252" y="348" width="167.955" height="100.5"/>
-  <object id="158" name="plataform" x="-0.333333" y="448" width="96.6667" height="32"/>
+  <object id="158" name="plataform" x="-0.333333" y="448" width="128.292" height="32"/>
   <object id="159" name="plataform" x="0.333333" y="607.969" width="63.5833" height="32.3639"/>
   <object id="160" name="plataform" x="63.9479" y="576" width="63.7187" height="64.3333"/>
   <object id="161" name="plataform" x="127.667" y="608" width="384.304" height="32.6667"/>

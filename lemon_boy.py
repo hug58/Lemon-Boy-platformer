@@ -112,9 +112,6 @@ class Game:
 			elif tile_object.name == "plataform":
 				self.plataform.add(Plataform(tile_object.x,tile_object.y,tile_object.width,tile_object.height))
 
-			elif tile_object.name == "Skull":
-				self.enemies.add(Enemies.Skull(tile_object.x,tile_object.y,self))
-
 			elif tile_object.name == "Apple":
 				if tile_object.type == "left":
 					self.enemies.add(Enemies.Apple(tile_object.x,tile_object.y,self,"left"))
@@ -129,6 +126,9 @@ class Game:
 
 			elif tile_object.name == "jump":
 				self.objs.add(Element.Trampoline(tile_object.x,tile_object.y,self))
+
+			elif tile_object.name == "Lemon":
+				self.objs.add(Element.Lemon(tile_object.x,tile_object.y,self))
 		
 	def update(self):
 		self.camera.update(self.player)

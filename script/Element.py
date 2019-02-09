@@ -83,9 +83,9 @@ class Key(pygame.sprite.Sprite):
 
 	def update(self):
 		if self.rect.colliderect(self.game.player.rect):
-			print(self.game.player.keys['KEY_YELLOW'])
+			#print(self.game.player.keys['KEY_YELLOW'])
 			self.game.player.keys['KEY_YELLOW'] = True
-			print(self.game.player.keys['KEY_YELLOW'])
+			#print(self.game.player.keys['KEY_YELLOW'])
 			self.sound.play()
 			self.kill()
 
@@ -142,8 +142,6 @@ class Trampoline(pygame.sprite.Sprite):
 		self.game.player.direcciony = -1
 		return vl
 
-
-
 class Door(pygame.sprite.Sprite):
 	def __init__(self,x,y,game,Type):
 		pygame.sprite.Sprite.__init__(self)
@@ -187,20 +185,16 @@ class Door(pygame.sprite.Sprite):
 		return self.image
 		
 class Lemon(pygame.sprite.Sprite):
-	def __init__(self,x,y):
+	def __init__(self,x,y,game):
 		pygame.sprite.Sprite.__init__(self)
-		self.lemonsito =pygame.transform.scale2x( pygame.image.load(ruta_base + "Hugo_Juego.png"))
-		self.pos = pygame.Rect(	(370*2,52*2),  (13*2,10*2))		
-		self.image = self.lemonsito.subsurface(self.pos)
+		self.image =pygame.transform.scale2x( pygame.image.load(ruta_base + "lemon.png"))
 		self.rect = self.image.get_rect()
 		self.rect.x = x
-		self.rect.y = y + self.rect.height
-		self.vlx = 0
-		self.vly = 0
+		self.rect.y = y 
+		self.game = game
 
 	def update(self):
-		self.rect.x += self.vlx
-		self.rect.y += self.vly
+		if self.rect.colliderect(self.game.player.rect):
+			self.kill()
 
-if __name__ == '__main__':
-	Main()
+
