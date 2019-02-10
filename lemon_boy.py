@@ -143,10 +143,12 @@ class Game:
 
 		self.enemies.update()
 		for objs in self.objs:
+			
 			objs.update()
+
 			try:
 				if objs.next == True:
-					if self.map_cont <= len(self.maps):
+					if self.map_cont < len(self.maps) -1:
 						self.map_cont +=1
 					self.map =  TileMap(self.maps[self.map_cont])
 					self.Mapimage = self.map.make_map()

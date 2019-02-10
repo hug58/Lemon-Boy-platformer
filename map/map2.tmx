@@ -24,7 +24,7 @@
   <object id="179" name="Spike_trap" x="288.057" y="320.003" width="31.9688" height="27.5699"/>
   <object id="183" name="Spike" x="521.94" y="479.983" width="12.0702" height="27.9447"/>
   <object id="187" name="Spike" x="420.182" y="361.455" width="28" height="76.3636"/>
-  <object id="188" name="Spike" x="393.818" y="576.091" width="44.2727" height="27.8182"/>
+  <object id="188" name="Spike" x="393.818" y="576.091" width="12.2727" height="27.8182"/>
   <object id="189" name="Spike" x="778.039" y="256.069" width="11.9723" height="27.9801"/>
   <object id="190" name="Spike" x="777.772" y="323.885" width="11.9723" height="27.9801"/>
  </objectgroup>
@@ -35,7 +35,7 @@
  </layer>
  <layer name="spikes" width="61" height="22">
   <data encoding="base64" compression="zlib">
-   eJzt1EEOgCAMBMD2iK/0aTxVvQGx2otbijsJF9JAN1ZEiCgzFdmjeyAi8kK8WeXrC4A0ugEwaz7O/YrtBIeZu/2K7YSi/e2NuxTnWul/2Jwrc2aVfp5Xyvw0p23NmO1OlszW93qrsc6yMo9zMzNP1rZ2JgcDRglD
+   eJzt1EEOgDAIBEA41lf6tD5VvdWmKBcXaXeSXhqibEREiCgzFdmjeyAi8kLsrPL1C4A0ugEwaz7O+4rtBIeZb/cV2wlFW23HXYrzzPQ/bM6TOXM/yzNlfprTtqbPNpIls/W93mqsZ1mZVfLsQU/WtvZPDv+bCUI=
   </data>
  </layer>
  <objectgroup name="wall">
