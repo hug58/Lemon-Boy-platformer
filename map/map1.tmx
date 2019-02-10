@@ -29,7 +29,7 @@
  </objectgroup>
  <layer name="plts" width="61" height="22">
   <data encoding="base64" compression="zlib">
-   eJztl0EKACEIRW1Z9z/AHHVWAyKZ2ozQ1H/gKtN+SBoRACCDyuwUGrMep90H2BvUMgDrUg2L+BeiK//E72mGRfyhGVhkz3Qr9tjRjLsrf9Yc6QGcrzXPnmMmvvc9lLk9/zerd/bied7lCB6d3lyaj4yv7ZNrGZojWq1chfnIOpQxRuveerPmMM2ieq1cj88Nsh0Jpw==
+   eJztl0sOgCAMRGEJxs/9Vx5VTSAhxLY0Wr/zkllR247RAs4BACwYV4WkvzCtikl7bO+iv64dAEzp7m4AAEASBGnivXOzfcfHiYI08fAMJPI514on7rHcGfervNlzeReT9oCSsz1TfQwG+VvnYf1/cZ5z/r1+qTXNXNaQ60mzv6UWFTMKOag1C891L0c8+yKm/hbrHNw69xyXo1Vav1KtHLMAxbcKAg==
   </data>
  </layer>
  <layer name="spikes" width="61" height="22">

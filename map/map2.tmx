@@ -30,12 +30,12 @@
  </objectgroup>
  <layer name="plts" width="61" height="22">
   <data encoding="base64" compression="zlib">
-   eJztl0EOgCAMBPGo/3+QT9NEuZjWlgI2rTvJHggk7rZApBQAQHTWW9I8pei8ZesRANlZHL/9xRnD2b44+7x7e2glUt9GedsIZSdj5ij7Fshk7t8f/4up+0ZSpbcGXnW1ZK6+nmMOLoumrq1o9qklc6tPbs2ozLPyjJLWn/UNPsv3AZ8HCf4=
+   eJztl0sOgCAMRHHpX+9/GY+mEk3UVAOUtgJ9yaxYtBPKWI1RFCV1uk31x/l4nD810LdGDuQLq57VgQLRSjdQAJVgber7PTNR37a950W6B1+gb9ZfiTXLDaDcmczd7yzbThSu2VNi3uTCnkGUO/LbXs61o7vUj53BUMZx5p5rfaiX0HlI0TP2H4rSs8vchnjmUohP6Z6xopwhX60LhAwr
   </data>
  </layer>
  <layer name="spikes" width="61" height="22">
   <data encoding="base64" compression="zlib">
-   eJzt1EEOgDAIBEA41lf6tD5VvdWmKBcXaXeSXhqibEREiCgzFdmjeyAi8kLsrPL1C4A0ugEwaz7O+4rtBIeZb/cV2wlFW23HXYrzzPQ/bM6TOXM/yzNlfprTtqbPNpIls/W93mqsZ1mZVfLsQU/WtvZPDv+bCUI=
+   eJzt1DsKQCEMRNFYu8m3NJeqrcUDPzBD8J4yjTMQEwEgsxLxuTMAwCrnzaquhy8UdwCxv/0Y86ZNokPnad60SeD22o3b8eJ/yNz5dJczdz5F52nOHRTo5hYG/g==
   </data>
  </layer>
  <objectgroup name="wall">
@@ -48,7 +48,7 @@
   <object id="53" name="Key" type="YELLOW" x="21.67" y="573.667" width="6" height="5.66667"/>
   <object id="99" name="jump" type="left" x="1728.33" y="447.667" width="20" height="18.6667"/>
   <object id="107" name="jump" x="1631.9" y="319.803" width="30.8542" height="22.4129"/>
-  <object id="172" name="Door" type="YELLOW" x="1888" y="32.3333" width="62.3333" height="63"/>
+  <object id="172" name="Door" type="YELLOW" x="1888.25" y="32.5833" width="62.3333" height="63"/>
   <object id="181" name="jump" x="447.875" y="575.875" width="16.875" height="12.25"/>
   <object id="194" name="jump" x="1439.94" y="576.003" width="32.3253" height="31.7101"/>
   <object id="195" name="jump" x="1824.33" y="161.667" width="31.3333" height="29"/>
