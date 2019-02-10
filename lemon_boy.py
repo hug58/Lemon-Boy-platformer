@@ -18,7 +18,6 @@ class TileMap:
 	def __init__(self,filename):
 		tm = pytmx.load_pygame(filename,pixelaplha = True)
 		self.width = tm.width * tm.tilewidth
-		
 		self.height = tm.height * tm.tileheight
 		self.tmxdata = tm
 
@@ -31,7 +30,6 @@ class TileMap:
 					if tile:
 						surface.blit(tile,(x* self.tmxdata.tilewidth,y* self.tmxdata.tileheight))
 	def make_map(self):
-
 		temp_surface = pygame.Surface((self.width,self.height))
 		self.render(temp_surface)
 		return temp_surface
@@ -41,10 +39,12 @@ class Camera:
 		self.camera = pygame.Rect((0,0),(width,height))
 		self.width = width
 		self.height = height
+	
 	def apply(self,entity):
 		return entity.rect.move(self.camera.topleft)
 	def apply_rect(self,rect):
 		return rect.move(self.camera.topleft)
+	
 	def update(self,target):
 		#Targe en negativo para que en caso de llegar al extremo left (positivo) , el movimiento sea 0
 		x =-target.rect.x + int(WIDTH/2)
@@ -81,7 +81,7 @@ class Spikes(pygame.sprite.Sprite):
 
 class Game:
 	def __init__(self):
-		self.maps= ["map/map2.tmx","map/map1.tmx"]
+		self.maps= ["map/map1.tmx","map/map2.tmx"]
 		self.map = TileMap(self.maps[0])
 		self.Mapimage = self.map.make_map()
 		self.Maprect = self.Mapimage.get_rect()
@@ -149,14 +149,12 @@ class Game:
 			except:
 				pass
 
-
 		if self.player.dead == True:
 			self.load()
 		
 		self.player.update()
 
 	def draw(self):
-
 		SCREEN.blit(self.Mapimage,self.camera.apply_rect(self.Maprect))	
 		for enemies in self.enemies:
 			SCREEN.blit(enemies.image,self.camera.apply(enemies))	
