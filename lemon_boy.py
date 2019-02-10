@@ -79,13 +79,19 @@ class Spikes(pygame.sprite.Sprite):
 		if self.rect.colliderect(self.game.player.rect):
 			self.game.player.dead = True
 
+class Menu:
+	def __init__(self):
+		pass
+
 class Game:
 	def __init__(self):
 		self.maps= ["map/map1.tmx","map/map2.tmx"]
-		self.map = TileMap(self.maps[0])
+		self.map_cont = 0
+		self.map = TileMap(self.maps[self.map_cont])
 		self.Mapimage = self.map.make_map()
 		self.Maprect = self.Mapimage.get_rect()
 		self.camera = Camera(self.map.width,self.map.height)
+		
 						
 	def load(self):
 		#self.map.tmxdata
@@ -140,7 +146,9 @@ class Game:
 			objs.update()
 			try:
 				if objs.next == True:
-					self.map =  TileMap(self.maps[1])
+					if self.map_cont <= len(self.maps):
+						self.map_cont +=1
+					self.map =  TileMap(self.maps[self.map_cont])
 					self.Mapimage = self.map.make_map()
 					self.Maprect = self.Mapimage.get_rect()
 					self.camera = Camera(self.map.width,self.map.height)
