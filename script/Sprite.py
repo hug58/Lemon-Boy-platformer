@@ -40,6 +40,8 @@ class animation():
 				self.step = 0
 		if self.frame_current >= self.frame:
 			self.frame_current = 0
+
+			
 		return self.image
 
 class Sprite(pygame.sprite.Sprite):
@@ -126,5 +128,3 @@ class Sprite(pygame.sprite.Sprite):
 			self.list_lifes.pop()
 		elif self.lifes > len(self.list_lifes):
 			self.list_lifes.append(Lifes(self.list_lifes[-1].x +20,self.list_lifes[-1].y) )
-
-

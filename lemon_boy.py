@@ -91,11 +91,10 @@ class Game:
 		self.Mapimage = self.map.make_map()
 		self.Maprect = self.Mapimage.get_rect()
 		self.camera = Camera(self.map.width,self.map.height)
-		
+		self.arrow = []
 						
 	def load(self):
-		#self.map.tmxdata
-		#self.group = pygame.sprite.Group()
+		self.arrow = pygame.sprite.Group()
 		self.plataform = pygame.sprite.Group()
 		self.enemies = pygame.sprite.Group()
 		self.objs = pygame.sprite.Group()
@@ -140,7 +139,7 @@ class Game:
 		self.camera.update(self.player)
 		self.spike.update()
 		self.trap.update()
-
+		self.arrow.update()
 		self.enemies.update()
 		for objs in self.objs:
 			
@@ -165,7 +164,13 @@ class Game:
 		self.player.update()
 
 	def draw(self):
+		
+
 		SCREEN.blit(self.Mapimage,self.camera.apply_rect(self.Maprect))	
+		
+		for arrow in self.arrow:
+			SCREEN.blit(arrow.image,self.camera.apply(arrow))
+		
 		for enemies in self.enemies:
 			SCREEN.blit(enemies.image,self.camera.apply(enemies))	
 		for objs in self.objs:
@@ -192,13 +197,17 @@ def Main():
 				exit = True
 			if event.type == pygame.KEYDOWN:
 				
-				if event.key == pygame.K_UP:
+				if event.key == pygame.K_x:
 					if game.player.cont_jump > 0:
 						game.player.sound_jump.play()
-						game.player.vly = -8 
+						game.player.vly = -8      
 						game.player.cont_jump -=1
 
 					game.player.direcciony = -1
+
+				if event.key == pygame.K_z:
+					game.player.position_shot = 0
+					game.player.shot = True
 
 			if event.type == pygame.KEYUP:
 				game.player.detener = True

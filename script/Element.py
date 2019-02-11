@@ -197,4 +197,3 @@ class Lemon(pygame.sprite.Sprite):
 		if self.rect.colliderect(self.game.player.rect):
 			self.kill()
 
-
