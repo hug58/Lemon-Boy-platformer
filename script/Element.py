@@ -115,7 +115,7 @@ class Trampoline(pygame.sprite.Sprite):
 			if self.game.player.rect.top < self.rect.top:
 				self.game.player.sound_jump.play()
 				self.activate = True
-				self.game.player.vly = self.jump()
+				self.jump()
 
 		self.animation()
 
@@ -139,8 +139,9 @@ class Trampoline(pygame.sprite.Sprite):
 		return self.image
 				
 	def jump(self, vl = -12):
+		self.game.player.cont_jump = 0
 		self.game.player.direcciony = -1
-		return vl
+		self.game.player.vly = vl
 
 class Door(pygame.sprite.Sprite):
 	def __init__(self,x,y,game,Type):

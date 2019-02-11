@@ -205,12 +205,16 @@ def Main():
 
 					game.player.direcciony = -1
 
-				if event.key == pygame.K_z:
-					game.player.position_shot = 0
-					game.player.shot = True
 
 			if event.type == pygame.KEYUP:
-				game.player.detener = True
+				if event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT:
+					game.player.stop = True
+				if event.key == pygame.K_z:
+					if game.player.cont_shot >= 10:
+						game.player.cont_shot = 0
+						game.player.shot()
+					else:
+						game.player.cont_shot = 0
 
 		game.update()
 		game.draw()

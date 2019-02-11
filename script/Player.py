@@ -47,7 +47,7 @@ class Player(Sprite.Sprite):
 		self.direccionx = 1
 		self.direcciony = 0
 		self.dead = None
-		self.detener = False
+		self.stop = False
 		self.fuerza_gravitatoria = 0.65
 		self.game = game
 		self.cont_jump = 2
@@ -55,13 +55,8 @@ class Player(Sprite.Sprite):
 						'KEY_RED': False,
 					}
 		
-		self.lifes = 3
-		#self.list_lifes = [Sprite.Lifes(column*25,10) for column in range(self.lifes)]
 		self.sound_jump = pygame.mixer.Sound(ruta_sound + "Jump.wav")
-
-		self.shot = False
-		self.activate_shot = False 
-		self.position_shot = 0
+		self.cont_shot  = 0
 
 	def update(self):
 		#print(self.vly)
@@ -78,6 +73,9 @@ class Player(Sprite.Sprite):
 		elif self.vlx < 0:
 			self.image = self.animation_walk.update(True)
 
+		if self.cont_jump == 0:
+			self.direcciony = -1
+
 		if self.direcciony < 0:	
 			if self.direccionx > 0:
 				self.image = self.jump[0]
@@ -87,24 +85,21 @@ class Player(Sprite.Sprite):
 
 		self.mask = pygame.mask.from_surface(self.image)
 
-		if self.shot == True:
-			self.archer()
-
 		self.move()
-		#self.life()
 			
 		if self.vlx >= 5:
 			self.vlx = 5
 		elif self.vlx <= -5:
 			self.vlx = -5	
-		if self.detener == True:
+		if self.stop == True:
 			if self.vlx > 0:
 				self.vlx -=1
 			elif self.vlx < 0:
 				self.vlx +=1
 			else:
-				self.detener = False
+				self.stop = False
 
+		self.cont_jump = 0
 		self.gravity()
 		self.collided()
 		self.collided_trap()
@@ -114,31 +109,29 @@ class Player(Sprite.Sprite):
 		if pulsar[pygame.K_LEFT]:
 			self.direccionx = -1
 			self.vlx +=-1  			
-			self.detener = False
+			self.stop = False
 		if pulsar[pygame.K_RIGHT]:
 			self.direccionx = 1
 			self.vlx += 1			
-			self.detener = False
+			self.stop = False
 
-		#if pulsar[pygame.K_z]:
-		#	print("arrow!")			
+		if pulsar[pygame.K_z]:
+			self.cont_shot += 0.55
+			if self.cont_shot >= 10:
+				self.archer()
 
 	def archer(self):
 		
-		if self.position_shot < len(self.archers):
-			if self.direccionx > 0:
-				self.image = self.archers[self.position_shot] 			
-			elif self.direccionx < 0:
-				self.image = pygame.transform.flip(self.archers[self.position_shot],1,0)
-			self.position_shot +=1
-			 
-		if self.position_shot >= len(self.archers):
-			if self.direccionx > 0:
-				self.game.arrow.add(Arrow(self.rect.centerx,self.rect.centery,1,self.game))
-			elif self.direccionx < 0:
-				self.game.arrow.add(Arrow(self.rect.centerx,self.rect.centery,-1,self.game))
-				
-			self.shot = False
+		if self.direccionx > 0:
+			self.image = self.archers[0] 			
+		elif self.direccionx < 0:
+			self.image = pygame.transform.flip(self.archers[0],1,0)
+
+	def shot(self):
+		if self.direccionx > 0:
+			self.game.arrow.add(Arrow(self.rect.right +5,self.rect.centery,1,self.game))
+		elif self.direccionx < 0:
+			self.game.arrow.add(Arrow(self.rect.left -5,self.rect.centery,-1,self.game))
 
 class Arrow(pygame.sprite.Sprite):
 	def __init__(self,x,y,direccion,game):
@@ -158,6 +151,10 @@ class Arrow(pygame.sprite.Sprite):
 		self.colision =  pygame.sprite.spritecollide(self,self.game.plataform,False)
 		if len(self.colision) > 0:
 			self.vl = 0
+
+		self.colision_enemy = pygame.sprite.spritecollide(self,self.game.enemies,True)
+		if len(self.colision_enemy) > 0:
+			self.kill()
 		self.rect.x += self.vl
 
 
