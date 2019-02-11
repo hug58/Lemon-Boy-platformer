@@ -32,7 +32,6 @@ class Player(Sprite.Sprite):
 		self.activate_jump = False
 		self.animation_state = Sprite.animation(self.state,32,52)
 		self.animation_walk = Sprite.animation(self.walk,32,52)
-		self.animation_archer = Sprite.animation(self.archers,32,52)
 
 
 		self.image = self.state[0]
