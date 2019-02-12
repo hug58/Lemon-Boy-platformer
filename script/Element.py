@@ -9,8 +9,8 @@ GREEN = (140,196,51)
 
 ruta_base =  os.path.abspath("")
 ruta_base += "/image/"
-ruta_sound = os.path.abspath("")
-ruta_sound += "/sound/"
+#ruta_sound = os.path.abspath("")
+#ruta_sound += "/sound/"
 
 class Block(pygame.sprite.Sprite):
 	def __init__(self,x,y,scale):
@@ -79,14 +79,14 @@ class Key(pygame.sprite.Sprite):
 		self.rect.x = x
 		self.rect.y = y
 		self.game = game
-		self.sound = pygame.mixer.Sound(ruta_sound + "Pickup_Coin.wav")
+		#self.sound = pygame.mixer.Sound(ruta_sound + "Pickup_Coin.wav")
 
 	def update(self):
 		if self.rect.colliderect(self.game.player.rect):
 			#print(self.game.player.keys['KEY_YELLOW'])
 			self.game.player.keys['KEY_YELLOW'] = True
 			#print(self.game.player.keys['KEY_YELLOW'])
-			self.sound.play()
+			#self.sound.play()
 			self.kill()
 
 class Trampoline(pygame.sprite.Sprite):
@@ -113,7 +113,7 @@ class Trampoline(pygame.sprite.Sprite):
 	def update(self):
 		if self.rect.colliderect(self.game.player.rect):
 			if self.game.player.rect.top < self.rect.top:
-				self.game.player.sound_jump.play()
+				#self.game.player.sound_jump.play()
 				self.activate = True
 				self.jump()
 

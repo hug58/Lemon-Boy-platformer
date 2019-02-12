@@ -200,13 +200,13 @@ class Apple(Enemy):
 		self.animacion.limite = 3
 		self.game = game
 		self.pos_patrullandox = self.rect.x
-
-		self.vl = 2 if sentido == "left" else -2
+		self.animacion.limite = 6
+		self.vl = 4 if sentido == "left" else -4
 		
 	def update(self):
 
 		if self.vlx < 0:
-			self.animacion.limite = 10
+			
 			self.image = pygame.transform.flip(self.animacion.update(True),True,False)
 			self.mask = pygame.mask.from_surface(self.image)	
 
