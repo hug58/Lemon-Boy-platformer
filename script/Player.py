@@ -135,25 +135,35 @@ class Player(Sprite.Sprite):
 class Arrow(pygame.sprite.Sprite):
 	def __init__(self,x,y,direccion,game):
 		pygame.sprite.Sprite.__init__(self)
-		if direccion > 0:
+		self.direccion = direccion
+		if self.direccion > 0:
 			self.image = pygame.image.load(ruta_base + "sprites/hug/arrow.png")
-		elif direccion < 0:
+		elif self.direccion < 0:
 			self.image = pygame.transform.flip(pygame.image.load(ruta_base + "sprites/hug/arrow.png"),1,0)
 
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y  = y
 		self.game = game
-		self.vl = 10 if direccion > 0 else -10
+		self.vl = 10 if self.direccion > 0 else -10
+		#self.vly = 1
+		#self.rango = self.rect.left - 100 if self.direccion < 0 else self.rect.right + 100
 
 	def update(self):
 		self.colision =  pygame.sprite.spritecollide(self,self.game.plataform,False)
 		if len(self.colision) > 0:
 			self.vl = 0
-
+			self.vly = 0
 		self.colision_enemy = pygame.sprite.spritecollide(self,self.game.enemies,True)
 		if len(self.colision_enemy) > 0:
 			self.kill()
+
+
+		#if self.direccion > 0 and self.rect.right > self.rango:
+		#	self.rect.y += self.vly
+		#elif self.direccion < 0 and self.rect.left < self.rango :
+		#	self.rect.y += self.vly
+
 		self.rect.x += self.vl
 
 
