@@ -12,7 +12,7 @@ class Enemy(Sprite.Sprite):
 		self.game = game
 		Sprite.Sprite.__init__(self)
 		self.limite_x = 60
-		self.vl = 3
+		self.vl = 4
 
 	def patroling(self):
 		if self.vl > 0:
@@ -77,7 +77,7 @@ class Apple(Enemy):
 		#self.pos_patrullandox = self.rect.x
 		self.animacion.limite = 7
 		#self.vl = 3 if sentido == "left" else -3
-		self.vl = 3
+		self.vl = 4
 		self.cont = 0
 		self.distancia = math.sqrt(	(	(self.rect.centerx - self.game.player.rect.centerx )**2 + (self.rect.centery - self.game.player.rect.centery)**2	)	)
 		self.direccionx = 1

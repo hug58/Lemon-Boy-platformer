@@ -85,7 +85,7 @@ class Menu:
 
 class Game:
 	def __init__(self):
-		self.maps= ["map/map1.tmx","map/map2.tmx"]
+		self.maps= ["map/map3.tmx","map/map2.tmx","map/map1.tmx"]
 		self.map_cont = 0
 		self.map = TileMap(self.maps[self.map_cont])
 		self.Mapimage = self.map.make_map()
@@ -200,7 +200,7 @@ def Main():
 				if event.key == pygame.K_x:
 					if game.player.cont_jump > 0:
 						#game.player.sound_jump.play()
-						game.player.vly = -8      
+						game.player.vly = -10     
 						game.player.cont_jump -=1
 
 					game.player.direcciony = -1
