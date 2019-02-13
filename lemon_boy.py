@@ -5,8 +5,10 @@ from script import Player
 from script import Enemies
 from script import Element
 
-pygame.display.init()
+#pygame.display.init()
 #pygame.mixer.init()
+pygame.init()
+
 WIDTH = 620
 HEIGHT = 620
 
@@ -199,7 +201,7 @@ def Main():
 				
 				if event.key == pygame.K_x:
 					if game.player.cont_jump > 0:
-						#game.player.sound_jump.play()
+						game.player.sound_jump.play()
 						game.player.vly = -10     
 						game.player.cont_jump -=1
 
