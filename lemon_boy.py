@@ -1,6 +1,7 @@
 import pygame
 import pytmx
-#import script 
+import os
+
 from script import Player
 from script import Enemies
 from script import Element
@@ -81,6 +82,14 @@ class Spikes(pygame.sprite.Sprite):
 		if self.rect.colliderect(self.game.player.rect):
 			self.game.player.dead = True
 
+class Sound:
+	def __init__(self):
+		self.ruta_sound = os.path.abspath("") + "/sound/"
+		self.sound_jump = pygame.mixer.Sound(self.ruta_sound + "Jumpa.wav")
+		self.sound_arrow = pygame.mixer.Sound(self.ruta_sound + "arrow_sound.wav")
+		self.sound_object = pygame.mixer.Sound(self.ruta_sound + "Pickup_Coin.wav")
+
+
 class Menu:
 	def __init__(self):
 		pass
@@ -88,6 +97,7 @@ class Menu:
 class Game:
 	def __init__(self):
 		self.maps= ["map/map3.tmx","map/map2.tmx","map/map1.tmx"]
+		self.sound = Sound()
 		self.map_cont = 0
 		self.map = TileMap(self.maps[self.map_cont])
 		self.Mapimage = self.map.make_map()
@@ -201,7 +211,7 @@ def Main():
 				
 				if event.key == pygame.K_x:
 					if game.player.cont_jump > 0:
-						game.player.sound_jump.play()
+						game.sound.sound_jump.play()
 						game.player.vly = -10     
 						game.player.cont_jump -=1
 
@@ -215,8 +225,7 @@ def Main():
 					if game.player.cont_shot >= 10:
 						game.player.cont_shot = 0
 						game.player.shot()
-					#else:
-					#	game.player.cont_shot = 0
+			
 
 		game.update()
 		game.draw()

@@ -54,8 +54,6 @@ class Player(Sprite.Sprite):
 						'KEY_RED': False,
 					}
 		
-		self.sound_jump = pygame.mixer.Sound(ruta_sound + "Jumpa.wav")
-		self.sound_arrow = pygame.mixer.Sound(ruta_sound + "arrow_sound.wav")
 		self.cont_shot  = 0
 
 	def update(self):
@@ -128,7 +126,7 @@ class Player(Sprite.Sprite):
 			self.image = pygame.transform.flip(self.archers[0],1,0)
 
 	def shot(self):
-		self.sound_arrow.play()
+		self.game.sound.sound_arrow.play()
 		if self.direccionx > 0:
 			self.game.arrow.add(Arrow(self.rect.right +5,self.rect.centery,1,self.game))
 		elif self.direccionx < 0:
