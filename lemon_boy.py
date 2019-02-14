@@ -215,8 +215,8 @@ def Main():
 					if game.player.cont_shot >= 10:
 						game.player.cont_shot = 0
 						game.player.shot()
-					else:
-						game.player.cont_shot = 0
+					#else:
+					#	game.player.cont_shot = 0
 
 		game.update()
 		game.draw()

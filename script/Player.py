@@ -55,6 +55,7 @@ class Player(Sprite.Sprite):
 					}
 		
 		self.sound_jump = pygame.mixer.Sound(ruta_sound + "Jumpa.wav")
+		self.sound_arrow = pygame.mixer.Sound(ruta_sound + "arrow_sound.wav")
 		self.cont_shot  = 0
 
 	def update(self):
@@ -127,6 +128,7 @@ class Player(Sprite.Sprite):
 			self.image = pygame.transform.flip(self.archers[0],1,0)
 
 	def shot(self):
+		self.sound_arrow.play()
 		if self.direccionx > 0:
 			self.game.arrow.add(Arrow(self.rect.right +5,self.rect.centery,1,self.game))
 		elif self.direccionx < 0:
@@ -145,7 +147,7 @@ class Arrow(pygame.sprite.Sprite):
 		self.rect.x = x
 		self.rect.y  = y
 		self.game = game
-		self.vl = 10 if self.direccion > 0 else -10
+		self.vl = 9 if self.direccion > 0 else -9
 		#self.vly = 1
 		#self.rango = self.rect.left - 100 if self.direccion < 0 else self.rect.right + 100
 
@@ -165,19 +167,4 @@ class Arrow(pygame.sprite.Sprite):
 		#	self.rect.y += self.vly
 
 		self.rect.x += self.vl
-
-
-
-class NPC(pygame.sprite.Sprite):
-	def __init__(self,x,y):
-		pygame.sprite.Sprite.__init__(self)
-		self.troso = pygame.image.load(ruta_base + "mango_men")
-		
-		self.image = self.troso.subsurface((10,4),(11,24))
-		self.rect = self.image.get_rect()
-		self.rect.x = x 
-		self.rect.y = y +self.rect.height
-
-	def update(self):
-		pass
 

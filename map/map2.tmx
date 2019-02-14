@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="61" height="22" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="200">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="61" height="22" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="203">
  <tileset firstgid="1" source="spikes.tsx"/>
  <tileset firstgid="9" source="pasto.tsx"/>
  <objectgroup name="spikes">
@@ -20,22 +20,23 @@
   <object id="152" name="Spike" x="1855.93" y="105.932" width="28" height="12"/>
   <object id="175" name="Spike_trap" x="0.123106" y="416.121" width="32" height="32"/>
   <object id="176" name="Spike_trap" x="351.788" y="320.121" width="32" height="32"/>
-  <object id="177" name="Spike" x="266.117" y="319.906" width="11.9022" height="28.0543"/>
-  <object id="179" name="Spike_trap" x="288.057" y="320.003" width="31.9688" height="27.5699"/>
+  <object id="177" name="Spike" x="298.117" y="319.542" width="11.9022" height="28.0543"/>
+  <object id="179" name="Spike_trap" x="256.057" y="320.185" width="31.9688" height="27.5699"/>
   <object id="183" name="Spike" x="521.94" y="479.983" width="12.0702" height="27.9447"/>
   <object id="187" name="Spike" x="420.182" y="361.455" width="28" height="76.3636"/>
   <object id="188" name="Spike" x="393.818" y="576.091" width="12.2727" height="27.8182"/>
   <object id="189" name="Spike" x="778.039" y="256.069" width="11.9723" height="27.9801"/>
   <object id="190" name="Spike" x="777.772" y="323.885" width="11.9723" height="27.9801"/>
+  <object id="202" name="Apple" x="280" y="95" width="7" height="6"/>
  </objectgroup>
  <layer name="plts" width="61" height="22">
   <data encoding="base64" compression="zlib">
-   eJztl0sOgCAMRHHpX+9/GY+mEk3UVAOUtgJ9yaxYtBPKWI1RFCV1uk31x/l4nD810LdGDuQLq57VgQLRSjdQAJVgber7PTNR37a950W6B1+gb9ZfiTXLDaDcmczd7yzbThSu2VNi3uTCnkGUO/LbXs61o7vUj53BUMZx5p5rfaiX0HlI0TP2H4rSs8vchnjmUohP6Z6xopwhX60LhAwr
+   eJztl0sKgDAMROvSv97/Mh7NghVUotTmZ2sezKpIMjSO0TnDMHKn86ofzsdwftXA3xo7kC+selEHBkSr3cAPqBRrc9/vnomlvNuYu/LPLlR9SAF9s74K1Sw3gEpncme/s247JByzJ9e8MbYM4tyR7/ZyqR09pj51BkMZJ5l7sfWhXlLnIUfP2H8oTs8xc5viWUopPrV7xopzht5qBRbQDCw=
   </data>
  </layer>
  <layer name="spikes" width="61" height="22">
   <data encoding="base64" compression="zlib">
-   eJzt1DsKQCEMRNFYu8m3NJeqrcUDPzBD8J4yjTMQEwEgsxLxuTMAwCrnzaquhy8UdwCxv/0Y86ZNokPnad60SeD22o3b8eJ/yNz5dJczdz5F52nOHRTo5hYG/g==
+   eJzt1DEOACAIQ1GcvaRH46i6OpgYBirxv5HFNkHMAFTWzIY6AwDcUt6srnoY1077seaemyQPnbe55yaBWlMHeNiP/6Fy5+guV+4cRedtzh1MMAHaxgb9
   </data>
  </layer>
  <objectgroup name="wall">
@@ -53,6 +54,7 @@
   <object id="194" name="jump" x="1439.94" y="576.003" width="32.3253" height="31.7101"/>
   <object id="195" name="jump" x="1824.33" y="161.667" width="31.3333" height="29"/>
   <object id="198" name="Lemon" x="320.455" y="320.091" width="30.4545" height="27.4545"/>
+  <object id="200" name="Lemon" x="32.1818" y="416.091" width="31.7273" height="31.8182"/>
  </objectgroup>
  <objectgroup name="enemies">
   <object id="196" name="Apple" type="left" x="536.5" y="106.083" width="6.75" height="5.08333"/>

@@ -9,8 +9,8 @@ GREEN = (140,196,51)
 
 ruta_base =  os.path.abspath("")
 ruta_base += "/image/"
-#ruta_sound = os.path.abspath("")
-#ruta_sound += "/sound/"
+ruta_sound = os.path.abspath("")
+ruta_sound += "/sound/"
 
 class Block(pygame.sprite.Sprite):
 	def __init__(self,x,y,scale):
@@ -79,14 +79,14 @@ class Key(pygame.sprite.Sprite):
 		self.rect.x = x
 		self.rect.y = y
 		self.game = game
-		#self.sound = pygame.mixer.Sound(ruta_sound + "Pickup_Coin.wav")
+		self.sound = pygame.mixer.Sound(ruta_sound + "Pickup_Coin.wav")
 
 	def update(self):
 		if self.rect.colliderect(self.game.player.rect):
 			#print(self.game.player.keys['KEY_YELLOW'])
 			self.game.player.keys['KEY_YELLOW'] = True
 			#print(self.game.player.keys['KEY_YELLOW'])
-			#self.sound.play()
+			self.sound.play()
 			self.kill()
 
 class Trampoline(pygame.sprite.Sprite):
@@ -113,7 +113,7 @@ class Trampoline(pygame.sprite.Sprite):
 	def update(self):
 		if self.rect.colliderect(self.game.player.rect):
 			if self.game.player.rect.top < self.rect.top:
-				#self.game.player.sound_jump.play()
+				self.game.player.sound_jump.play()
 				self.activate = True
 				self.jump()
 
@@ -175,7 +175,7 @@ class Door(pygame.sprite.Sprite):
 		if self.cont > self.delay:
 			if self.position < 5:					
 				self.image = pygame.image.load(ruta_base + "door{}.png".format(self.position)) 			
-				self.image = pygame.transform.scale(self.image,(60,62))
+				self.image = pygame.transform.scale(self.image,(62,64))
 				self.position +=1
 			elif self.position >= 4:
 				self.next = True
@@ -190,11 +190,13 @@ class Lemon(pygame.sprite.Sprite):
 		pygame.sprite.Sprite.__init__(self)
 		self.image =pygame.transform.scale2x( pygame.image.load(ruta_base + "lemon.png"))
 		self.rect = self.image.get_rect()
+		self.sound = pygame.mixer.Sound(ruta_sound + "Pickup_Coin.wav")
 		self.rect.x = x
 		self.rect.y = y 
 		self.game = game
 
 	def update(self):
 		if self.rect.colliderect(self.game.player.rect):
-			self.kill()
+				self.sound.play()
+				self.kill()
 
