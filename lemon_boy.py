@@ -31,6 +31,7 @@ class TileMap:
 				for x,y,gid in layer:
 					tile = ti(gid)
 					if tile:
+						
 						surface.blit(tile,(x* self.tmxdata.tilewidth,y* self.tmxdata.tileheight))
 	def make_map(self):
 		temp_surface = pygame.Surface((self.width,self.height))
@@ -90,9 +91,22 @@ class Sound:
 		self.sound_object = pygame.mixer.Sound(self.ruta_sound + "Pickup_Coin.wav")
 
 
-class Menu:
+class Paused:
 	def __init__(self):
-		pass
+		self.exit = True
+		self.clock = pygame.time.Clock()
+	def update(self):
+		while self.exit == False:
+			self.clock.tick(30)
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					self.exit = True
+
+				if event.type == pygame.KEYDOWN:
+					if event.key == pygame.K_p:
+						self.exit = True
+		
+		
 
 class Game:
 	def __init__(self):
@@ -104,6 +118,7 @@ class Game:
 		self.Maprect = self.Mapimage.get_rect()
 		self.camera = Camera(self.map.width,self.map.height)
 		self.arrow = []
+
 						
 	def load(self):
 		self.arrow = pygame.sprite.Group()
@@ -177,7 +192,6 @@ class Game:
 
 	def draw(self):
 		
-
 		SCREEN.blit(self.Mapimage,self.camera.apply_rect(self.Maprect))	
 		
 		for arrow in self.arrow:
@@ -192,7 +206,6 @@ class Game:
 
 		for trap in self.trap:
 			SCREEN.blit(trap.image,self.camera.apply(trap))
-
 		
 			
 def Main():
@@ -200,10 +213,12 @@ def Main():
 	exit = False
 	clock = pygame.time.Clock()
 	game = Game()
+	paused = Paused()
 	game.load()
 
 	while exit == False:
 		clock.tick(60)
+		
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				exit = True
@@ -217,6 +232,9 @@ def Main():
 
 					game.player.direcciony = -1
 
+				if event.key == pygame.K_p:
+					paused.exit = False
+
 
 			if event.type == pygame.KEYUP:
 				if event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT:
@@ -228,6 +246,7 @@ def Main():
 			
 
 		game.update()
+		paused.update()
 		game.draw()
 		pygame.display.flip()
 

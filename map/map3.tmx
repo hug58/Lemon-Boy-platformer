@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="61" height="22" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="220">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="61" height="22" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="221">
  <tileset firstgid="1" source="spikes.tsx"/>
  <tileset firstgid="9" source="pasto.tsx"/>
  <objectgroup name="spikes">
@@ -29,12 +29,13 @@
   <object id="217" name="jump" x="895.938" y="352" width="32.1875" height="31.875"/>
   <object id="218" name="jump" x="864" y="224.091" width="32.1818" height="31.8182"/>
   <object id="219" name="Lemon" x="1024.12" y="512.25" width="31.875" height="31.5"/>
+  <object id="220" name="Apple" type="left" x="1567.25" y="640" width="2" height="2.5"/>
  </objectgroup>
  <objectgroup name="enemies">
   <object id="196" name="Apple" type="left" x="478" y="558.583" width="6.75" height="5.08333"/>
   <object id="215" name="Apple" type="left" x="858.125" y="545.125" width="6.75" height="1.08333"/>
  </objectgroup>
- <objectgroup name="plataform">
+ <objectgroup color="#00ff00" name="plataform">
   <object id="115" name="Player" x="32.5" y="339.5" width="9" height="6"/>
   <object id="153" name="plataform" x="1215.81" y="672.007" width="736.189" height="32.0079"/>
   <object id="155" name="plataform" x="-0.0543333" y="416.083" width="352.054" height="256.25"/>
