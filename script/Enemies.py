@@ -15,16 +15,17 @@ class Enemy(Sprite.Sprite):
 		self.vl = 4
 
 	def patroling(self):
-		if self.vl > 0:
-			if self.rect.x < self.pos_patrullandox + self.limite_x:
-				self.vlx = self.vl
-			else:
-				self.vl *=-1 
-		elif self.vl < 0:
-			if self.rect.x > self.pos_patrullandox -self.limite_x:
-				self.vlx = self.vl
-			else:
-				self.vl *=-1
+		pass
+		#if self.vl > 0:
+		#	if self.rect.x < self.pos_patrullandox + self.limite_x:
+		#		self.vlx = self.vl
+		#	else:
+		#		self.vl *=-1 
+		#elif self.vl < 0:
+		#	if self.rect.x > self.pos_patrullandox -self.limite_x:
+		#		self.vlx = self.vl
+		#	else:
+		#		self.vl *=-1
 
 	def follow(self):
 		self.distancia = math.sqrt(	(	(self.rect.centerx - self.game.player.rect.centerx )**2 + (self.rect.centery - self.game.player.rect.centery)**2	)	)
@@ -54,7 +55,7 @@ class Enemy_Rect(Enemy):
 		
 	def update(self):
 		self.gravity()
-		self.patroling()
+		#self.patroling()
 		self.collided()
 
 class Apple(Enemy):
@@ -74,7 +75,7 @@ class Apple(Enemy):
 		self.rect.y = y
 		self.animacion = Sprite.animation(self.frames,self.scale_x,self.scale_y)
 		self.animacion.limite = 3
-		#self.pos_patrullandox = self.rect.x
+		#self.posx = self.rect.x
 		self.animacion.limite = 7
 		#self.vl = 3 if sentido == "left" else -3
 		self.vl = 4

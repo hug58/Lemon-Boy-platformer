@@ -1,6 +1,6 @@
 import pygame
 import os.path
-import random
+import pytweening as tween
 
 
 WHITE2 =  (252,252,238)
@@ -192,9 +192,23 @@ class Lemon(pygame.sprite.Sprite):
 		self.rect.x = x
 		self.rect.y = y 
 		self.game = game
+		self.tween = tween.easeInOutSine
+		self.bob_range = 20
+		self.bob_speed = 0.6
+		self.step = 0
+		self.dir = 1
+		self.posy = y
 
 	def update(self):
 		if self.rect.colliderect(self.game.player.rect):
 				self.game.sound.sound_object.play()
 				self.kill()
+
+		offset = self.bob_range *  (self.tween(self.step / self.bob_range) - 0.5)
+		self.rect.centery = self.posy + offset * self.dir
+		self.step += self.bob_speed
+		
+		if self.step > self.bob_range:
+			self.step = 0
+			self.dir *=-1
 

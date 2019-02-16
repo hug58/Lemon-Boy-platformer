@@ -110,7 +110,7 @@ class Paused:
 
 class Game:
 	def __init__(self):
-		self.maps= ["map/map3.tmx","map/map2.tmx","map/map1.tmx"]
+		self.maps= ["map/map2.tmx","map/map3.tmx","map/map1.tmx"]
 		self.sound = Sound()
 		self.map_cont = 0
 		self.map = TileMap(self.maps[self.map_cont])
