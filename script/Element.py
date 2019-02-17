@@ -26,7 +26,7 @@ class Block(pygame.sprite.Sprite):
 		self.y = y
 
 class Trap(pygame.sprite.Sprite):
-	def __init__(self,x,y):
+	def __init__(self,x,y,game):
 		pygame.sprite.Sprite.__init__(self)
 		self.trap = pygame.image.load(ruta_base + "spikes.png")
 		self.frames = 8
@@ -39,9 +39,23 @@ class Trap(pygame.sprite.Sprite):
 		self.activate = False
 		self.activate_spike = False
 		self.cont = 0
+		self.game = game
 
 	def update(self):
 		self.animation()
+
+		colision = pygame.sprite.collide_mask(self.game.player,self)
+		if colision != None and self.activate_spike == True:
+			self.game.player.dead = True
+		colision = pygame.sprite.collide_mask(self.game.player,self)
+		if colision != None and self.activate_spike == True:
+			self.game.player.dead = True
+		for enemy in self.game.enemies:
+			colision_enemies = pygame.sprite.collide_mask(enemy,self)
+			if colision_enemies != None and self.activate_spike == True:
+				enemy.kill()
+
+
 
 	def animation(self):
 		if self.activate == False:
@@ -112,7 +126,7 @@ class Trampoline(pygame.sprite.Sprite):
 	def update(self):
 		if self.rect.colliderect(self.game.player.rect):
 			if self.game.player.rect.top < self.rect.top:
-				self.game.sound.sound_jump.play()
+				#self.game.sound.sound_jump.play()
 				self.activate = True
 				self.jump()
 
@@ -212,3 +226,45 @@ class Lemon(pygame.sprite.Sprite):
 			self.step = 0
 			self.dir *=-1
 
+
+class Fire_Cannon(pygame.sprite.Sprite):
+	def __init__(self,x,y,game,sentido = "right"):
+		pygame.sprite.Sprite.__init__(self)
+		self.fireball = []
+		self.limite = 1
+		self.game = game
+		self.rect = pygame.Rect(x,y,20,20)
+		self.sentido = sentido
+	def update(self):
+		if len(self.fireball) < self.limite:
+			self.fireball.append(Fireball(self.rect.centerx,self.rect.centery,self.sentido))
+
+		for fireball in self.fireball:
+			colision = pygame.sprite.collide_mask(self.game.player,fireball)
+			if colision != None:
+				self.game.player.dead = True
+
+			colision_pared = pygame.sprite.spritecollide(fireball,self.game.plataform,False)
+			
+			if len(colision_pared) > 0:
+				
+				self.fireball.remove(fireball)
+				
+			
+			fireball.update()
+
+class Fireball(pygame.sprite.Sprite):
+
+	def __init__(self,x,y,sentido):
+		pygame.sprite.Sprite.__init__(self)
+		self.fireball = pygame.image.load(ruta_base + "ball.png")
+		self.image = self.fireball.subsurface((0,0),(20,20))
+		self.rect = self.image.get_rect()
+		self.rect.x = x
+		self.rect.y = y
+		self.mask = pygame.mask.from_surface(self.image)
+		self.vlx = 4 if sentido == "right" else -4
+
+	def update(self):
+
+		self.rect.x += self.vlx
