@@ -5,9 +5,6 @@ from script import Sprite
 ruta_base =  os.path.abspath("")
 ruta_base += "/image/"
 
-ruta_sound = os.path.abspath("")
-ruta_sound += "/sound/"
-
 class Player(Sprite.Sprite):
 	def __init__(self,x,y,game):
 		Sprite.Sprite.__init__(self)
@@ -100,7 +97,6 @@ class Player(Sprite.Sprite):
 		self.cont_jump = 0
 		self.gravity()
 		self.collided()
-		self.collided_trap()
 
 	def move(self):
 		pulsar = pygame.key.get_pressed()

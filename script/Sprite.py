@@ -76,46 +76,6 @@ class Sprite(pygame.sprite.Sprite):
 			elif self.vly < 0:
 				self.rect.top = block.rect.bottom
 
-		#for objeto in self.colision:
-			#if objeto.element == "block":	
-				#if (self.rect.top < objeto.rect.top and self.rect.bottom < objeto.rect.bottom and	self.rect.left < objeto.rect.right 
-				#and self.rect.right > objeto.rect.left  and self.vly  >= 0 
-				#or self.rect.top < objeto.rect.top and self.rect.bottom < objeto.rect.bottom and self.rect.right > objeto.rect.left 
-				#and self.rect.left < objeto.rect.right and self.vly >= 0):	
-				#			self.vly = 0			
-				#			self.rect.bottom = objeto.rect.top 				
-				#			self.cont_jump =2
-				#elif self.rect.left < objeto.rect.left:
-				#	self.rect.right = objeto.rect.left 		
-				#elif self.rect.right > objeto.rect.right:
-				#	self.rect.left = objeto.rect.right 
-				#elif self.rect.bottom >= objeto.rect.bottom:
-				#	self.rect.top = objeto.rect.bottom
-				#	self.cont_jump = 0
-			#if objeto.element == "pua":
-			#	self.vlx = 0
-			#	self.vly = 0
-			#	self.dead = True
-			#	self.rect.bottom = objeto.rect.top +27
-			#if objeto.element == "skull" or objeto.element == "enemy":
-			#	self.vlx = 0
-			#	self.vly = 0
-			#	self.dead = True
-
-	def collided_trap(self):
-		for sprite in self.game.trap:
-			colision = pygame.sprite.collide_mask(self.game.player,sprite)
-			if colision != None and sprite.activate_spike == True:
-				self.game.player.dead = True
-				#return True
-
-		for enemy in self.game.enemies:
-			colision = pygame.sprite.collide_mask(self.game.player,enemy)
-			if colision != None:
-				self.game.player.dead = True
-
-
-
 	def gravity(self):
 		if self.vly == 0:
 			self.vly = 1
