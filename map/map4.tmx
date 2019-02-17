@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="61" height="22" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="233">
+ <tileset firstgid="1" source="spikes.tsx"/>
+ <tileset firstgid="9" source="pasto.tsx"/>
+ <objectgroup name="spikes">
+  <object id="211" name="Spike_trap" x="302.818" y="607.758" width="32" height="31.8182"/>
+  <object id="212" name="Spike_trap" x="334.824" y="607.741" width="32" height="31.8182"/>
+  <object id="213" name="Spike_trap" x="366.88" y="607.82" width="32" height="31.8182"/>
+  <object id="214" name="Spike_trap" x="398.886" y="607.735" width="32" height="31.8182"/>
+  <object id="232" name="plataform" x="256.03" y="640.061" width="224.199" height="32.2424"/>
+ </objectgroup>
+ <layer name="plts" width="61" height="22">
+  <data encoding="base64" compression="zlib">
+   eJzt0rEJACAQA8C0Nrr/ti5g8SCiyB2kDyQJAAAAACe0YnjLyHqnfrPUpuoXf8oE1BICyg==
+  </data>
+ </layer>
+ <layer name="spikes" width="61" height="22">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAwJcBFPgAAQ==
+  </data>
+ </layer>
+ <objectgroup name="wall">
+  <object id="111" name="plataform" x="0.060606" y="-0.667" height="672.646"/>
+  <object id="113" name="plataform" x="1951.99" y="307.626" width="-4.2244e-14" height="397.646"/>
+ </objectgroup>
+ <objectgroup name="object">
+  <object id="53" name="Key" type="YELLOW" x="1309" y="629" width="6" height="5.66667"/>
+  <object id="172" name="Door" type="YELLOW" x="1889.08" y="608.023" width="62.3333" height="63"/>
+  <object id="221" name="Lemon" x="520.5" y="628" width="12" height="10.5"/>
+  <object id="222" name="Lemon" x="804.167" y="532.833" width="12.3333" height="10"/>
+ </objectgroup>
+ <objectgroup name="ball">
+  <object id="229" name="Fireball" x="63.8409" y="640.705" width="15.8182" height="10.4545"/>
+ </objectgroup>
+ <objectgroup name="enemies">
+  <object id="196" name="Apple" type="left" x="1051.33" y="642.583" width="6.75" height="5.08333"/>
+  <object id="220" name="Apple" type="left" x="1567.25" y="640" width="2" height="2.5"/>
+  <object id="225" name="Apple" type="right" x="703.333" y="531" width="5.66667" height="6.66667"/>
+  <object id="227" name="Apple" type="right" x="900.667" y="527.667" width="5.66667" height="6.66667"/>
+ </objectgroup>
+ <objectgroup color="#00ff00" name="plataform">
+  <object id="115" name="Player" x="28.5" y="571.5" width="9" height="6"/>
+  <object id="153" name="plataform" x="-2.19" y="672.007" width="1954.19" height="32.0079"/>
+  <object id="223" name="plataform" x="639.909" y="575.967" width="320.102" height="32.0444"/>
+ </objectgroup>
+</map>

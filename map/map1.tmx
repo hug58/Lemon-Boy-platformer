@@ -54,12 +54,12 @@
   <object id="27" name="Door" type="YELLOW" x="1900.26" y="386.69" width="4" height="10.5"/>
   <object id="29" name="plataform" x="128" y="640" width="32.0625" height="32.0241"/>
   <object id="30" name="plataform" x="703.997" y="479.997" width="32.0005" height="32"/>
-  <object id="32" name="Apple" type="right" x="919" y="313.833" width="13" height="11">
+  <object id="32" name="Apple" type="right" x="917" y="299.5" width="13" height="11">
    <properties>
     <property name="area" type="int" value="70"/>
    </properties>
   </object>
-  <object id="33" name="Apple" type="left" x="677.666" y="543.334" width="15.3333" height="9.33333">
+  <object id="33" name="Apple" type="left" x="670.666" y="529.001" width="15.3333" height="9.33333">
    <properties>
     <property name="area" type="int" value="60"/>
    </properties>
