@@ -35,11 +35,12 @@ class Trap(pygame.sprite.Sprite):
 		self.rect.x = x 
 		self.rect.y = y 
 		self.mask = pygame.mask.from_surface(self.image)
-		self.position = 0
+		self.game = game
+		
 		self.activate = False
 		self.activate_spike = False
 		self.cont = 0
-		self.game = game
+		self.position = 0
 
 	def update(self):
 		self.animation()
@@ -54,7 +55,6 @@ class Trap(pygame.sprite.Sprite):
 			colision_enemies = pygame.sprite.collide_mask(enemy,self)
 			if colision_enemies != None and self.activate_spike == True:
 				enemy.kill()
-
 
 
 	def animation(self):
@@ -116,8 +116,6 @@ class Trampoline(pygame.sprite.Sprite):
 		self.rect.y = y 
 		
 		self.frame = len(self.frames)
-		#self.delay = 5
-		#self.cont = 0
 		self.position = 0
 
 		self.game = game
@@ -141,7 +139,7 @@ class Trampoline(pygame.sprite.Sprite):
 			
 			if self.position >= self.frame:
 				self.activate = False
-			self.cont = 0
+			
 				 
 		else:
 			
@@ -149,7 +147,6 @@ class Trampoline(pygame.sprite.Sprite):
 			self.image = self.tramp.subsurface(self.frames[self.position],(13,9)) 			
 			self.image = pygame.transform.scale(self.image,(32,32))
 
-		return self.image
 				
 	def jump(self, vl = -12):
 		self.game.player.cont_jump = 0
@@ -226,7 +223,6 @@ class Lemon(pygame.sprite.Sprite):
 			self.step = 0
 			self.dir *=-1
 
-
 class Fire_Cannon(pygame.sprite.Sprite):
 	def __init__(self,x,y,game,sentido = "right"):
 		pygame.sprite.Sprite.__init__(self)
@@ -235,9 +231,13 @@ class Fire_Cannon(pygame.sprite.Sprite):
 		self.game = game
 		self.rect = pygame.Rect(x,y,20,20)
 		self.sentido = sentido
+		self.cont = 0
 	def update(self):
 		if len(self.fireball) < self.limite:
-			self.fireball.append(Fireball(self.rect.centerx,self.rect.centery,self.sentido))
+			self.cont +=1
+			if self.cont == 20:
+				self.fireball.append(Fireball(self.rect.centerx,self.rect.centery,self.sentido))
+				self.cont = 0
 
 		for fireball in self.fireball:
 			colision = pygame.sprite.collide_mask(self.game.player,fireball)
@@ -257,14 +257,32 @@ class Fireball(pygame.sprite.Sprite):
 
 	def __init__(self,x,y,sentido):
 		pygame.sprite.Sprite.__init__(self)
-		self.fireball = pygame.image.load(ruta_base + "ball.png")
-		self.image = self.fireball.subsurface((0,0),(20,20))
+		self.frames = [	pygame.image.load(ruta_base + "ball.png"),
+						pygame.image.load(ruta_base + "ball2.png"),
+						pygame.image.load(ruta_base + "ball3.png"),]
+		self.image = self.frames[0]
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y
 		self.mask = pygame.mask.from_surface(self.image)
-		self.vlx = 4 if sentido == "right" else -4
-
+		self.vlx = 3 if sentido == "right" else -3
+		
+		self.frame = len(self.frames)
+		self.position = 0
+		self.cont = 0
 	def update(self):
 
 		self.rect.x += self.vlx
+		self.animation()
+
+	def animation(self):
+		
+		self.image = self.frames[self.position] 	
+		self.cont +=1	
+				 
+		if self.cont == 10:
+			self.position +=1
+			self.cont = 0	
+
+		if self.position >= self.frame:
+			self.position = 0

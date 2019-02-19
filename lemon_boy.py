@@ -6,9 +6,9 @@ from script import Player
 from script import Enemies
 from script import Element
 
-#pygame.display.init()
-#pygame.mixer.init()
-pygame.init()
+pygame.display.init()
+pygame.mixer.init()
+#pygame.init()
 
 WIDTH = 620
 HEIGHT = 620
@@ -156,7 +156,7 @@ class Game:
 			elif tile_object.name == "Spike":
 				self.spike.add(Spikes(tile_object.x,tile_object.y,tile_object.width,tile_object.height,self))
 
-			elif tile_object.name == "Fireball":
+			elif tile_object.name == "Fire_cannon":
 				self.fire_cannon.add(Element.Fire_Cannon(tile_object.x,tile_object.y,self))
 
 			elif tile_object.name == "Key":
@@ -239,7 +239,7 @@ def Main():
 				if event.key == pygame.K_x:
 					if game.player.cont_jump > 0:
 						#game.sound.sound_jump.play()
-						game.player.vly = -13     
+						game.player.vly = -8
 						game.player.cont_jump -=1
 
 					game.player.direcciony = -1

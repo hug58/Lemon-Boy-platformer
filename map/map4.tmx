@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="61" height="22" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="233">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="61" height="22" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="237">
  <tileset firstgid="1" source="spikes.tsx"/>
  <tileset firstgid="9" source="pasto.tsx"/>
+ <tileset firstgid="18" source="fire_cannon.tsx"/>
  <objectgroup name="spikes">
   <object id="211" name="Spike_trap" x="302.818" y="607.758" width="32" height="31.8182"/>
   <object id="212" name="Spike_trap" x="334.824" y="607.741" width="32" height="31.8182"/>
   <object id="213" name="Spike_trap" x="366.88" y="607.82" width="32" height="31.8182"/>
   <object id="214" name="Spike_trap" x="398.886" y="607.735" width="32" height="31.8182"/>
-  <object id="232" name="plataform" x="256.03" y="640.061" width="224.199" height="32.2424"/>
  </objectgroup>
  <layer name="plts" width="61" height="22">
   <data encoding="base64" compression="zlib">
-   eJzt0rEJACAQA8C0Nrr/ti5g8SCiyB2kDyQJAAAAACe0YnjLyHqnfrPUpuoXf8oE1BICyg==
+   eJzt0jkKACAMBMC0Ngr+/7F+IEUKD5AZ2CbVwiYCAAAAgBNaMbwzk9uIfKd+sddu1V/8KQv1igLc
   </data>
  </layer>
  <layer name="spikes" width="61" height="22">
@@ -29,8 +29,8 @@
   <object id="221" name="Lemon" x="520.5" y="628" width="12" height="10.5"/>
   <object id="222" name="Lemon" x="804.167" y="532.833" width="12.3333" height="10"/>
  </objectgroup>
- <objectgroup name="ball">
-  <object id="229" name="Fireball" x="63.8409" y="640.705" width="15.8182" height="10.4545"/>
+ <objectgroup color="#ff0000" name="ball">
+  <object id="229" name="Fire_cannon" x="96" y="639.75" width="32.125" height="32.0795"/>
  </objectgroup>
  <objectgroup name="enemies">
   <object id="196" name="Apple" type="left" x="1051.33" y="642.583" width="6.75" height="5.08333"/>
@@ -42,5 +42,6 @@
   <object id="115" name="Player" x="28.5" y="571.5" width="9" height="6"/>
   <object id="153" name="plataform" x="-2.19" y="672.007" width="1954.19" height="32.0079"/>
   <object id="223" name="plataform" x="639.909" y="575.967" width="320.102" height="32.0444"/>
+  <object id="232" name="plataform" x="256.03" y="640.061" width="224.199" height="32.2424"/>
  </objectgroup>
 </map>

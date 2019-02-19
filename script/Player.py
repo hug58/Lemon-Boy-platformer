@@ -54,22 +54,17 @@ class Player(Sprite.Sprite):
 		self.cont_shot  = 0
 
 	def update(self):
-		#print(self.vly)
 		if self.vlx == 0:
 			self.animation_state.limite = 10
 			if self.direccionx > 0:
 				self.image = self.animation_state.update(False)
 			if self.direccionx < 0:
 				self.image = self.animation_state.update(True)
-		
+
 		elif self.vlx > 0:
 			self.image = self.animation_walk.update(False) 
-
 		elif self.vlx < 0:
 			self.image = self.animation_walk.update(True)
-
-		if self.cont_jump == 0:
-			self.direcciony = -1
 
 		if self.direcciony < 0:	
 			if self.direccionx > 0:
@@ -93,10 +88,15 @@ class Player(Sprite.Sprite):
 				self.vlx +=1
 			else:
 				self.stop = False
+		
 
-		self.cont_jump = 0
+
 		self.gravity()
 		self.collided()
+
+		if len(self.colision_plataform) == 0 and self.cont_jump == 2:
+			self.direcciony = -1
+			self.cont_jump = 1
 
 	def move(self):
 		pulsar = pygame.key.get_pressed()
