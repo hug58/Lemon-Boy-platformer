@@ -11,10 +11,11 @@ pygame.mixer.init()
 #pygame.init()
 
 WIDTH = 620
-HEIGHT = 620
+HEIGHT = 480
 
 SCREEN = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("Project Hugo")
+pygame.display.set_icon(pygame.image.load(os.path.abspath("") + "/lemon.ico"))
  
 
 class TileMap:
@@ -241,8 +242,7 @@ def Main():
 						#game.sound.sound_jump.play()
 						game.player.vly = -8
 						game.player.cont_jump -=1
-
-					game.player.direcciony = -1
+						game.player.direcciony = -1
 
 				if event.key == pygame.K_p:
 					paused.exit = False
@@ -251,10 +251,14 @@ def Main():
 			if event.type == pygame.KEYUP:
 				if event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT:
 					game.player.stop = True
-				if event.key == pygame.K_z:
+
+				if event.key == pygame.K_c:
 					if game.player.cont_shot >= 13:
 						game.player.cont_shot = 0
 						game.player.shot()
+
+					else:
+						game.player.cont_shot = 0
 			
 
 		game.update()
