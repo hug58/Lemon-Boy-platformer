@@ -109,9 +109,14 @@ class Paused:
 				if event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_p:
 						self.exit = True
-		
+
+class Menu(pygame.sprite.Sprite):
+	def __init__(self):
+		pygame.sprite.Sprite.__init__(self)
+		self.rect = pygame.Rect((0,0),(620,480)) 		
 		
 class Game:
+	
 	def __init__(self):
 		self.maps= ["map/map4.tmx","map/map3.tmx","map/map2.tmx","map/map1.tmx"]
 		self.sound = Sound()
@@ -124,6 +129,7 @@ class Game:
 
 						
 	def load(self):
+		
 		self.arrow = pygame.sprite.Group()
 		self.plataform = pygame.sprite.Group()
 		self.enemies = pygame.sprite.Group()
@@ -143,6 +149,9 @@ class Game:
 					self.objs.add(Element.Door(tile_object.x,tile_object.y,self,"YELLOW"))
 			
 			elif tile_object.name == "Spike_trap":
+				if tile_object.type == "right":
+					self.trap.add(Element.Trap(tile_object.x,tile_object.y,self,"right"))
+				else:
 					self.trap.add(Element.Trap(tile_object.x,tile_object.y,self))
 
 			elif tile_object.name == "plataform":
@@ -158,7 +167,12 @@ class Game:
 				self.spike.add(Spikes(tile_object.x,tile_object.y,tile_object.width,tile_object.height,self))
 
 			elif tile_object.name == "Fire_cannon":
-				self.fire_cannon.add(Element.Fire_Cannon(tile_object.x,tile_object.y,self))
+				
+				if tile_object.type == "left":
+					self.fire_cannon.add(Element.Fire_Cannon(tile_object.x,tile_object.y,self, "left"))
+
+				else:
+					self.fire_cannon.add(Element.Fire_Cannon(tile_object.x,tile_object.y,self))
 
 			elif tile_object.name == "Key":
 				self.objs.add(Element.Key(tile_object.x,tile_object.y,self))
@@ -185,6 +199,9 @@ class Game:
 				if objs.next == True:
 					if self.map_cont < len(self.maps) -1:
 						self.map_cont +=1
+
+					else:
+						self.map_cont = 0
 					self.map =  TileMap(self.maps[self.map_cont])
 					self.Mapimage = self.map.make_map()
 					self.Maprect = self.Mapimage.get_rect()
@@ -263,6 +280,7 @@ def Main():
 
 		game.update()
 		paused.update()
+		SCREEN.fill((255,255,255))
 		game.draw()
 		pygame.display.flip()
 

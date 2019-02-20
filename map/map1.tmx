@@ -16,7 +16,6 @@
   <object id="95" name="Spike" x="1769.91" y="640.091" width="12.0386" height="28.0707"/>
   <object id="96" name="Spike" x="1801.88" y="640" width="12.0386" height="28.0707"/>
   <object id="97" name="Spike" x="1833.88" y="640" width="12.0386" height="28.0707"/>
-  <object id="103" name="Spike" x="1248.01" y="138.068" width="27.8196" height="12.0323"/>
   <object id="109" name="Spike" x="1120" y="106" width="27.8182" height="11.9091"/>
   <object id="110" name="Spike" x="1120" y="138" width="27.9091" height="12"/>
   <object id="116" name="Spike_trap" x="384" y="576" width="32" height="32"/>
@@ -29,12 +28,12 @@
  </objectgroup>
  <layer name="plts" width="61" height="22">
   <data encoding="base64" compression="zlib">
-   eJztl0sOgCAMRGEJxs/9Vx5VTSAhxLY0Wr/zkllR247RAs4BACwYV4WkvzCtikl7bO+iv64dAEzp7m4AAEASBGnivXOzfcfHiYI08fAMJPI514on7rHcGfervNlzeReT9oCSsz1TfQwG+VvnYf1/cZ5z/r1+qTXNXNaQ60mzv6UWFTMKOag1C891L0c8+yKm/hbrHNw69xyXo1Vav1KtHLMAxbcKAg==
+   eJztl90KgCAMhfUyg+z9r3rUvFAQaZvDRj+eD87V1rYDNc05AIAFMWnJmoU9KWQB8HfWpwcAAJAsgjT53rnDfuJxgiBNPjwDiXLPteKNZ+yMd9wve67/xaQzoOZuz9Qcm0H93n3Yfl+c51L/al4qptnLGko/aff39KJyolCDill4bmcZ8eyrnPZdbGtwce45rkavtH6lXiXnBFosCew=
   </data>
  </layer>
  <layer name="spikes" width="61" height="22">
   <data encoding="base64" compression="zlib">
-   eJzt1cEJACAIQFHdtNEatY4hBEWZUf9Bh0hMD6IIAG8qkqNrOM32XO8pphLAz4+zDdxuZN+0s/vCfqLnbkyeiQcAoKXm9N68/ljNtSPnCwob0gZ/
+   eJzt09EKABAMheF5U4+2R+VSSlmMxf/Vrpw2K0QAeEsievsOp/24M/7DOwfiqf8yT2TUko+OnYcZteQBAGilrkZnXjNWe+3o+YIC130GHg==
   </data>
  </layer>
  <objectgroup name="plataform">
@@ -86,7 +85,6 @@
   <object id="80" name="Spike" x="1412" y="394.002" width="27.9788" height="12.0203"/>
   <object id="83" name="Spike" x="1412" y="426.004" width="28.0111" height="12.0108"/>
   <object id="98" name="plataform" x="1664" y="672" width="191.969" height="32.0097"/>
-  <object id="100" name="plataform" x="1275.85" y="128.136" width="68.1621" height="31.9091"/>
   <object id="105" name="plataform" x="1184" y="224.182" width="35.625" height="31.9091"/>
   <object id="123" name="Apple" type="left" x="1272.17" y="319.833" width="13" height="11">
    <properties>

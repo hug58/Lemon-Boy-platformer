@@ -26,11 +26,14 @@ class Block(pygame.sprite.Sprite):
 		self.y = y
 
 class Trap(pygame.sprite.Sprite):
-	def __init__(self,x,y,game):
+	def __init__(self,x,y,game,sentido = "top"):
 		pygame.sprite.Sprite.__init__(self)
 		self.trap = pygame.image.load(ruta_base + "spikes.png")
 		self.frames = 8
+		self.sentido  = sentido
+
 		self.image = self.trap.subsurface((0,0),(32,32))
+		
 		self.rect = self.image.get_rect()
 		self.rect.x = x 
 		self.rect.y = y 
@@ -41,6 +44,20 @@ class Trap(pygame.sprite.Sprite):
 		self.activate_spike = False
 		self.cont = 0
 		self.position = 0
+
+		if self.sentido == "top":
+			pass
+
+		elif self.sentido == "right":
+			self.image = pygame.transform.rotate(self.image,-90)
+
+		elif self.sentido == "left":
+			self.image = pygame.transform.rotate(self.image,90)
+
+		elif self.sentido == "bottom":
+			self.image = pygame.transform.rotate(self.image,180)
+
+
 
 	def update(self):
 		self.animation()
@@ -61,6 +78,8 @@ class Trap(pygame.sprite.Sprite):
 		if self.activate == False:
 			self.activate_spike = False
 			self.image = self.trap.subsurface((32*self.position,0),(32,32)) 
+			if self.sentido == "right":
+				self.image = pygame.transform.rotate(self.image,-90)	
 			self.mask = pygame.mask.from_surface(self.image)			
 			self.position +=1
 			if self.position == self.frames:
@@ -82,7 +101,19 @@ class Trap(pygame.sprite.Sprite):
 				if self.cont == 55:
 					self.activate = False
 
+			
 			self.image = self.trap.subsurface((32*self.position,0),(32,32)) 
+			if self.sentido == "right":
+				self.image = pygame.transform.rotate(self.image,-90)	
+
+			elif self.sentido == "left":
+				self.image = pygame.transform.rotate(self.image,90)
+
+			elif self.sentido == "bottom":
+				self.image = pygame.transform.rotate(self.image,-180)
+				
+				
+
 			self.mask = pygame.mask.from_surface(self.image)	
 			
 class Key(pygame.sprite.Sprite):
@@ -148,7 +179,7 @@ class Trampoline(pygame.sprite.Sprite):
 			self.image = pygame.transform.scale(self.image,(32,32))
 
 				
-	def jump(self, vl = -12):
+	def jump(self, vl = -15):
 		self.game.player.cont_jump = 0
 		self.game.player.direcciony = -1
 		self.game.player.vly = vl
