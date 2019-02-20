@@ -23,7 +23,7 @@ class Player(Sprite.Sprite):
 																				]
 
 		self.archers = [	pygame.image.load(ruta_base + "sprites/hug/hug7.png"),
-						pygame.image.load(ruta_base + "sprites/hug/hug8.png"),]
+						pygame.image.load(ruta_base + "sprites/hug/hug9.png"),]
 
 
 		self.activate_jump = False
@@ -75,12 +75,12 @@ class Player(Sprite.Sprite):
 
 		self.mask = pygame.mask.from_surface(self.image)
 
-		self.move()
-			
+		self.move()	
 		if self.vlx >= 5:
 			self.vlx = 5
 		elif self.vlx <= -5:
 			self.vlx = -5	
+
 		if self.stop == True:
 			if self.vlx > 0:
 				self.vlx -=1
@@ -91,35 +91,44 @@ class Player(Sprite.Sprite):
 		
 
 
+		
 		self.gravity()
 		self.collided()
-
 		if len(self.colision_plataform) == 0 and self.cont_jump == 2:
 			self.direcciony = -1
 			self.cont_jump = 1
 
 	def move(self):
-		pulsar = pygame.key.get_pressed()
-		if pulsar[pygame.K_LEFT]:
+		move = pygame.key.get_pressed()
+		
+		if move[pygame.K_LEFT]:
 			self.direccionx = -1
 			self.vlx +=-1  			
 			self.stop = False
-		if pulsar[pygame.K_RIGHT]:
+
+		if move[pygame.K_RIGHT]:
 			self.direccionx = 1
-			self.vlx += 1			
-			self.stop = False
+			self.vlx += 1		
+			self.stop = False	
+			
 
-		if pulsar[pygame.K_z]:
-			self.cont_shot += 0.55
-			if self.cont_shot >= 10:
-				self.archer()
+		if move[pygame.K_c]:
+		    if self.vlx == 0:
+			    self.cont_shot += 0.55
+			    if self.cont_shot>= 10:
+				    self.archer(1)
+			    elif self.cont_shot >= 5:
+				    self.archer(0)
 
-	def archer(self):
+		
+
+
+	def archer(self,pos):
 		
 		if self.direccionx > 0:
-			self.image = self.archers[0] 			
+			self.image = self.archers[pos] 			
 		elif self.direccionx < 0:
-			self.image = pygame.transform.flip(self.archers[0],1,0)
+			self.image = pygame.transform.flip(self.archers[pos],1,0)
 
 	def shot(self):
 		self.game.sound.sound_arrow.play()
@@ -141,7 +150,7 @@ class Arrow(pygame.sprite.Sprite):
 		self.rect.x = x
 		self.rect.y  = y
 		self.game = game
-		self.vl = 9 if self.direccion > 0 else -9
+		self.vl = 11 if self.direccion > 0 else -11
 		#self.vly = 1
 		#self.rango = self.rect.left - 100 if self.direccion < 0 else self.rect.right + 100
 
