@@ -8,6 +8,8 @@ from script import Element
 
 pygame.display.init()
 pygame.mixer.init()
+pygame.font.init()
+
 #pygame.init()
 
 WIDTH = 620
@@ -36,6 +38,7 @@ class TileMap:
 						surface.blit(tile,(x* self.tmxdata.tilewidth,y* self.tmxdata.tileheight))
 	def make_map(self):
 		temp_surface = pygame.Surface((self.width,self.height))
+		temp_surface.fill(pygame.Color("#0C040C"))
 		self.render(temp_surface)
 		return temp_surface
 
@@ -113,7 +116,16 @@ class Paused:
 class Menu(pygame.sprite.Sprite):
 	def __init__(self):
 		pygame.sprite.Sprite.__init__(self)
-		self.rect = pygame.Rect((0,0),(620,480)) 		
+		self.font = pygame.font.Font("Pixel Digivolve.otf",30)
+		self.texto = self.font.render("Iniciar Partida",0,(255,255,255))
+		self.surface = pygame.Surface((620,480)) 		
+
+	def update(self):
+		pass
+
+	def apply(self):
+		self.surface.blit(self.texto,(200,200))
+		return self.surface
 		
 class Game:
 	

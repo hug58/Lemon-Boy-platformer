@@ -86,19 +86,19 @@ class Trap(pygame.sprite.Sprite):
 				self.activate = True
 
 		else:
-			if self.position != 4 and self.position > 0:
+			if self.position != 6 and self.position > 0:
 				self.position -=1
-				self.cont = 0
+				self.step = 0
 
-			elif self.position == 4:
-				self.cont +=1
-				if self.cont == 55:
+			elif self.position == 6:
+				self.step +=1
+				if self.step == 55:
 					self.position -=1	
 			
 			elif self.position == 0:
-				self.cont +=1
+				self.step +=1
 				self.activate_spike = True
-				if self.cont == 55:
+				if self.step == 55:
 					self.activate = False
 
 			
@@ -112,8 +112,6 @@ class Trap(pygame.sprite.Sprite):
 			elif self.sentido == "bottom":
 				self.image = pygame.transform.rotate(self.image,-180)
 				
-				
-
 			self.mask = pygame.mask.from_surface(self.image)	
 			
 class Key(pygame.sprite.Sprite):
@@ -124,7 +122,13 @@ class Key(pygame.sprite.Sprite):
 		self.rect.x = x
 		self.rect.y = y
 		self.game = game
-
+		self.tween = tween.easeInOutSine
+		self.bob_range = 20
+		self.bob_speed = 0.6
+		self.step = 0
+		self.dir = 1
+		self.posy = y
+		
 	def update(self):
 		if self.rect.colliderect(self.game.player.rect):
 			#print(self.game.player.keys['KEY_YELLOW'])
@@ -132,6 +136,14 @@ class Key(pygame.sprite.Sprite):
 			#print(self.game.player.keys['KEY_YELLOW'])
 			self.game.sound.sound_object.play()
 			self.kill()
+
+		offset = self.bob_range *  (self.tween(self.step / self.bob_range) - 0.5)
+		self.rect.centery = self.posy + offset * self.dir
+		self.step += self.bob_speed
+		
+		if self.step > self.bob_range:
+			self.step = 0
+			self.dir *=-1
 
 class Trampoline(pygame.sprite.Sprite):
 	def __init__(self,x,y,game):
@@ -198,7 +210,7 @@ class Door(pygame.sprite.Sprite):
 		self.game = game
 		
 		self.open = False
-		self.cont = 0
+		self.step = 0
 		self.delay = 10
 
 		self.next = None
@@ -212,8 +224,8 @@ class Door(pygame.sprite.Sprite):
 			self.image = self.OpenDoor()
 
 	def OpenDoor(self):
-		self.cont += 2.5
-		if self.cont > self.delay:
+		self.step += 2.5
+		if self.step > self.delay:
 			if self.position < 5:					
 				self.image = pygame.image.load(ruta_base + "door{}.png".format(self.position)) 			
 				self.image = pygame.transform.scale(self.image,(62,64))
@@ -222,7 +234,7 @@ class Door(pygame.sprite.Sprite):
 				self.next = True
 				self.position =1
 
-			self.cont = 0 
+			self.step = 0 
 
 		return self.image
 		
@@ -235,8 +247,9 @@ class Lemon(pygame.sprite.Sprite):
 		self.rect.y = y 
 		self.game = game
 		self.tween = tween.easeInOutSine
+		#self.tween = tween.easeOutElastic
 		self.bob_range = 20
-		self.bob_speed = 0.6
+		self.bob_speed = 0.5
 		self.step = 0
 		self.dir = 1
 		self.posy = y
@@ -262,13 +275,13 @@ class Fire_Cannon(pygame.sprite.Sprite):
 		self.game = game
 		self.rect = pygame.Rect(x,y,20,20)
 		self.sentido = sentido
-		self.cont = 0
+		self.step = 0
 	def update(self):
 		if len(self.fireball) < self.limite:
-			self.cont +=1
-			if self.cont == 20:
+			self.step +=1
+			if self.step == 20:
 				self.fireball.append(Fireball(self.rect.centerx,self.rect.centery,self.sentido))
-				self.cont = 0
+				self.step = 0
 
 		for fireball in self.fireball:
 			colision = pygame.sprite.collide_mask(self.game.player,fireball)
