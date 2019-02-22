@@ -167,7 +167,8 @@ class Trampoline(pygame.sprite.Sprite):
 	def update(self):
 		if self.rect.colliderect(self.game.player.rect):
 			if self.game.player.rect.top < self.rect.top:
-				#self.game.sound.sound_jump.play()
+				self.game.sound.sound_jump.stop()
+				self.game.sound.sound_jump.play()
 				self.activate = True
 				self.jump()
 
