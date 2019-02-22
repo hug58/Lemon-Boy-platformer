@@ -113,20 +113,111 @@ class Paused:
 					if event.key == pygame.K_p:
 						self.exit = True
 
-class Menu(pygame.sprite.Sprite):
+class Menu:
 	def __init__(self):
-		pygame.sprite.Sprite.__init__(self)
 		self.font = pygame.font.Font("Pixel Digivolve.otf",30)
-		self.texto = self.font.render("Iniciar Partida",0,(255,255,255))
-		self.surface = pygame.Surface((620,480)) 		
-
+		self.clock = pygame.time.Clock()
+		self.lemon =  pygame.transform.scale(pygame.image.load(os.path.abspath("") + "/image/lemon.png"),(30,30))
+		self.exit = False
 	def update(self):
-		pass
 
-	def apply(self):
-		self.surface.blit(self.texto,(200,200))
-		return self.surface
+		lemon_pos = {1:(0,0),2:(0,40), 3:(0,80)}
+		position = 1
+
+		text_partida = self.font.render("Start Game ",2,(200,200,200))
+		text_about = self.font.render("About",2,(200,200,200))
+		text_exit = self.font.render("Exit",2,(200,200,200))
+		text_twitter = self.font.render("@hug588",2,pygame.Color("#1CA4F4"))
 		
+		texto = (text_partida,text_about,text_exit,text_twitter)
+		surface = self.apply(texto)
+		
+		
+
+		while self.exit == False:
+			self.clock.tick(30)
+	
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					pygame.quit()
+
+				if event.type == pygame.KEYDOWN:
+					if event.key == pygame.K_RETURN:
+
+						if position == 1:
+							self.exit = True
+
+						elif position == 2:
+							self.about()
+
+						elif position == 3:
+							pygame.quit()
+
+					elif event.key == pygame.K_DOWN:
+						if position < 3:
+							position +=1
+
+					elif event.key == pygame.K_UP:
+						if position > 1:
+							position -=1
+
+			SCREEN.blit(surface,(0,0))
+			SCREEN.blit(self.lemon,lemon_pos[position])
+			pygame.display.flip()
+
+
+	def apply(self,args,x= 0,y = 0,space_line = 0):
+		surface = pygame.Surface((620,480))
+		surface.fill(pygame.Color("#0C040C"))
+		cont = 0
+
+		for text in args:
+			surface.blit(text,(30,y))
+			cont +=1
+			if space_line > 0 and cont == space_line:
+				y +=80
+				cont = 0
+
+			else:
+				y += 40
+
+		return surface
+
+	def about(self):
+
+		text_hug = self.font.render("Developer/programmer: Hugo  ",2,(200,200,200))
+		text_twitter_hug = self.font.render("@hug588",2,pygame.Color("#1CA4F4"))
+
+		text_paty = self.font.render("Artist: Patricia",2,(200,200,200))
+		#text_facebook_paty = None
+
+		text_return = self.font.render("Return [R]",2,(200,200,200))
+		texto = (text_hug,text_twitter_hug,text_paty)
+
+		surface = self.apply(texto,space_line= 2)
+		exit = False
+
+		while exit == False:
+
+			surface.blit(text_return,(40,440))
+			self.clock.tick(30)
+	
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					pygame.quit()
+
+				if event.type == pygame.KEYDOWN:
+					if event.key == pygame.K_r:
+						exit = True
+
+
+					
+
+			SCREEN.blit(surface,(0,0))
+			SCREEN.blit(self.lemon,(0,440))
+			pygame.display.flip()
+
+
 class Game:
 	
 	def __init__(self):
@@ -255,7 +346,8 @@ def Main():
 	exit = False
 	clock = pygame.time.Clock()
 	game = Game()
-	paused = Paused()
+	menu = Menu()
+
 	game.load()
 
 	while exit == False:
@@ -268,7 +360,8 @@ def Main():
 				
 				if event.key == pygame.K_x:
 					if game.player.cont_jump > 0:
-						#game.sound.sound_jump.play()
+						game.sound.sound_jump.stop()
+						game.sound.sound_jump.play()
 						game.player.vly = -8
 						game.player.cont_jump -=1
 						game.player.direcciony = -1
@@ -290,9 +383,8 @@ def Main():
 						game.player.cont_shot = 0
 			
 
+		menu.update()
 		game.update()
-		paused.update()
-		SCREEN.fill((255,255,255))
 		game.draw()
 		pygame.display.flip()
 
