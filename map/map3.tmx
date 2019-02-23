@@ -10,7 +10,7 @@
  </objectgroup>
  <layer name="plts" width="61" height="22">
   <data encoding="base64" compression="zlib">
-   eJztlEsKwDAIRN2m9HP/27ZdFAItNIkxSngPZifooKMIAEAb66XNewgAUEGOAebhznPK5JntVKjda0ADlgrNQgTPh7zvypIInkffVE/P+b5K8v/Uf/Wy/HU9PWvrI+7577dr6yN6HilLvL213pRGJ9BLCZM=
+   eJztlLEOgDAIRFlrHNQv9FP4dGmMSQcHaEohei+5jbRcDiACAIA+9lsc3QcAoB/sMQDfoe5zaRS520WpNapBBxaltqgGHcjgWWbonDlTGTzL2zxzpkZ6lnzYktVT//aX560b6bnNy1qfMecq7Y3XKupeWjzP0h89HzR+plpdecYO4A==
   </data>
  </layer>
  <layer name="spikes" width="61" height="22">
