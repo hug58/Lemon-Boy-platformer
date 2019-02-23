@@ -37,9 +37,11 @@ class TileMap:
 						
 						surface.blit(tile,(x* self.tmxdata.tilewidth,y* self.tmxdata.tileheight))
 	def make_map(self):
-		temp_surface = pygame.Surface((self.width,self.height))
-		temp_surface.fill(pygame.Color("#0C040C"))
+		temp_surface = pygame.Surface((self.width,self.height),pygame.SRCALPHA)
+		
+		#temp_surface.set_colorkey((0,0,0))	
 		self.render(temp_surface)
+		
 		return temp_surface
 
 class Camera:
@@ -191,7 +193,7 @@ class Menu:
 		text_paty = self.font.render("Artist: Patricia",2,(200,200,200))
 		#text_facebook_paty = None
 
-		text_return = self.font.render("Return [R]",2,(200,200,200))
+		text_return = self.font.render("Return",2,(200,200,200))
 		texto = (text_hug,text_twitter_hug,text_paty)
 
 		surface = self.apply(texto,space_line= 2)
@@ -207,7 +209,7 @@ class Menu:
 					pygame.quit()
 
 				if event.type == pygame.KEYDOWN:
-					if event.key == pygame.K_r:
+					if event.key == pygame.K_RETURN:
 						exit = True
 
 
@@ -320,15 +322,19 @@ class Game:
 		self.player.update()
 
 	def draw(self):
+
+		SCREEN.fill(pygame.Color("#A0A0A0"))
 		
+		for arrow in self.arrow:
+			SCREEN.blit(arrow.image,self.camera.apply(arrow))
+
 		SCREEN.blit(self.Mapimage,self.camera.apply_rect(self.Maprect))	
 
 		for cannon in self.fire_cannon:
 			for fireball in cannon.fireball:
 				SCREEN.blit(fireball.image,self.camera.apply(fireball))
 		
-		for arrow in self.arrow:
-			SCREEN.blit(arrow.image,self.camera.apply(arrow))
+
 		
 		for enemies in self.enemies:
 			SCREEN.blit(enemies.image,self.camera.apply(enemies))	
@@ -366,8 +372,8 @@ def Main():
 						game.player.cont_jump -=1
 						game.player.direcciony = -1
 
-				if event.key == pygame.K_p:
-					paused.exit = False
+				if event.key == pygame.K_RETURN:
+					menu.exit = False
 
 
 			if event.type == pygame.KEYUP:
