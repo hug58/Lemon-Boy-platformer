@@ -2,7 +2,7 @@
 <map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="61" height="15" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="285">
  <tileset firstgid="1" source="spikes.tsx"/>
  <tileset firstgid="9" source="pasto.tsx"/>
- <tileset firstgid="18" source="fire_cannon.tsx"/>
+ <tileset firstgid="11" source="fire_cannon.tsx"/>
  <objectgroup name="spikes">
   <object id="251" name="Spike" x="201.875" y="416" width="12.25" height="27.75"/>
   <object id="253" name="Spike" x="233.693" y="415.943" width="12.25" height="27.75"/>
@@ -24,7 +24,7 @@
  </objectgroup>
  <layer name="plts" width="61" height="15">
   <data encoding="base64" compression="zlib">
-   eJztkjEOACAIA13Vzf8/1p1IjSYqYC/pwtQLTYkQQsjP5NcFDqK5last7tKUexTn0U93nD3tfuShuSFnTxuYOVdxzyBWkd1W/4xiFdktmjPaYdR0glkD9w==
+   eJztkjEOACAIA1nR///XnQBGExG0l3Rh6oUSAQAA+Bm+XeAgllsLbRFLN+6vOGs/3XGutHvNw3LznCttYObM4s5OsiK7rf7ZS1Zkt9ectf3JfWp7nW04cwYqAQPq
   </data>
  </layer>
  <layer name="spikes" width="61" height="15">

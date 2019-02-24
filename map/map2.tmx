@@ -30,12 +30,12 @@
  </objectgroup>
  <layer name="plts" width="61" height="22">
   <data encoding="base64" compression="zlib">
-   eJztl0sOgCAMRHHpX+9/GY8miZigaRShnxT7klkRaSfUQZ0zDEM7g1f7sD6H9Vi1cPeFoZHVgQHRSzfwAxrB2tTne2ZiLe92yVn5ZzesPrjQdGdhzXIHqHYWd/W7yraDQpw9WvPGODJoIt7/7VtUuj52BkMZx5l7qfWhXnLnQaPn0n8oSs8pc5vjmUs5PqV7LhXlDH3VDpBGDBU=
+   eJztl0EOgCAMBPGI/3+QT1MTjxUr3dJs00n2JKRbWhBaK4qCnf7o63tXjGVDyu3WLuhtbOb1YaVq4M8WGNu7vtn2tqVW19wD5WMVTHVDeZP+WdnJmDNL3xZjvOsXfRcd3Zu9vEj7feUZoI0veZldA8actf3w5/2FyhkZP0IzeUZ7tgrdNxadwMkLug==
   </data>
  </layer>
  <layer name="spikes" width="61" height="22">
   <data encoding="base64" compression="zlib">
-   eJzt1DEOACAIQ1GcvaRH46i6OpgYBirxv5HFNkHMAFTWzIY6AwDcUt6srnoY1077seaemyQPnbe55yaBWlMHeNiP/6Fy5+guV+4cRedtzh1MMAHaxgb9
+   eJzt1DEOACAIQ1EcvaVH46i6OpgYBirxv5HFNkHMAFTWzIY6AwDcUt6srnoY1077seaemyQPnbe55yaBWlMHeNiP/6Fy5+guV+4cRedtzh1MMAHCvgb7
   </data>
  </layer>
  <objectgroup name="wall">

@@ -33,7 +33,7 @@
  </layer>
  <layer name="spikes" width="61" height="22">
   <data encoding="base64" compression="zlib">
-   eJzt09EKABAMheF5U4+2R+VSSlmMxf/Vrpw2K0QAeEsievsOp/24M/7DOwfiqf8yT2TUko+OnYcZteQBAGilrkZnXjNWe+3o+YIC130GHg==
+   eJzt090KwCAIBlC7dE+5R/NRt92FINNWTeo7EAty/kARAcAIXO0LkfzVx0xHtd9lZtjX88ZxzwHyud/l6YiRSHx2mNmMkUg8+PF7SOr8sL4sd8jqo1d/LXki/7D6es9GmFFH1yhqWWdfWDVa5tW5evS3ggs5wQa4
   </data>
  </layer>
  <objectgroup name="plataform">
@@ -84,7 +84,7 @@
   <object id="79" name="Spike" x="1412" y="362" width="27.9861" height="11.9905"/>
   <object id="80" name="Spike" x="1412" y="394.002" width="27.9788" height="12.0203"/>
   <object id="83" name="Spike" x="1412" y="426.004" width="28.0111" height="12.0108"/>
-  <object id="98" name="plataform" x="1664" y="672" width="191.969" height="32.0097"/>
+  <object id="98" name="plataform" x="1664" y="672" width="223.969" height="32.0097"/>
   <object id="105" name="plataform" x="1184" y="224.182" width="35.625" height="31.9091"/>
   <object id="123" name="Apple" type="left" x="1272.17" y="319.833" width="13" height="11">
    <properties>
