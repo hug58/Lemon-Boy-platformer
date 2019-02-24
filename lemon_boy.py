@@ -36,11 +36,13 @@ class TileMap:
 					if tile:
 						
 						surface.blit(tile,(x* self.tmxdata.tilewidth,y* self.tmxdata.tileheight))
+						
 	def make_map(self):
-		temp_surface = pygame.Surface((self.width,self.height),pygame.SRCALPHA)
+		temp_surface = pygame.Surface((self.width,self.height)) #pygame.SRCALPHA
 		
-		#temp_surface.set_colorkey((0,0,0))	
+		temp_surface.set_colorkey((0,0,0))	
 		self.render(temp_surface)
+		#temp_surface.convert_alpha()
 		
 		return temp_surface
 
@@ -99,6 +101,7 @@ class Sound:
 		self.sound_jump = pygame.mixer.Sound(self.ruta_sound + "Jumpa.wav")
 		self.sound_arrow = pygame.mixer.Sound(self.ruta_sound + "arrow_sound.wav")
 		self.sound_object = pygame.mixer.Sound(self.ruta_sound + "Pickup_Coin.wav")
+		self.blip = pygame.mixer.Sound(self.ruta_sound + "blip.wav")
 
 class Paused:
 	def __init__(self):
@@ -116,23 +119,32 @@ class Paused:
 						self.exit = True
 
 class Menu:
-	def __init__(self):
+	def __init__(self,maps):
+		self.maps = maps
 		self.font = pygame.font.Font("Pixel Digivolve.otf",30)
 		self.clock = pygame.time.Clock()
 		self.lemon =  pygame.transform.scale(pygame.image.load(os.path.abspath("") + "/image/lemon.png"),(30,30))
 		self.exit = False
+		self.sound = Sound()
+		self.color_selection = pygame.Color("#DBAE09")
+		self.color_base = pygame.Color("#C4C4C4")
+		self.position = 1
+		self.changes_maps = False
+
 	def update(self):
 
 		lemon_pos = {1:(0,0),2:(0,40), 3:(0,80)}
 		position = 1
 
-		text_partida = self.font.render("Start Game ",2,(200,200,200))
-		text_about = self.font.render("About",2,(200,200,200))
-		text_exit = self.font.render("Exit",2,(200,200,200))
+		text_partida = self.font.render("Start Game ",2,self.color_base)
+		text_about = self.font.render("About",2,self.color_base)
+		text_exit = self.font.render("Exit",2,self.color_base)
 		text_twitter = self.font.render("@hug588",2,pygame.Color("#1CA4F4"))
 		
 		texto = (text_partida,text_about,text_exit,text_twitter)
-		surface = self.apply(texto)
+		
+		surface = pygame.Surface((620,480))
+		surface = self.apply(surface,texto)
 		
 		
 
@@ -148,9 +160,12 @@ class Menu:
 
 						if position == 1:
 							self.exit = True
+							self.changes()
 
-						elif position == 2:
+						elif position == 2:							
 							self.about()
+							self.sound.blip.stop()							
+							self.sound.blip.play()
 
 						elif position == 3:
 							pygame.quit()
@@ -158,23 +173,37 @@ class Menu:
 					elif event.key == pygame.K_DOWN:
 						if position < 3:
 							position +=1
+							self.sound.blip.stop()
+							self.sound.blip.play()
 
 					elif event.key == pygame.K_UP:
 						if position > 1:
 							position -=1
+							self.sound.blip.stop()
+							self.sound.blip.play()
+							
+
+			#for i in range(len(texto)):	
+			#	if i +1 == position:
+			#		texto[i].fill(self.color_selection)
+			#	else:
+			#		texto[i].fill(self.color_base)				
+			#surface = self.apply(texto)
+			
+
 
 			SCREEN.blit(surface,(0,0))
 			SCREEN.blit(self.lemon,lemon_pos[position])
 			pygame.display.flip()
 
 
-	def apply(self,args,x= 0,y = 0,space_line = 0):
-		surface = pygame.Surface((620,480))
+	def apply(self,surface,args,x= 30,y = 0,space_line = 0):
+		#surface = pygame.Surface((620,480))
 		surface.fill(pygame.Color("#0C040C"))
 		cont = 0
 
 		for text in args:
-			surface.blit(text,(30,y))
+			surface.blit(text,(x,y))
 			cont +=1
 			if space_line > 0 and cont == space_line:
 				y +=80
@@ -185,23 +214,23 @@ class Menu:
 
 		return surface
 
-	def about(self):
-
-		text_hug = self.font.render("Developer/programmer: Hugo  ",2,(200,200,200))
+	def about(self,exit = False):
+		text_hug = self.font.render("Developer/programmer: Hugo  ",2,self.color_base)
 		text_twitter_hug = self.font.render("@hug588",2,pygame.Color("#1CA4F4"))
 
-		text_paty = self.font.render("Artist: Patricia",2,(200,200,200))
-		#text_facebook_paty = None
+		text_paty = self.font.render("Artist: Patricia",2,self.color_base)
+		text_facebook_paty = self.font.render("The pash team",2,pygame.Color("#3C5C9C"))
 
-		text_return = self.font.render("Return",2,(200,200,200))
-		texto = (text_hug,text_twitter_hug,text_paty)
+		text_return = self.font.render("Return",2,self.color_base)
+		texto = (text_hug,text_twitter_hug,text_paty,text_facebook_paty)
 
-		surface = self.apply(texto,space_line= 2)
-		exit = False
-
+		surface = pygame.Surface((620,480))
+		surface = self.apply(surface,texto,space_line= 2)
+		surface.blit(text_return,(40,440))
+		
+		
 		while exit == False:
 
-			surface.blit(text_return,(40,440))
 			self.clock.tick(30)
 	
 			for event in pygame.event.get():
@@ -211,6 +240,9 @@ class Menu:
 				if event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_RETURN:
 						exit = True
+						self.sound.blip.stop()
+						self.sound.blip.play()
+						
 
 
 					
@@ -219,17 +251,64 @@ class Menu:
 			SCREEN.blit(self.lemon,(0,440))
 			pygame.display.flip()
 
+	def changes(self,exit = False):
+		surface = pygame.Surface((620,480))
+		surface_selection = pygame.Surface((200,40))
+
+		texto = [self.font.render( "Map {}".format(i+1),2,self.color_base) for i in range(len(self.maps))]
+		position = 1
+		y_move = 0
+		surface_selection = self.apply(surface_selection,texto,y = y_move)
+		surface.fill(pygame.Color("#0C040C"))
+		SCREEN.blit(surface,(0,0))
+
+		while exit == False:
+
+			self.clock.tick(30)
+	
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					pygame.quit()
+
+				if event.type == pygame.KEYDOWN:
+					if event.key == pygame.K_RETURN:
+						self.position = position -1
+						self.changes_maps = True
+						exit = True
+					
+
+					elif event.key == pygame.K_DOWN:
+						if position < len(self.maps):
+							y_move -=40
+							surface_selection = self.apply(surface_selection,texto,y = y_move)
+							position +=1
+
+					elif event.key == pygame.K_UP:
+						if position > 1:
+							y_move +=40
+							surface_selection = self.apply(surface_selection,texto,y = y_move)	
+							position -=1
+
+
+			SCREEN.blit(surface_selection,(240,100))	
+			#SCREEN.blit(self.lemon,(0,440))
+			pygame.display.flip()
+
+
+
 
 class Game:
 	
-	def __init__(self):
-		self.maps= ["map/map4.tmx","map/map3.tmx","map/map2.tmx","map/map1.tmx"]
+	def __init__(self,maps):
+		#self.maps= ["map/map4.tmx","map/map3.tmx","map/map2.tmx","map/map1.tmx"]
+		self.maps = maps
 		self.sound = Sound()
 		self.map_cont = 0
 		self.map = TileMap(self.maps[self.map_cont])
 		self.Mapimage = self.map.make_map()
 		self.Maprect = self.Mapimage.get_rect()
 		self.camera = Camera(self.map.width,self.map.height)
+		self.changes_maps = False
 		#self.arrow = []
 
 						
@@ -304,7 +383,6 @@ class Game:
 				if objs.next == True:
 					if self.map_cont < len(self.maps) -1:
 						self.map_cont +=1
-
 					else:
 						self.map_cont = 0
 					self.map =  TileMap(self.maps[self.map_cont])
@@ -315,6 +393,14 @@ class Game:
 					
 			except:
 				pass
+
+		if self.changes_maps == True:
+			self.map =  TileMap(self.maps[self.map_cont])
+			self.Mapimage = self.map.make_map()
+			self.Maprect = self.Mapimage.get_rect()
+			self.camera = Camera(self.map.width,self.map.height)
+			self.load()
+			self.changes_maps = False			
 
 		if self.player.dead == True:
 			self.load()
@@ -351,8 +437,11 @@ def Main():
 
 	exit = False
 	clock = pygame.time.Clock()
-	game = Game()
-	menu = Menu()
+
+	maps= ["map/map4.tmx","map/map3.tmx","map/map2.tmx","map/map1.tmx"]
+	menu = Menu(maps)
+	game = Game(menu.maps)
+	
 
 	game.load()
 
@@ -363,7 +452,6 @@ def Main():
 			if event.type == pygame.QUIT:
 				exit = True
 			if event.type == pygame.KEYDOWN:
-				
 				if event.key == pygame.K_x:
 					if game.player.cont_jump > 0:
 						game.sound.sound_jump.stop()
@@ -371,10 +459,8 @@ def Main():
 						game.player.vly = -8
 						game.player.cont_jump -=1
 						game.player.direcciony = -1
-
 				if event.key == pygame.K_RETURN:
 					menu.exit = False
-
 
 			if event.type == pygame.KEYUP:
 				if event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT:
@@ -388,6 +474,13 @@ def Main():
 					else:
 						game.player.cont_shot = 0
 			
+
+		if menu.changes_maps == True:
+			game.map_cont = menu.position
+			print(game.map_cont)
+			game.changes_maps = True
+			menu.changes_maps = False
+
 
 		menu.update()
 		game.update()
