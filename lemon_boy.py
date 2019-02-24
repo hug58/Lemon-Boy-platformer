@@ -129,25 +129,20 @@ class Menu:
 		self.color_selection = pygame.Color("#DBAE09")
 		self.color_base = pygame.Color("#C4C4C4")
 		self.position = 1
-		self.changes_maps = False
-
+		self.changes_maps = False	
+	
 	def update(self):
 
 		lemon_pos = {1:(0,0),2:(0,40), 3:(0,80)}
 		position = 1
-
 		text_partida = self.font.render("Start Game ",2,self.color_base)
 		text_about = self.font.render("About",2,self.color_base)
 		text_exit = self.font.render("Exit",2,self.color_base)
 		text_twitter = self.font.render("@hug588",2,pygame.Color("#1CA4F4"))
-		
 		texto = (text_partida,text_about,text_exit,text_twitter)
-		
 		surface = pygame.Surface((620,480))
 		surface = self.apply(surface,texto)
 		
-		
-
 		while self.exit == False:
 			self.clock.tick(30)
 	
@@ -182,7 +177,6 @@ class Menu:
 							self.sound.blip.stop()
 							self.sound.blip.play()
 							
-
 			#for i in range(len(texto)):	
 			#	if i +1 == position:
 			#		texto[i].fill(self.color_selection)
@@ -190,8 +184,6 @@ class Menu:
 			#		texto[i].fill(self.color_base)				
 			#surface = self.apply(texto)
 			
-
-
 			SCREEN.blit(surface,(0,0))
 			SCREEN.blit(self.lemon,lemon_pos[position])
 			pygame.display.flip()
@@ -290,11 +282,11 @@ class Menu:
 							position -=1
 
 
+
+
 			SCREEN.blit(surface_selection,(240,100))	
 			#SCREEN.blit(self.lemon,(0,440))
 			pygame.display.flip()
-
-
 
 
 class Game:
@@ -309,8 +301,6 @@ class Game:
 		self.Maprect = self.Mapimage.get_rect()
 		self.camera = Camera(self.map.width,self.map.height)
 		self.changes_maps = False
-		#self.arrow = []
-
 						
 	def load(self):
 		
@@ -444,7 +434,8 @@ def Main():
 	
 
 	game.load()
-
+	
+	
 	while exit == False:
 		clock.tick(60)
 		
@@ -477,12 +468,13 @@ def Main():
 
 		if menu.changes_maps == True:
 			game.map_cont = menu.position
-			print(game.map_cont)
 			game.changes_maps = True
 			menu.changes_maps = False
 
 
-		menu.update()
+		if menu.exit == False:
+			menu.update()
+		
 		game.update()
 		game.draw()
 		pygame.display.flip()
