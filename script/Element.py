@@ -331,3 +331,8 @@ class Fireball(pygame.sprite.Sprite):
 
 		if self.position >= self.frame:
 			self.position = 0
+
+
+
+		
+		

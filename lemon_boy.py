@@ -55,6 +55,7 @@ class Camera:
 	def apply(self,entity):
 		return entity.rect.move(self.camera.topleft)
 	def apply_rect(self,rect):
+		#mueve la posición de la surface a la pos de la camara en topleft (arriba/izquierda)
 		return rect.move(self.camera.topleft)
 	
 	def update(self,target):
@@ -95,6 +96,26 @@ class Spikes(pygame.sprite.Sprite):
 			if self.rect.colliderect(enemy.rect):
 				enemy.kill()
 
+class Slope:
+	def __init__(self,x,y,w,h,game):
+		self.slope_x1 = x
+		self.slope_y1 = y
+		self.slope_x2 = x + w
+		self.slope_y2 = y + h
+		self.on_slope = False
+		self.game = game
+
+	def update(self):
+		
+		if self.slope_x1 <= self.game.player.rect.x + self.game.player.rect.width <= self.slope_x2 - self.game.player.rect.width:
+
+			proj_y = self.slope_y1 + (self.game.player.rect.x - self.slope_x1) * ((self.slope_y2 - self.slope_y1) / (self.slope_x2 - self.slope_x1))
+			if self.game.player.rect.y + self.game.player.rect.height >= proj_y:
+				self.game.player.rect.y = proj_y - self.game.player.rect.height
+
+		#self.line = pygame.draw.line(self.surface,(0,0,0),(self.slope_x1,self.slope_y1),(self.slope_x2,self.slope_y2),2)
+
+
 class Sound:
 	def __init__(self):
 		self.ruta_sound = os.path.abspath("") + "/sound/"
@@ -124,6 +145,9 @@ class Menu:
 		self.font = pygame.font.Font("Pixel Digivolve.otf",30)
 		self.clock = pygame.time.Clock()
 		self.lemon =  pygame.transform.scale(pygame.image.load(os.path.abspath("") + "/image/lemon.png"),(30,30))
+		self.hugo =  pygame.transform.flip(pygame.image.load(os.path.abspath("") + "/image/sprites/hug/hug0.png"),1,0)
+		self.paty = pygame.transform.scale(pygame.image.load(os.path.abspath("") + "/image/sprites/hug/paty.png"),(32,52))
+ 
 		self.exit = False
 		self.sound = Sound()
 		self.color_selection = pygame.Color("#DBAE09")
@@ -142,6 +166,8 @@ class Menu:
 		texto = (text_partida,text_about,text_exit,text_twitter)
 		surface = pygame.Surface((620,480))
 		surface = self.apply(surface,texto)
+		surface.blit(self.hugo,(400,400))
+		surface.blit(self.paty,(440,400))
 		
 		while self.exit == False:
 			self.clock.tick(30)
@@ -189,10 +215,12 @@ class Menu:
 			pygame.display.flip()
 
 
-	def apply(self,surface,args,x= 30,y = 0,space_line = 0):
+	def apply(self,surface,args,x= 30,y = 0,space_line = 0,sign = 1):
 		#surface = pygame.Surface((620,480))
 		surface.fill(pygame.Color("#0C040C"))
 		cont = 0
+
+		value = 40 * sign
 
 		for text in args:
 			surface.blit(text,(x,y))
@@ -202,7 +230,7 @@ class Menu:
 				cont = 0
 
 			else:
-				y += 40
+				y += value
 
 		return surface
 
@@ -213,13 +241,15 @@ class Menu:
 		text_paty = self.font.render("Artist: Patricia",2,self.color_base)
 		text_facebook_paty = self.font.render("The pash team",2,pygame.Color("#3C5C9C"))
 
-		text_return = self.font.render("Return",2,self.color_base)
+		text_return = self.font.render("Return [K]",2,self.color_base)
 		texto = (text_hug,text_twitter_hug,text_paty,text_facebook_paty)
 
 		surface = pygame.Surface((620,480))
 		surface = self.apply(surface,texto,space_line= 2)
 		surface.blit(text_return,(40,440))
-		
+		surface.blit(self.lemon,(0,440))
+		surface.blit(self.hugo,(400,400))
+		surface.blit(self.paty,(440,400))
 		
 		while exit == False:
 
@@ -230,17 +260,13 @@ class Menu:
 					pygame.quit()
 
 				if event.type == pygame.KEYDOWN:
-					if event.key == pygame.K_RETURN:
+					if event.key == pygame.K_k:
 						exit = True
 						self.sound.blip.stop()
 						self.sound.blip.play()
-						
-
-
-					
+								
 
 			SCREEN.blit(surface,(0,0))
-			SCREEN.blit(self.lemon,(0,440))
 			pygame.display.flip()
 
 	def changes(self,exit = False):
@@ -250,10 +276,14 @@ class Menu:
 		texto = [self.font.render( "Map {}".format(i+1),2,self.color_base) for i in range(len(self.maps))]
 		position = 1
 		y_move = 0
-		surface_selection = self.apply(surface_selection,texto,y = y_move)
-		surface.fill(pygame.Color("#0C040C"))
-		SCREEN.blit(surface,(0,0))
+		surface_selection = self.apply(surface_selection,texto,y = y_move,sign= -1)
+		text_return = self.font.render("Return [K]",2,self.color_base)
 
+		surface.fill(pygame.Color("#0C040C"))
+		surface.blit(text_return,(40,440))
+		SCREEN.blit(surface,(0,0))
+		SCREEN.blit(self.lemon,(0,440))
+		
 		while exit == False:
 
 			self.clock.tick(30)
@@ -268,17 +298,21 @@ class Menu:
 						self.changes_maps = True
 						exit = True
 					
+					if event.key == pygame.K_k:
+						self.exit = False
+						exit = True
 
-					elif event.key == pygame.K_DOWN:
-						if position < len(self.maps):
-							y_move -=40
-							surface_selection = self.apply(surface_selection,texto,y = y_move)
-							position +=1
 
 					elif event.key == pygame.K_UP:
-						if position > 1:
+						if position < len(self.maps):
 							y_move +=40
-							surface_selection = self.apply(surface_selection,texto,y = y_move)	
+							surface_selection = self.apply(surface_selection,texto,y = y_move,sign =-1 )
+							position +=1
+
+					elif event.key == pygame.K_DOWN:
+						if position > 1:
+							y_move -=40
+							surface_selection = self.apply(surface_selection,texto,y = y_move, sign= -1)	
 							position -=1
 
 
@@ -287,7 +321,6 @@ class Menu:
 			SCREEN.blit(surface_selection,(240,100))	
 			#SCREEN.blit(self.lemon,(0,440))
 			pygame.display.flip()
-
 
 class Game:
 	
@@ -303,7 +336,7 @@ class Game:
 		self.changes_maps = False
 						
 	def load(self):
-		
+		self.rampas = []
 		self.arrow = pygame.sprite.Group()
 		self.plataform = pygame.sprite.Group()
 		self.enemies = pygame.sprite.Group()
@@ -357,14 +390,30 @@ class Game:
 
 			elif tile_object.name == "Lemon":
 				self.objs.add(Element.Lemon(tile_object.x,tile_object.y,self))
+
+			elif tile_object.name == "dead":
+				self.objs.add(Player.Dead(tile_object.x,tile_object.y))
+
+			#elif tile_object.name == "rampa":
+			#	self.rampas.append(Slope(tile_object.x,tile_object.y,tile_object.width,tile_object.height,self))
 		
 	def update(self):
+		#for rampa in self.rampas:
+		#	self.player.direcciony = 0
+		#	rampa.update()		
+		
 		self.camera.update(self.player)
 		self.spike.update()
 		self.trap.update()
 		self.fire_cannon.update()
 		self.arrow.update()
 		self.enemies.update()
+
+
+			
+
+			
+
 		for objs in self.objs:
 			
 			objs.update()
@@ -404,7 +453,7 @@ class Game:
 		for arrow in self.arrow:
 			SCREEN.blit(arrow.image,self.camera.apply(arrow))
 
-		SCREEN.blit(self.Mapimage,self.camera.apply_rect(self.Maprect))	
+		SCREEN.blit(self.Mapimage,self.camera.apply_rect(self.Maprect))
 
 		for cannon in self.fire_cannon:
 			for fireball in cannon.fireball:
@@ -421,14 +470,15 @@ class Game:
 
 		for trap in self.trap:
 			SCREEN.blit(trap.image,self.camera.apply(trap))
-		
-			
+					
+		#for rampa in self.rampas:
+		#	pygame.draw.line(self.Mapimage,pygame.Color("#04BCCC"),(rampa.slope_x1,rampa.slope_y1),(rampa.slope_x2,rampa.slope_y2),2)
 def Main():
 
 	exit = False
 	clock = pygame.time.Clock()
 
-	maps= ["map/map4.tmx","map/map3.tmx","map/map2.tmx","map/map1.tmx"]
+	maps= ["map/map1.tmx","map/map2.tmx","map/map3.tmx","map/map4.tmx"]
 	menu = Menu(maps)
 	game = Game(menu.maps)
 	
@@ -478,7 +528,6 @@ def Main():
 		game.update()
 		game.draw()
 		pygame.display.flip()
-
 
 if __name__ == "__main__":
 	Main()

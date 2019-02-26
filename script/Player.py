@@ -1,5 +1,6 @@
 import pygame
 import os.path
+import pytweening as tween
 from script import Sprite
 
 ruta_base =  os.path.abspath("")
@@ -54,6 +55,7 @@ class Player(Sprite.Sprite):
 		self.cont_shot  = 0
 
 	def update(self):
+		
 		if self.vlx == 0:
 			self.animation_state.limite = 10
 			if self.direccionx > 0:
@@ -171,3 +173,28 @@ class Arrow(pygame.sprite.Sprite):
 
 		self.rect.x += self.vl
 
+class Dead(pygame.sprite.Sprite):
+	def __init__(self,x,y):
+		pygame.sprite.Sprite.__init__(self)
+		self.image = pygame.image.load(ruta_base + "dead.png")
+		self.image = pygame.transform.scale(self.image,(32,32))
+		self.rect = self.image.get_rect()
+		self.rect.x = x
+		self.rect.y = y
+		self.tween = tween.easeInOutSine
+		self.bob_range = 20
+		self.bob_speed = 0.7
+		self.step = 0
+		self.dir = 1
+		self.posy = y
+		self.posx = x
+
+	def update(self):
+		offset = self.bob_range *  (self.tween(self.step / self.bob_range) - 0.5)
+		self.rect.centery -=1 
+		self.rect.centerx = self.posx + offset * self.dir
+		self.step += self.bob_speed
+		
+		if self.step > self.bob_range:
+			self.step = 0
+			self.dir *=-1
