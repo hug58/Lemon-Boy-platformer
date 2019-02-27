@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="61" height="15" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="342">
+ <tileset firstgid="1" source="spikes.tsx"/>
+ <tileset firstgid="9" source="pasto.tsx"/>
+ <tileset firstgid="11" source="fire_cannon.tsx"/>
+ <layer name="plts" width="61" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgB3EgYnc+NSxMQcNLYXaNgFNADDLZ0zMlAuptI1cNFhh20BFxQjK+8waWHVuqpBThxYC4kjEsNLj3Eqh8oDABUzAMI
+  </data>
+ </layer>
+ <objectgroup name="spikes"/>
+ <layer name="spikes" width="61" height="15">
+  <data encoding="base64" compression="zlib">
+   eJztyyEOADAIBEEqS///34qiEDQIkhM7yarLmQEAgK49nCIfTtWJqh2AnpXq7L8vngscPAH2
+  </data>
+ </layer>
+ <objectgroup name="wall">
+  <object id="111" name="plataform" x="0.060606" y="-224.667" height="672.646"/>
+  <object id="113" name="plataform" x="1951.99" y="83.626" width="-4.2244e-14" height="397.646"/>
+ </objectgroup>
+ <objectgroup color="#00ff00" name="plataform">
+  <object id="115" name="Player" x="45.1667" y="376.833" width="9" height="6"/>
+  <object id="153" name="plataform" x="-2.19" y="449.945" width="1954.19" height="30.0704"/>
+  <object id="291" name="Key" type="YELLOW" x="1882.5" y="381.167" width="6" height="5.66667"/>
+  <object id="330" name="plataform" x="191.667" y="386.083" width="64" height="61.5833"/>
+  <object id="331" name="plataform" x="608.152" y="387.905" width="64" height="61.5833"/>
+  <object id="332" name="plataform" x="1184.17" y="226.833" width="766.5" height="61.1667"/>
+  <object id="334" name="plataform" x="992.333" y="386.667" width="64" height="63.3333"/>
+  <object id="336" name="plataform" x="1152.09" y="258.727" width="31.9091" height="29.1818"/>
+  <object id="339" name="plataform" x="992" y="354.727" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="object">
+  <object id="292" name="Lemon" x="1472.57" y="384.314" width="32.375" height="32.25"/>
+  <object id="293" name="Lemon" x="353.812" y="383.875" width="32.375" height="32.25"/>
+  <object id="294" name="Fire_cannon" type="bottom" x="1214.94" y="288.627" width="32.125" height="32.0795"/>
+  <object id="295" name="Fire_cannon" type="bottom" x="1247.6" y="288.627" width="32.125" height="32.0795"/>
+  <object id="296" name="Fire_cannon" type="bottom" x="1472.27" y="287.627" width="32.125" height="32.0795"/>
+  <object id="297" name="Fire_cannon" type="bottom" x="896.274" y="256" width="31.4638" height="31.4193"/>
+  <object id="298" name="Fire_cannon" type="bottom" x="928.262" y="256" width="31.4638" height="31.4193"/>
+  <object id="299" name="Fire_cannon" type="bottom" x="832.274" y="256" width="31.4638" height="31.4193"/>
+  <object id="300" name="Fire_cannon" type="bottom" x="864.262" y="256" width="31.4638" height="31.4193"/>
+  <object id="301" name="Fire_cannon" type="bottom" x="767.941" y="256" width="31.4638" height="31.4193"/>
+  <object id="303" name="Fire_cannon" type="bottom" x="703.941" y="256" width="31.4638" height="31.4193"/>
+  <object id="304" name="Fire_cannon" type="bottom" x="735.929" y="256" width="31.4638" height="31.4193"/>
+  <object id="310" name="Spike" x="1065.84" y="416.125" width="12.25" height="27.75"/>
+  <object id="311" name="Spike" x="1097.66" y="416.375" width="12.25" height="27.75"/>
+  <object id="312" name="Spike" x="1129.91" y="416.125" width="12.25" height="27.75"/>
+  <object id="313" name="Spike" x="1161.91" y="415.875" width="12.25" height="27.75"/>
+  <object id="314" name="Spike" x="1322.09" y="416.042" width="12.25" height="27.75"/>
+  <object id="315" name="Spike" x="1353.91" y="416.292" width="12.25" height="27.75"/>
+  <object id="316" name="Spike" x="1386.16" y="416.042" width="12.25" height="27.75"/>
+  <object id="317" name="Spike" x="1418.16" y="415.792" width="12.25" height="27.75"/>
+  <object id="322" name="Spike" x="1545.17" y="415.792" width="12.25" height="27.75"/>
+  <object id="323" name="Spike" x="1576.99" y="416.042" width="12.25" height="27.75"/>
+  <object id="324" name="Spike" x="1609.24" y="415.792" width="12.25" height="27.75"/>
+  <object id="325" name="Spike" x="1641.24" y="415.542" width="12.25" height="27.75"/>
+  <object id="335" name="Fire_cannon" type="right" x="256" y="416.25" width="31.4638" height="31.4193"/>
+  <object id="337" name="Door" type="YELLOW" x="1888.17" y="163.167" width="62.3333" height="63"/>
+ </objectgroup>
+</map>

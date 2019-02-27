@@ -18,9 +18,9 @@
   <object id="97" name="Spike" x="1833.88" y="640" width="12.0386" height="28.0707"/>
   <object id="109" name="Spike" x="1120" y="106" width="27.8182" height="11.9091"/>
   <object id="110" name="Spike" x="1120" y="138" width="27.9091" height="12"/>
-  <object id="116" name="Spike_trap" x="384" y="576" width="32" height="32"/>
-  <object id="117" name="Spike_trap" x="416" y="576" width="32" height="32"/>
-  <object id="118" name="Spike_trap" x="449" y="576" width="31" height="32"/>
+  <object id="116" name="Spike_trap" x="383.625" y="578.125" width="32" height="32"/>
+  <object id="117" name="Spike_trap" x="416" y="578.12" width="32" height="32"/>
+  <object id="118" name="Spike_trap" x="448.375" y="578.12" width="31" height="32"/>
   <object id="119" name="Spike" x="1216" y="234" width="16" height="12"/>
   <object id="121" name="Spike" x="1232" y="238" width="12" height="4"/>
   <object id="125" name="Spike" x="553.938" y="639.875" width="12.0625" height="27.875"/>
@@ -53,12 +53,12 @@
   <object id="27" name="Door" type="YELLOW" x="1900.26" y="386.69" width="4" height="10.5"/>
   <object id="29" name="plataform" x="128" y="640" width="32.0625" height="32.0241"/>
   <object id="30" name="plataform" x="703.997" y="479.997" width="32.0005" height="32"/>
-  <object id="32" name="Apple" type="right" x="917" y="299.5" width="13" height="11">
+  <object id="32" name="Apple" type="right" x="948.5" y="298" width="13" height="11">
    <properties>
     <property name="area" type="int" value="70"/>
    </properties>
   </object>
-  <object id="33" name="Apple" type="left" x="670.666" y="529.001" width="15.3333" height="9.33333">
+  <object id="33" name="Apple" type="left" x="722.666" y="534.501" width="15.3333" height="9.33333">
    <properties>
     <property name="area" type="int" value="60"/>
    </properties>

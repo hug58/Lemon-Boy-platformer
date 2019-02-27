@@ -96,25 +96,6 @@ class Spikes(pygame.sprite.Sprite):
 			if self.rect.colliderect(enemy.rect):
 				enemy.kill()
 
-class Slope:
-	def __init__(self,x,y,w,h,game):
-		self.slope_x1 = x
-		self.slope_y1 = y
-		self.slope_x2 = x + w
-		self.slope_y2 = y + h
-		self.on_slope = False
-		self.game = game
-
-	def update(self):
-		
-		if self.slope_x1 <= self.game.player.rect.x + self.game.player.rect.width <= self.slope_x2 - self.game.player.rect.width:
-
-			proj_y = self.slope_y1 + (self.game.player.rect.x - self.slope_x1) * ((self.slope_y2 - self.slope_y1) / (self.slope_x2 - self.slope_x1))
-			if self.game.player.rect.y + self.game.player.rect.height >= proj_y:
-				self.game.player.rect.y = proj_y - self.game.player.rect.height
-
-		#self.line = pygame.draw.line(self.surface,(0,0,0),(self.slope_x1,self.slope_y1),(self.slope_x2,self.slope_y2),2)
-
 
 class Sound:
 	def __init__(self):
@@ -154,16 +135,29 @@ class Menu:
 		self.color_base = pygame.Color("#C4C4C4")
 		self.position = 1
 		self.changes_maps = False	
+
+		self.game_active = False
 	
 	def update(self):
 
-		lemon_pos = {1:(0,0),2:(0,40), 3:(0,80)}
-		position = 1
+		lemon_pos = {1:(0,0),2:(0,40), 3:(0,80),4:(0,120)}
+		text_continue = self.font.render("Continue",2,self.color_selection)
 		text_partida = self.font.render("Start Game ",2,self.color_base)
 		text_about = self.font.render("About",2,self.color_base)
 		text_exit = self.font.render("Exit",2,self.color_base)
 		text_twitter = self.font.render("@hug588",2,pygame.Color("#1CA4F4"))
-		texto = (text_partida,text_about,text_exit,text_twitter)
+		
+		if self.game_active == False:
+			texto = (text_partida,text_about,text_exit,text_twitter)
+			position = 2
+
+		else:
+			texto = (text_continue,text_partida,text_about,text_exit,text_twitter)			
+			position = 1
+		
+		
+		limite = len(texto) 
+
 		surface = pygame.Surface((620,480))
 		surface = self.apply(surface,texto)
 		surface.blit(self.hugo,(400,400))
@@ -171,52 +165,54 @@ class Menu:
 		
 		while self.exit == False:
 			self.clock.tick(30)
-	
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					pygame.quit()
 
-				if event.type == pygame.KEYDOWN:
+				elif event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_RETURN:
 
 						if position == 1:
 							self.exit = True
-							self.changes()
 
-						elif position == 2:							
+						elif position == 2:
+							self.exit = True
+							self.changes()
+							self.game_active = True
+
+
+						elif position == 3:							
 							self.about()
 							self.sound.blip.stop()							
 							self.sound.blip.play()
 
-						elif position == 3:
+						elif position == 4:
 							pygame.quit()
 
 					elif event.key == pygame.K_DOWN:
-						if position < 3:
+						
+						if position < limite:
 							position +=1
 							self.sound.blip.stop()
 							self.sound.blip.play()
 
 					elif event.key == pygame.K_UP:
-						if position > 1:
-							position -=1
+						if self.game_active == False:
+							if position > 2:								
+								position -=1
+						else:
+							if position > 1:
+								position -=1
+
 							self.sound.blip.stop()
 							self.sound.blip.play()
-							
-			#for i in range(len(texto)):	
-			#	if i +1 == position:
-			#		texto[i].fill(self.color_selection)
-			#	else:
-			#		texto[i].fill(self.color_base)				
-			#surface = self.apply(texto)
-			
+
 			SCREEN.blit(surface,(0,0))
-			SCREEN.blit(self.lemon,lemon_pos[position])
+			SCREEN.blit(self.lemon,lemon_pos[position-1]) if self.game_active == False else SCREEN.blit(self.lemon,lemon_pos[position]) 
 			pygame.display.flip()
 
 
 	def apply(self,surface,args,x= 30,y = 0,space_line = 0,sign = 1):
-		#surface = pygame.Surface((620,480))
 		surface.fill(pygame.Color("#0C040C"))
 		cont = 0
 
@@ -325,7 +321,6 @@ class Menu:
 class Game:
 	
 	def __init__(self,maps):
-		#self.maps= ["map/map4.tmx","map/map3.tmx","map/map2.tmx","map/map1.tmx"]
 		self.maps = maps
 		self.sound = Sound()
 		self.map_cont = 0
@@ -334,7 +329,7 @@ class Game:
 		self.Maprect = self.Mapimage.get_rect()
 		self.camera = Camera(self.map.width,self.map.height)
 		self.changes_maps = False
-						
+								
 	def load(self):
 		self.rampas = []
 		self.arrow = pygame.sprite.Group()
@@ -354,53 +349,24 @@ class Game:
 			if tile_object.name == "Door":
 				if tile_object.type == "YELLOW":
 					self.objs.add(Element.Door(tile_object.x,tile_object.y,self,"YELLOW"))
-			
-			elif tile_object.name == "Spike_trap":
-				if tile_object.type == "right":
-					self.trap.add(Element.Trap(tile_object.x,tile_object.y,self,"right"))
-				else:
-					self.trap.add(Element.Trap(tile_object.x,tile_object.y,self))
-
-			elif tile_object.name == "plataform":
-				self.plataform.add(Plataform(tile_object.x,tile_object.y,tile_object.width,tile_object.height))
-
-			elif tile_object.name == "Apple":
-				if tile_object.type == "left":
-					self.enemies.add(Enemies.Apple(tile_object.x,tile_object.y,self,"left"))
-				elif tile_object.type == "right":
-					self.enemies.add(Enemies.Apple(tile_object.x,tile_object.y,self,"right"))
-			
-			elif tile_object.name == "Spike":
-				self.spike.add(Spikes(tile_object.x,tile_object.y,tile_object.width,tile_object.height,self))
-
-			elif tile_object.name == "Fire_cannon":
-				
-				if tile_object.type == "left":
-					self.fire_cannon.add(Element.Fire_Cannon(tile_object.x,tile_object.y,self, "left"))
-
-				else:
-					self.fire_cannon.add(Element.Fire_Cannon(tile_object.x,tile_object.y,self))
-
+			elif tile_object.name == "Apple":				
+					self.enemies.add(Enemies.Apple(tile_object.x,tile_object.y,self,tile_object.type))
 			elif tile_object.name == "Key":
 				self.objs.add(Element.Key(tile_object.x,tile_object.y,self))
-
-
-			elif tile_object.name == "jump":
-				self.objs.add(Element.Trampoline(tile_object.x,tile_object.y,self))
-
 			elif tile_object.name == "Lemon":
 				self.objs.add(Element.Lemon(tile_object.x,tile_object.y,self))
-
-			elif tile_object.name == "dead":
-				self.objs.add(Player.Dead(tile_object.x,tile_object.y))
-
-			#elif tile_object.name == "rampa":
-			#	self.rampas.append(Slope(tile_object.x,tile_object.y,tile_object.width,tile_object.height,self))
+			elif tile_object.name == "Spike_trap":
+				self.trap.add(Element.Trap(tile_object.x,tile_object.y,self,tile_object.type))
+			elif tile_object.name == "plataform":
+				self.plataform.add(Plataform(tile_object.x,tile_object.y,tile_object.width,tile_object.height))
+			elif tile_object.name == "Spike":
+				self.spike.add(Spikes(tile_object.x,tile_object.y,tile_object.width,tile_object.height,self))
+			elif tile_object.name == "Fire_cannon":
+					self.fire_cannon.add(Element.Fire_Cannon(tile_object.x,tile_object.y,self, tile_object.type))				
+			elif tile_object.name == "jump":
+				self.objs.add(Element.Trampoline(tile_object.x,tile_object.y,self))
 		
 	def update(self):
-		#for rampa in self.rampas:
-		#	self.player.direcciony = 0
-		#	rampa.update()		
 		
 		self.camera.update(self.player)
 		self.spike.update()
@@ -408,11 +374,6 @@ class Game:
 		self.fire_cannon.update()
 		self.arrow.update()
 		self.enemies.update()
-
-
-			
-
-			
 
 		for objs in self.objs:
 			
@@ -434,6 +395,7 @@ class Game:
 				pass
 
 		if self.changes_maps == True:
+		
 			self.map =  TileMap(self.maps[self.map_cont])
 			self.Mapimage = self.map.make_map()
 			self.Maprect = self.Mapimage.get_rect()
@@ -443,42 +405,32 @@ class Game:
 
 		if self.player.dead == True:
 			self.load()
-		
+
 		self.player.update()
 
 	def draw(self):
 
 		SCREEN.fill(pygame.Color("#A0A0A0"))
-		
 		for arrow in self.arrow:
 			SCREEN.blit(arrow.image,self.camera.apply(arrow))
-
 		SCREEN.blit(self.Mapimage,self.camera.apply_rect(self.Maprect))
-
 		for cannon in self.fire_cannon:
 			for fireball in cannon.fireball:
 				SCREEN.blit(fireball.image,self.camera.apply(fireball))
-		
-
-		
 		for enemies in self.enemies:
 			SCREEN.blit(enemies.image,self.camera.apply(enemies))	
 		for objs in self.objs:
 			SCREEN.blit(objs.image,self.camera.apply(objs))
-
 		SCREEN.blit(self.player.image,self.camera.apply(self.player))
-
 		for trap in self.trap:
 			SCREEN.blit(trap.image,self.camera.apply(trap))
-					
-		#for rampa in self.rampas:
-		#	pygame.draw.line(self.Mapimage,pygame.Color("#04BCCC"),(rampa.slope_x1,rampa.slope_y1),(rampa.slope_x2,rampa.slope_y2),2)
+
 def Main():
 
 	exit = False
 	clock = pygame.time.Clock()
 
-	maps= ["map/map1.tmx","map/map2.tmx","map/map3.tmx","map/map4.tmx"]
+	maps= ["map/map1.tmx","map/map2.tmx","map/map3.tmx","map/map4.tmx","map/map5.tmx"]
 	menu = Menu(maps)
 	game = Game(menu.maps)
 	
@@ -531,4 +483,3 @@ def Main():
 
 if __name__ == "__main__":
 	Main()
-	pygame.quit()

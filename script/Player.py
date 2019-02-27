@@ -26,7 +26,7 @@ class Player(Sprite.Sprite):
 		self.archers = [	pygame.image.load(ruta_base + "sprites/hug/hug7.png"),
 						pygame.image.load(ruta_base + "sprites/hug/hug9.png"),]
 
-
+		
 		self.activate_jump = False
 		self.animation_state = Sprite.animation(self.state,32,52)
 		self.animation_walk = Sprite.animation(self.walk,32,52)
@@ -78,9 +78,9 @@ class Player(Sprite.Sprite):
 		self.mask = pygame.mask.from_surface(self.image)
 
 		self.move()	
-		if self.vlx >= 5:
+		if self.vlx >= 7:
 			self.vlx = 5
-		elif self.vlx <= -5:
+		elif self.vlx <= -7:
 			self.vlx = -5	
 
 		if self.stop == True:
@@ -92,8 +92,6 @@ class Player(Sprite.Sprite):
 				self.stop = False
 		
 
-
-		
 		self.gravity()
 		self.collided()
 		if len(self.colision_plataform) == 0 and self.cont_jump == 2:
@@ -121,9 +119,6 @@ class Player(Sprite.Sprite):
 				    self.archer(1)
 			    elif self.cont_shot >= 5:
 				    self.archer(0)
-
-		
-
 
 	def archer(self,pos):
 		

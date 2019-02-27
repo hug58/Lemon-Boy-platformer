@@ -269,7 +269,7 @@ class Lemon(pygame.sprite.Sprite):
 			self.dir *=-1
 
 class Fire_Cannon(pygame.sprite.Sprite):
-	def __init__(self,x,y,game,sentido = "right"):
+	def __init__(self,x,y,game,sentido):
 		pygame.sprite.Sprite.__init__(self)
 		self.fireball = []
 		self.limite = 1
@@ -310,7 +310,20 @@ class Fireball(pygame.sprite.Sprite):
 		self.rect.x = x
 		self.rect.y = y
 		self.mask = pygame.mask.from_surface(self.image)
-		self.vlx = 3 if sentido == "right" else -3
+		
+		if sentido == "right":
+			self.vlx = 3
+		elif sentido == "left":
+			self.vlx  = -3
+		else:
+			self.vlx = 0		
+		
+		if sentido == "bottom":
+			self.vly = 3
+		elif sentido == "top":
+			self.vly  = -3
+		else:
+			self.vly = 0
 		
 		self.frame = len(self.frames)
 		self.position = 0
@@ -318,6 +331,7 @@ class Fireball(pygame.sprite.Sprite):
 	def update(self):
 
 		self.rect.x += self.vlx
+		self.rect.y += self.vly
 		self.animation()
 
 	def animation(self):
