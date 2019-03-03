@@ -79,6 +79,7 @@ class Plataform(pygame.sprite.Sprite):
 		self.rect = pygame.Rect((x,y),(w,h))
 		self.rect.x = x
 		self.rect.y = y
+		self.vlx = 0
 
 class Spikes(pygame.sprite.Sprite):
 	def __init__(self,x,y,w,h,game):
@@ -96,7 +97,6 @@ class Spikes(pygame.sprite.Sprite):
 			if self.rect.colliderect(enemy.rect):
 				enemy.kill()
 
-
 class Sound:
 	def __init__(self):
 		self.ruta_sound = os.path.abspath("") + "/sound/"
@@ -104,6 +104,7 @@ class Sound:
 		self.sound_arrow = pygame.mixer.Sound(self.ruta_sound + "arrow_sound.wav")
 		self.sound_object = pygame.mixer.Sound(self.ruta_sound + "Pickup_Coin.wav")
 		self.blip = pygame.mixer.Sound(self.ruta_sound + "blip.wav")
+		self.dead = pygame.mixer.Sound(self.ruta_sound + "dead.wav")
 
 class Paused:
 	def __init__(self):
@@ -334,6 +335,7 @@ class Game:
 		self.rampas = []
 		self.arrow = pygame.sprite.Group()
 		self.plataform = pygame.sprite.Group()
+		self.plataform_m = pygame.sprite.Group()
 		self.enemies = pygame.sprite.Group()
 		self.objs = pygame.sprite.Group()
 		self.spike = pygame.sprite.Group()
@@ -359,6 +361,8 @@ class Game:
 				self.trap.add(Element.Trap(tile_object.x,tile_object.y,self,tile_object.type))
 			elif tile_object.name == "plataform":
 				self.plataform.add(Plataform(tile_object.x,tile_object.y,tile_object.width,tile_object.height))
+			elif tile_object.name == "plataform_m":
+				self.plataform_m.add(Element.plataform_m(tile_object.x,tile_object.y,tile_object.type))	
 			elif tile_object.name == "Spike":
 				self.spike.add(Spikes(tile_object.x,tile_object.y,tile_object.width,tile_object.height,self))
 			elif tile_object.name == "Fire_cannon":
@@ -374,9 +378,9 @@ class Game:
 		self.fire_cannon.update()
 		self.arrow.update()
 		self.enemies.update()
+		self.plataform_m.update()
 
-		for objs in self.objs:
-			
+		for objs in self.objs:	
 			objs.update()
 
 			try:
@@ -403,17 +407,16 @@ class Game:
 			self.load()
 			self.changes_maps = False			
 
-		if self.player.dead == True:
-			self.load()
-
 		self.player.update()
 
 	def draw(self):
 
-		SCREEN.fill(pygame.Color("#A0A0A0"))
+		SCREEN.fill(pygame.Color("#2b425d"))
 		for arrow in self.arrow:
 			SCREEN.blit(arrow.image,self.camera.apply(arrow))
 		SCREEN.blit(self.Mapimage,self.camera.apply_rect(self.Maprect))
+		for plataform_m in self.plataform_m:
+			SCREEN.blit(plataform_m.image,self.camera.apply(plataform_m))	 
 		for cannon in self.fire_cannon:
 			for fireball in cannon.fireball:
 				SCREEN.blit(fireball.image,self.camera.apply(fireball))
@@ -430,7 +433,7 @@ def Main():
 	exit = False
 	clock = pygame.time.Clock()
 
-	maps= ["map/map1.tmx","map/map2.tmx","map/map3.tmx","map/map4.tmx","map/map5.tmx"]
+	maps= ["map/map1.tmx","map/map2.tmx","map/map3.tmx","map/map4.tmx","map/map5.tmx","map/map6.tmx"]
 	menu = Menu(maps)
 	game = Game(menu.maps)
 	

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="61" height="15" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="342">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="61" height="15" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="345">
  <tileset firstgid="1" source="spikes.tsx"/>
  <tileset firstgid="9" source="pasto.tsx"/>
  <tileset firstgid="11" source="fire_cannon.tsx"/>
  <layer name="plts" width="61" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgB3EgYnc+NSxMQcNLYXaNgFNADDLZ0zMlAuptI1cNFhh20BFxQjK+8waWHVuqpBThxYC4kjEsNLj3Eqh8oDABUzAMI
+   eJztlMEKACAIQ72a//+/1S0kDSEraA8GRRN2cBEBAAAA4BdkkL6LNdTg5FyvUtR5Ju9tJXCWF/eYKZYr6i9BfzY9S8/k/TeaaF9u9YsNjZ23PNZMln+XKmIkA9s=
   </data>
  </layer>
  <objectgroup name="spikes"/>
@@ -20,14 +20,16 @@
  </objectgroup>
  <objectgroup color="#00ff00" name="plataform">
   <object id="115" name="Player" x="45.1667" y="376.833" width="9" height="6"/>
-  <object id="153" name="plataform" x="-2.19" y="449.945" width="1954.19" height="30.0704"/>
+  <object id="153" name="plataform" x="-2.19" y="450.932" width="1954.19" height="29.083"/>
   <object id="291" name="Key" type="YELLOW" x="1882.5" y="381.167" width="6" height="5.66667"/>
-  <object id="330" name="plataform" x="191.667" y="386.083" width="64" height="61.5833"/>
-  <object id="331" name="plataform" x="608.152" y="387.905" width="64" height="61.5833"/>
+  <object id="330" name="plataform" x="224.122" y="387.901" width="31.5455" height="63.0378"/>
+  <object id="331" name="plataform" x="608.152" y="387.383" width="64" height="62.105"/>
   <object id="332" name="plataform" x="1184.17" y="226.833" width="766.5" height="61.1667"/>
   <object id="334" name="plataform" x="992.333" y="386.667" width="64" height="63.3333"/>
   <object id="336" name="plataform" x="1152.09" y="258.727" width="31.9091" height="29.1818"/>
   <object id="339" name="plataform" x="992" y="354.727" width="32" height="32"/>
+  <object id="342" name="plataform" x="255.75" y="387.9" width="32.25" height="28.125"/>
+  <object id="344" name="plataform" x="192.091" y="419.364" width="32.1818" height="31.5455"/>
  </objectgroup>
  <objectgroup name="object">
   <object id="292" name="Lemon" x="1472.57" y="384.314" width="32.375" height="32.25"/>

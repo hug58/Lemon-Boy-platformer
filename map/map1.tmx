@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="61" height="22" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="133">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="61" height="22" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="135">
  <tileset firstgid="1" source="spikes.tsx"/>
  <tileset firstgid="9" source="pasto.tsx"/>
  <layer name="background" width="61" height="22">
@@ -28,42 +28,42 @@
  </objectgroup>
  <layer name="plts" width="61" height="22">
   <data encoding="base64" compression="zlib">
-   eJztl90KgCAMhfUyg+z9r3rUvFAQaZvDRj+eD87V1rYDNc05AIAFMWnJmoU9KWQB8HfWpwcAAJAsgjT53rnDfuJxgiBNPjwDiXLPteKNZ+yMd9wve67/xaQzoOZuz9Qcm0H93n3Yfl+c51L/al4qptnLGko/aff39KJyolCDill4bmcZ8eyrnPZdbGtwce45rkavtH6lXiXnBFosCew=
+   eJztlrEOgCAMRMsIJvr/G5/qoknThJaCHZB7yS1ytL0EFSIAQASZaRcKEwB/Z6d3G4DVyIY8/kRU4yeepxjy+JEZWETfcY/A2qPseMddObPnH8D5OvPoHCM9PN9DjubR5r2e52ejnncOi56cs5ll/dY+uRaR2ZPV6pWYR55DWUNb1/ZpNXrlzWv1ej03e4oJkA==
   </data>
  </layer>
  <layer name="spikes" width="61" height="22">
   <data encoding="base64" compression="zlib">
-   eJzt090KwCAIBlC7dE+5R/NRt92FINNWTeo7EAty/kARAcAIXO0LkfzVx0xHtd9lZtjX88ZxzwHyud/l6YiRSHx2mNmMkUg8+PF7SOr8sL4sd8jqo1d/LXki/7D6es9GmFFH1yhqWWdfWDVa5tW5evS3ggs5wQa4
+   eJzt090KABAMhuE5dJcubZfKsVLkZ8P7lBz4mq0QAbBbEFHrHk77cWb8h3cO+FP+ZerI6EjeO2ZuZnQkDz+idQPAJSz/Sqz2F4Vqtc523TFba0XNF2RcuAZC
   </data>
  </layer>
  <objectgroup name="plataform">
-  <object id="11" name="plataform" x="1888.12" y="447.989" width="63.8854" height="255.511"/>
-  <object id="12" name="plataform" x="1440.08" y="544.029" width="223.875" height="159.637"/>
-  <object id="13" name="plataform" x="1343.82" y="576" width="96.1603" height="32.25"/>
+  <object id="11" name="plataform" x="1888.12" y="452.989" width="63.8854" height="250.511"/>
+  <object id="12" name="plataform" x="1440.08" y="548.529" width="223.875" height="155.137"/>
+  <object id="13" name="plataform" x="1343.82" y="579.697" width="96.1603" height="28.553"/>
   <object id="14" name="plataform" x="1280" y="608" width="64.5" height="64"/>
-  <object id="17" name="plataform" x="0.00390625" y="672" width="160.004" height="32"/>
-  <object id="18" name="plataform" x="159.979" y="607.996" width="96.0206" height="63.8217"/>
+  <object id="17" name="plataform" x="0.00390625" y="676" width="160.004" height="28"/>
+  <object id="18" name="plataform" x="159.979" y="611.996" width="96.0206" height="59.8217"/>
   <object id="19" name="plataform" x="256.05" y="667.981" width="127.957" height="36.0138"/>
   <object id="20" name="plataform" x="384.008" y="608" width="95.9955" height="64.0078"/>
   <object id="21" name="plataform" x="480" y="667.891" width="96" height="36.1163"/>
-  <object id="22" name="plataform" x="576.017" y="576" width="224.478" height="96.022"/>
-  <object id="23" name="plataform" x="800" y="672" width="480" height="32"/>
-  <object id="24" name="plataform" x="795.956" y="352" width="263.953" height="95.9943"/>
-  <object id="26" name="plataform" x="1180.11" y="351.999" width="231.887" height="96.0236"/>
+  <object id="22" name="plataform" x="576.017" y="580.182" width="224.478" height="91.8402"/>
+  <object id="23" name="plataform" x="800" y="677" width="480" height="27"/>
+  <object id="24" name="plataform" x="795.956" y="355.5" width="263.953" height="92.4943"/>
+  <object id="26" name="plataform" x="1180.11" y="355.749" width="231.887" height="92.2736"/>
   <object id="27" name="Door" type="YELLOW" x="1900.26" y="386.69" width="4" height="10.5"/>
-  <object id="29" name="plataform" x="128" y="640" width="32.0625" height="32.0241"/>
+  <object id="29" name="plataform" x="128" y="643.818" width="32.0625" height="28.2059"/>
   <object id="30" name="plataform" x="703.997" y="479.997" width="32.0005" height="32"/>
   <object id="32" name="Apple" type="right" x="948.5" y="298" width="13" height="11">
    <properties>
     <property name="area" type="int" value="70"/>
    </properties>
   </object>
-  <object id="33" name="Apple" type="left" x="722.666" y="534.501" width="15.3333" height="9.33333">
+  <object id="33" name="Apple" type="left" x="1012.17" y="641.001" width="15.3333" height="9.33333">
    <properties>
     <property name="area" type="int" value="60"/>
    </properties>
   </object>
-  <object id="52" name="plataform" x="1024.01" y="96.0114" width="96.0028" height="63.9886"/>
+  <object id="52" name="plataform" x="1024.01" y="100.511" width="96.0028" height="59.4886"/>
   <object id="55" name="Spike" x="1060.18" y="426.091" width="28" height="12"/>
   <object id="57" name="Spike" x="1152" y="361.75" width="28.0435" height="11.9565"/>
   <object id="61" name="Spike" x="265.75" y="639.969" width="12.2727" height="27.9659"/>
@@ -84,15 +84,14 @@
   <object id="79" name="Spike" x="1412" y="362" width="27.9861" height="11.9905"/>
   <object id="80" name="Spike" x="1412" y="394.002" width="27.9788" height="12.0203"/>
   <object id="83" name="Spike" x="1412" y="426.004" width="28.0111" height="12.0108"/>
-  <object id="98" name="plataform" x="1664" y="672" width="223.969" height="32.0097"/>
-  <object id="105" name="plataform" x="1184" y="224.182" width="35.625" height="31.9091"/>
-  <object id="123" name="Apple" type="left" x="1272.17" y="319.833" width="13" height="11">
+  <object id="98" name="plataform" x="1664" y="676.25" width="223.969" height="27.7597"/>
+  <object id="105" name="plataform" x="1184" y="228" width="35.625" height="28.0909"/>
+  <object id="123" name="Apple" type="left" x="1330.17" y="310.015" width="13" height="11">
    <properties>
     <property name="area" type="int" value="70"/>
    </properties>
   </object>
   <object id="127" name="plataform" x="1248" y="639.818" width="32" height="32.2727"/>
-  <object id="130" x="1759.82" y="575.995" width="32.1682" height="32.005"/>
  </objectgroup>
  <objectgroup name="wall">
   <object id="111" name="plataform" x="-0.30303" y="527.333" width="0.363636" height="144.646"/>
@@ -101,11 +100,11 @@
  <objectgroup name="object">
   <object id="41" name="jump" x="611.333" y="545"/>
   <object id="42" name="jump" x="704.041" y="448.05"/>
-  <object id="44" name="jump" x="863.5" y="639.75" width="0.25"/>
   <object id="53" name="Key" type="YELLOW" x="1053.67" y="80.6667" width="6" height="5.66667"/>
-  <object id="90" name="jump" x="1760.04" y="544.06" width="1.21739" height="0.565217"/>
-  <object id="99" name="jump" type="left" x="1288" y="320" width="6" height="2.66667"/>
+  <object id="90" name="jump" x="1632.04" y="512.393" width="32.2618" height="30.1874"/>
+  <object id="99" name="jump" type="left" x="1288" y="320" width="28.9091" height="31.5758"/>
   <object id="107" name="jump" x="1184" y="192.5" width="1.5" height="0.25"/>
+  <object id="133" name="Lemon" x="833" y="641" width="31.5" height="29.5"/>
  </objectgroup>
  <objectgroup name="sprite">
   <object id="115" name="Player" x="30.5" y="614.5" width="9" height="6"/>

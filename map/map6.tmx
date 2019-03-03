@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="61" height="15" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="374">
+ <tileset firstgid="1" source="spikes.tsx"/>
+ <tileset firstgid="9" source="fire_cannon.tsx"/>
+ <tileset firstgid="10" source="pasto.tsx"/>
+ <layer name="plts" width="61" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzt0jEOACAIA0Bcwf+/10EHJwcjLYm9pCspATMREZGpHyIYjV0ArNqPvepSZR+U3/a95ewCBMEusHHLvYEXTKxkzR/tzwM3
+  </data>
+ </layer>
+ <objectgroup name="spikes">
+  <object id="356" name="Spike" x="1257.96" y="416" width="684.167" height="28"/>
+  <object id="358" name="Spike" x="137.333" y="416" width="461" height="27.3333"/>
+  <object id="365" name="Spike" x="1641.93" y="256.006" width="12.0682" height="28.0909"/>
+  <object id="367" name="Spike" x="1897.91" y="224.182" width="12.1818" height="27.6364"/>
+ </objectgroup>
+ <layer name="spikes" width="61" height="15">
+  <data encoding="base64" compression="zlib">
+   eJztzsEJADAIADHdf2mHELWFBO5/EQAAc/J6ADiXjV562fz8QQFHHAAn
+  </data>
+ </layer>
+ <objectgroup name="wall">
+  <object id="111" name="plataform" x="0.060606" y="-224.667" height="672.646"/>
+  <object id="113" name="plataform" x="1951.99" y="83.626" width="-4.2244e-14" height="397.646"/>
+ </objectgroup>
+ <objectgroup color="#00ff00" name="plataform">
+  <object id="115" name="Player" x="21.1667" y="375.5" width="9" height="6"/>
+  <object id="153" name="plataform" x="-2.19" y="450.932" width="1954.19" height="29.083"/>
+  <object id="291" name="Key" type="YELLOW" x="1546.5" y="65.167" width="6" height="5.66667"/>
+  <object id="345" name="plataform" x="736" y="196.542" width="223.5" height="27.125"/>
+  <object id="350" name="plataform" x="1600" y="323.364" width="32.25" height="28.3864"/>
+  <object id="346" name="plataform_m" type="-2" x="1408.58" y="321" width="31.3333" height="29.6667"/>
+  <object id="355" name="plataform" x="1184" y="420" width="63.75" height="30.75"/>
+  <object id="357" name="plataform_m" type="-2" x="279" y="321.333" width="26" height="28"/>
+  <object id="360" name="plataform" x="64.0947" y="387.988" width="31.9091" height="62.7159"/>
+  <object id="361" name="plataform_m" type="2" x="486.333" y="322" width="26" height="28"/>
+  <object id="362" name="plataform" x="1056" y="292.125" width="64" height="28"/>
+  <object id="364" name="plataform" x="1632.25" y="291.375" width="31.875" height="32"/>
+  <object id="366" name="plataform" x="1856" y="259.273" width="95.8182" height="29.0909"/>
+  <object id="368" name="plataform_m" type="1" x="1750.8" y="196.788" width="24.3636" height="29.5455"/>
+ </objectgroup>
+ <objectgroup name="sprites">
+  <object id="373" name="Apple" x="993.5" y="397" width="30.5" height="30"/>
+ </objectgroup>
+ <objectgroup name="object">
+  <object id="337" name="Door" type="YELLOW" x="819.295" y="133.292" width="62.3333" height="63"/>
+  <object id="363" name="jump" x="1600" y="291.352" width="32.0682" height="31.7386"/>
+  <object id="369" name="Lemon" x="1921.09" y="224" width="30.1818" height="32"/>
+  <object id="370" name="Lemon" x="640" y="386" width="32" height="29.3333"/>
+ </objectgroup>
+</map>

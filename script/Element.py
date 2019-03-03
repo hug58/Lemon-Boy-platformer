@@ -12,18 +12,35 @@ ruta_base += "/image/"
 ruta_sound = os.path.abspath("")
 ruta_sound += "/sound/"
 
-class Block(pygame.sprite.Sprite):
-	def __init__(self,x,y,scale):
+class plataform_m(pygame.sprite.Sprite):
+	def __init__(self,x,y,vl):
 		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.image.load(ruta_base +"pasto.png")	
-		self.image = pygame.transform.scale(self.image,(scale[0],scale[0]))
+		self.image = pygame.image.load(ruta_base +"plataform.png")	
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y
-		self.vly = 0
-		self.vlx = 0
-		self.x = x
-		self.y = y
+		#self.tween = tween.easeInOutSine
+		#self.bob_range = 210
+		#self.bob_speed = 1
+		self.step = 0
+		#self.dir = 1
+		#self.posx = x
+		self.vlx = int(vl)
+
+	def update(self):
+		
+		#offset = self.bob_range *  (self.tween(self.step / self.bob_range) - 0.5)
+		#self.rect.centerx = self.posx +offset * self.dir
+		self.step += 1
+		self.rect.x += self.vlx
+		if self.step > 80:
+			self.vlx *=-1
+			self.step = 0 
+		#if self.step > self.bob_range:
+		#	self.step = 0
+		#	self.dir *=-1
+
+		
 
 class Trap(pygame.sprite.Sprite):
 	def __init__(self,x,y,game,sentido = "top"):
@@ -45,15 +62,10 @@ class Trap(pygame.sprite.Sprite):
 		self.cont = 0
 		self.position = 0
 
-		if self.sentido == "top":
-			pass
-
-		elif self.sentido == "right":
+		if self.sentido == "right":
 			self.image = pygame.transform.rotate(self.image,-90)
-
 		elif self.sentido == "left":
 			self.image = pygame.transform.rotate(self.image,90)
-
 		elif self.sentido == "bottom":
 			self.image = pygame.transform.rotate(self.image,180)
 
@@ -100,15 +112,12 @@ class Trap(pygame.sprite.Sprite):
 				self.activate_spike = True
 				if self.step == 55:
 					self.activate = False
-
-			
+		
 			self.image = self.trap.subsurface((32*self.position,0),(32,32)) 
 			if self.sentido == "right":
 				self.image = pygame.transform.rotate(self.image,-90)	
-
 			elif self.sentido == "left":
 				self.image = pygame.transform.rotate(self.image,90)
-
 			elif self.sentido == "bottom":
 				self.image = pygame.transform.rotate(self.image,-180)
 				

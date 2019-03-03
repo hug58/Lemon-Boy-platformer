@@ -35,15 +35,13 @@ class Player(Sprite.Sprite):
 		self.image = self.state[0]
 		self.mask = pygame.mask.from_surface(self.image)
 		self.rect = pygame.Rect((x,y),(25,52))
-		#self.rect = self.image.get_rect()
-		self.rect.x = x
+		self.rect.centerx = self.rect.x
 		self.rect.y = y 
 		self.vly = 0
 		self.vlx = 0
 		
 		self.direccionx = 1
 		self.direcciony = 0
-		self.dead = None
 		self.stop = False
 		self.fuerza_gravitatoria = 0.65
 		self.game = game
@@ -54,20 +52,20 @@ class Player(Sprite.Sprite):
 		
 		self.cont_shot  = 0
 
+		self.dead = None
+		self.cont_dead = 0
+
 	def update(self):
-		
 		if self.vlx == 0:
 			self.animation_state.limite = 10
 			if self.direccionx > 0:
 				self.image = self.animation_state.update(False)
 			if self.direccionx < 0:
 				self.image = self.animation_state.update(True)
-
 		elif self.vlx > 0:
 			self.image = self.animation_walk.update(False) 
 		elif self.vlx < 0:
 			self.image = self.animation_walk.update(True)
-
 		if self.direcciony < 0:	
 			if self.direccionx > 0:
 				self.image = self.jump[0]
@@ -97,6 +95,9 @@ class Player(Sprite.Sprite):
 		if len(self.colision_plataform) == 0 and self.cont_jump == 2:
 			self.direcciony = -1
 			self.cont_jump = 1
+
+		
+		self.Fundead()
 
 	def move(self):
 		move = pygame.key.get_pressed()
@@ -134,6 +135,19 @@ class Player(Sprite.Sprite):
 		elif self.direccionx < 0:
 			self.game.arrow.add(Arrow(self.rect.left -5,self.rect.centery,-1,self.game))
 
+	def Fundead(self):
+		
+		if self.dead == True:
+			self.vlx = 0
+			self.vly = 0
+			if self.cont_dead == 0:
+				self.game.sound.dead.play()
+			self.cont_dead +=1
+			if self.cont_dead >= 10:
+				self.game.load()
+		
+			
+
 class Arrow(pygame.sprite.Sprite):
 	def __init__(self,x,y,direccion,game):
 		pygame.sprite.Sprite.__init__(self)
@@ -168,6 +182,8 @@ class Arrow(pygame.sprite.Sprite):
 
 		self.rect.x += self.vl
 
+
+			
 class Dead(pygame.sprite.Sprite):
 	def __init__(self,x,y):
 		pygame.sprite.Sprite.__init__(self)

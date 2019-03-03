@@ -55,8 +55,12 @@ class Sprite(pygame.sprite.Sprite):
 
 	def collided(self):
 		self.rect.x += self.vlx
-		
 		self.colision_plataform =  pygame.sprite.spritecollide(self,self.game.plataform,False)
+		self.colision_plataform_m = pygame.sprite.spritecollide(self,self.game.plataform_m,False)
+		
+		if len(self.colision_plataform_m) > 0:
+			self.colision_plataform = self.colision_plataform_m
+			
 		for block in self.colision_plataform:
 			if self.vlx > 0:
 				#self.cont_jump = 1
@@ -67,10 +71,15 @@ class Sprite(pygame.sprite.Sprite):
 
 		self.rect.y +=self.vly
 		self.colision_plataform =  pygame.sprite.spritecollide(self,self.game.plataform,False) #,pygame.sprite.collide_mask)
+		self.colision_plataform_m = pygame.sprite.spritecollide(self,self.game.plataform_m,False)
+		if len(self.colision_plataform_m) > 0:
+			self.colision_plataform = self.colision_plataform_m
+		
 		for block in self.colision_plataform:
 			if self.vly >= 0:
 				self.cont_jump = 2
 				self.rect.bottom = block.rect.top
+				self.rect.x += block.vlx					
 				self.direcciony = 1
 				self.vly = 0
 			elif self.vly < 0:
