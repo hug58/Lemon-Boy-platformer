@@ -450,6 +450,7 @@ def Main():
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_x:
 					if game.player.cont_jump > 0:
+						game.player.diffx = 0
 						game.sound.sound_jump.stop()
 						game.sound.sound_jump.play()
 						game.player.vly = -8
