@@ -1,11 +1,17 @@
 # Lemon-Boy
 
+<link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css">
+
 <h1>Un juego de plataforma en desarrollo </h1>
 <h3> Mi primer "gran" proyecto de videojuego. </h3>
 
+<div class = "container">
+  <div class = "card">
 <img src = "https://github.com/hug58/Lemon-Boy/blob/master/gif/menu.gif" >
 
 <img src= "https://github.com/hug58/Lemon-Boy/blob/master/gif/estado_actual.gif">
+  </div>
+</div>
 
 <h3> Keys </h3>
 <h4> X jump </h4>
