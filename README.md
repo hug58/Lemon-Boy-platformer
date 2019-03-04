@@ -13,10 +13,6 @@
   </div>
 </div>
 
-<h2> Require: </h2>
-  <h3> pygame </h3>
-  <h3> pytweening </h3>
-  <h3> pytmx </h3>
 
 <h3> Keys </h3>
 <h4> X jump </h4>
