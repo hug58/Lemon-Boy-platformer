@@ -138,6 +138,7 @@ class Menu:
 		self.changes_maps = False	
 
 		self.game_active = False
+		self.exit_game = False
 	
 	def update(self):
 
@@ -159,16 +160,18 @@ class Menu:
 		
 		limite = len(texto) 
 
-		surface = pygame.Surface((620,480))
-		surface = self.apply(surface,texto)
-		surface.blit(self.hugo,(400,400))
-		surface.blit(self.paty,(440,400))
+		if self.exit_game != True:
+			surface = pygame.Surface((620,480))
+			surface = self.apply(surface,texto)
+			surface.blit(self.hugo,(400,400))
+			surface.blit(self.paty,(440,400))
 		
-		while self.exit == False:
+		while self.exit != True:
 			self.clock.tick(30)
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
-					pygame.quit()
+					self.exit_game = True
+					self.exit = True
 
 				elif event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_RETURN:
@@ -188,7 +191,8 @@ class Menu:
 							self.sound.blip.play()
 
 						elif position == 4:
-							pygame.quit()
+							self.exit_game = True
+							self.exit = True
 
 					elif event.key == pygame.K_DOWN:
 						
@@ -211,7 +215,6 @@ class Menu:
 			SCREEN.blit(surface,(0,0))
 			SCREEN.blit(self.lemon,lemon_pos[position-1]) if self.game_active == False else SCREEN.blit(self.lemon,lemon_pos[position]) 
 			pygame.display.flip()
-
 
 	def apply(self,surface,args,x= 30,y = 0,space_line = 0,sign = 1):
 		surface.fill(pygame.Color("#0C040C"))
@@ -248,13 +251,13 @@ class Menu:
 		surface.blit(self.hugo,(400,400))
 		surface.blit(self.paty,(440,400))
 		
-		while exit == False:
-
+		while exit != True:
 			self.clock.tick(30)
-	
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
-					pygame.quit()
+					self.exit_game = True
+					self.exit = True
+					exit = True
 
 				if event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_k:
@@ -281,31 +284,28 @@ class Menu:
 		SCREEN.blit(surface,(0,0))
 		SCREEN.blit(self.lemon,(0,440))
 		
-		while exit == False:
+		while exit != True:
 
 			self.clock.tick(30)
 	
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
-					pygame.quit()
-
+					self.exit_game = True
+					self.exit = True
+					exit = True
 				if event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_RETURN:
 						self.position = position -1
 						self.changes_maps = True
 						exit = True
-					
 					if event.key == pygame.K_k:
 						self.exit = False
 						exit = True
-
-
 					elif event.key == pygame.K_UP:
 						if position < len(self.maps):
 							y_move +=40
 							surface_selection = self.apply(surface_selection,texto,y = y_move,sign =-1 )
 							position +=1
-
 					elif event.key == pygame.K_DOWN:
 						if position > 1:
 							y_move -=40
@@ -432,16 +432,12 @@ def Main():
 
 	exit = False
 	clock = pygame.time.Clock()
-
 	maps= ["map/map1.tmx","map/map2.tmx","map/map3.tmx","map/map4.tmx","map/map5.tmx","map/map6.tmx"]
 	menu = Menu(maps)
 	game = Game(menu.maps)
-	
-
 	game.load()
 	
-	
-	while exit == False:
+	while exit != True and menu.exit_game != True:
 		clock.tick(60)
 		
 		for event in pygame.event.get():
@@ -456,33 +452,32 @@ def Main():
 						game.player.vly = -8
 						game.player.cont_jump -=1
 						game.player.direcciony = -1
+
 				if event.key == pygame.K_RETURN:
 					menu.exit = False
 
 			if event.type == pygame.KEYUP:
 				if event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT:
 					game.player.stop = True
-
 				if event.key == pygame.K_c:
 					if game.player.cont_shot >= 13:
 						game.player.cont_shot = 0
 						game.player.shot()
-
 					else:
 						game.player.cont_shot = 0
 			
-
 		if menu.changes_maps == True:
 			game.map_cont = menu.position
 			game.changes_maps = True
 			menu.changes_maps = False
-
-
-		if menu.exit == False:
+		
+		if menu.exit != True:
 			menu.update()
 		
+		if menu.exit_game != True:
+			game.draw()
+		
 		game.update()
-		game.draw()
 		pygame.display.flip()
 
 if __name__ == "__main__":
