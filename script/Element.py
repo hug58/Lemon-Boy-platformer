@@ -1,5 +1,5 @@
-import pygame
-import os.path
+import pygame as pg
+from script import function_utils as fun
 import pytweening as tween
 
 
@@ -7,55 +7,33 @@ WHITE2 =  (252,252,238)
 LEMON = (249,215,0)
 GREEN = (140,196,51)
 
-ruta_base =  os.path.abspath("")
-ruta_base += "/image/"
-ruta_sound = os.path.abspath("")
-ruta_sound += "/sound/"
 
-class plataform_m(pygame.sprite.Sprite):
+class plataform_m(pg.sprite.Sprite):
 	def __init__(self,x,y,vl):
-		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.image.load(ruta_base +"plataform.png")	
+		pg.sprite.Sprite.__init__(self)
+		self.image = pg.image.load(fun.resolve_route("image/plataform.png"))	
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y
-		#self.tween = tween.easeInOutSine
-		#self.bob_range = 210
-		#self.bob_speed = 1
 		self.step = 0
-		#self.dir = 1
-		#self.posx = x
 		self.vlx = int(vl)
 
 	def update(self):
 		
-		#offset = self.bob_range *  (self.tween(self.step / self.bob_range) - 0.5)
-		#self.rect.centerx = self.posx +offset * self.dir
 		self.step += 1
 		self.rect.x += self.vlx
 		if self.step > 80:
 			self.vlx *=-1
 			self.step = 0 
-		#if self.step > self.bob_range:
-		#	self.step = 0
-		#	self.dir *=-1
 
-		
-
-class Trap(pygame.sprite.Sprite):
+class Trap(pg.sprite.Sprite):
 	def __init__(self,x,y,game,sentido = "top"):
-		pygame.sprite.Sprite.__init__(self)
-		self.trap = pygame.image.load(ruta_base + "spikes.png")
+		pg.sprite.Sprite.__init__(self)
+		self.trap = pg.image.load(fun.resolve_route("image/spikes.png"))
 		self.frames = 8
 		self.sentido  = sentido
 
 		self.image = self.trap.subsurface((0,0),(32,32))
-		
-		self.rect = self.image.get_rect()
-		self.rect.x = x 
-		self.rect.y = y 
-		self.mask = pygame.mask.from_surface(self.image)
-		self.game = game
 		
 		self.activate = False
 		self.activate_spike = False
@@ -63,25 +41,29 @@ class Trap(pygame.sprite.Sprite):
 		self.position = 0
 
 		if self.sentido == "right":
-			self.image = pygame.transform.rotate(self.image,-90)
+			self.image = pg.transform.rotate(self.image,-90)
 		elif self.sentido == "left":
-			self.image = pygame.transform.rotate(self.image,90)
+			self.image = pg.transform.rotate(self.image,90)
 		elif self.sentido == "bottom":
-			self.image = pygame.transform.rotate(self.image,180)
+			self.image = pg.transform.rotate(self.image,180)
 
-
+		self.rect = self.image.get_rect()
+		self.rect.x = x 
+		self.rect.y = y 
+		self.mask = pg.mask.from_surface(self.image)
+		self.game = game
 
 	def update(self):
 		self.animation()
 
-		colision = pygame.sprite.collide_mask(self.game.player,self)
+		colision = pg.sprite.collide_mask(self.game.player,self)
 		if colision != None and self.activate_spike == True:
 			self.game.player.dead = True
-		colision = pygame.sprite.collide_mask(self.game.player,self)
+		colision = pg.sprite.collide_mask(self.game.player,self)
 		if colision != None and self.activate_spike == True:
 			self.game.player.dead = True
 		for enemy in self.game.enemies:
-			colision_enemies = pygame.sprite.collide_mask(enemy,self)
+			colision_enemies = pg.sprite.collide_mask(enemy,self)
 			if colision_enemies != None and self.activate_spike == True:
 				enemy.kill()
 
@@ -91,8 +73,8 @@ class Trap(pygame.sprite.Sprite):
 			self.activate_spike = False
 			self.image = self.trap.subsurface((32*self.position,0),(32,32)) 
 			if self.sentido == "right":
-				self.image = pygame.transform.rotate(self.image,-90)	
-			self.mask = pygame.mask.from_surface(self.image)			
+				self.image = pg.transform.rotate(self.image,-90)	
+			self.mask = pg.mask.from_surface(self.image)			
 			self.position +=1
 			if self.position == self.frames:
 				self.activate = True
@@ -115,18 +97,18 @@ class Trap(pygame.sprite.Sprite):
 		
 			self.image = self.trap.subsurface((32*self.position,0),(32,32)) 
 			if self.sentido == "right":
-				self.image = pygame.transform.rotate(self.image,-90)	
+				self.image = pg.transform.rotate(self.image,-90)	
 			elif self.sentido == "left":
-				self.image = pygame.transform.rotate(self.image,90)
+				self.image = pg.transform.rotate(self.image,90)
 			elif self.sentido == "bottom":
-				self.image = pygame.transform.rotate(self.image,-180)
+				self.image = pg.transform.rotate(self.image,-180)
 				
-			self.mask = pygame.mask.from_surface(self.image)	
+			self.mask = pg.mask.from_surface(self.image)	
 			
-class Key(pygame.sprite.Sprite):
+class Key(pg.sprite.Sprite):
 	def __init__(self,x,y,game):
-		pygame.sprite.Sprite.__init__(self)
-		self.image =pygame.transform.scale( pygame.image.load(ruta_base + "key.png"),(8,15))	
+		pg.sprite.Sprite.__init__(self)
+		self.image =pg.transform.scale( pg.image.load(fun.resolve_route("image/key.png")),(8,15)) 	
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y
@@ -140,10 +122,8 @@ class Key(pygame.sprite.Sprite):
 		
 	def update(self):
 		if self.rect.colliderect(self.game.player.rect):
-			#print(self.game.player.keys['KEY_YELLOW'])
 			self.game.player.keys['KEY_YELLOW'] = True
-			#print(self.game.player.keys['KEY_YELLOW'])
-			self.game.sound.sound_object.play()
+			self.game.sound["objs"].play()
 			self.kill()
 
 		offset = self.bob_range *  (self.tween(self.step / self.bob_range) - 0.5)
@@ -154,14 +134,14 @@ class Key(pygame.sprite.Sprite):
 			self.step = 0
 			self.dir *=-1
 
-class Trampoline(pygame.sprite.Sprite):
+class Trampoline(pg.sprite.Sprite):
 	def __init__(self,x,y,game):
-		pygame.sprite.Sprite.__init__(self)
+		pg.sprite.Sprite.__init__(self)
 		self.frames = [(0,0),(21,0),(41,0),(58,0),(76,0),(21,20),(39,20),(56,20),(76,20)]
 		
-		self.tramp = pygame.image.load( ruta_base + "trampoline.png")
+		self.tramp = pg.image.load( fun.resolve_route("image/trampoline.png"))
 		self.image = self.tramp.subsurface(self.frames[0],(13,9))
-		self.image = pygame.transform.scale(self.image,(32,32))
+		self.image = pg.transform.scale(self.image,(32,32))
 
 		self.rect = self.image.get_rect()
 		self.rect.x = x 
@@ -176,8 +156,9 @@ class Trampoline(pygame.sprite.Sprite):
 	def update(self):
 		if self.rect.colliderect(self.game.player.rect):
 			if self.game.player.rect.top < self.rect.top:
-				self.game.sound.sound_jump.stop()
-				self.game.sound.sound_jump.play()
+				self.game.sound["jump"].stop()
+				self.game.sound["jump"].play()
+
 				self.activate = True
 				self.jump()
 
@@ -187,33 +168,31 @@ class Trampoline(pygame.sprite.Sprite):
 		
 		if self.activate == True:
 			self.image = self.tramp.subsurface(self.frames[self.position],(13,9)) 			
-			self.image = pygame.transform.scale(self.image,(32,32))
+			self.image = pg.transform.scale(self.image,(32,32))
 			self.position +=1
 			
 			if self.position >= self.frame:
 				self.activate = False
 			
-				 
 		else:
 			
 			self.position = 0
 			self.image = self.tramp.subsurface(self.frames[self.position],(13,9)) 			
-			self.image = pygame.transform.scale(self.image,(32,32))
-
+			self.image = pg.transform.scale(self.image,(32,32))
 				
 	def jump(self, vl = -15):
 		self.game.player.cont_jump = 0
 		self.game.player.direcciony = -1
 		self.game.player.vly = vl
 
-class Door(pygame.sprite.Sprite):
+class Door(pg.sprite.Sprite):
 	def __init__(self,x,y,game,Type):
-		pygame.sprite.Sprite.__init__(self)
+		pg.sprite.Sprite.__init__(self)
 		self.position = 1
 		if Type == "YELLOW":
-			self.image = pygame.image.load(ruta_base + "door1.png")
+			self.image = pg.image.load(fun.resolve_route("image/door1.png"))
 		
-		self.image = pygame.transform.scale(self.image,(62,64))
+		self.image = pg.transform.scale(self.image,(62,64))
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y 
@@ -237,8 +216,8 @@ class Door(pygame.sprite.Sprite):
 		self.step += 2.5
 		if self.step > self.delay:
 			if self.position < 5:					
-				self.image = pygame.image.load(ruta_base + "door{}.png".format(self.position)) 			
-				self.image = pygame.transform.scale(self.image,(62,64))
+				self.image = pg.image.load(fun.resolve_route("image/door{}.png".format(self.position))) 			
+				self.image = pg.transform.scale(self.image,(62,64))
 				self.position +=1
 			elif self.position >= 4:
 				self.next = True
@@ -248,16 +227,15 @@ class Door(pygame.sprite.Sprite):
 
 		return self.image
 		
-class Lemon(pygame.sprite.Sprite):
+class Lemon(pg.sprite.Sprite):
 	def __init__(self,x,y,game):
-		pygame.sprite.Sprite.__init__(self)
-		self.image =pygame.transform.scale2x( pygame.image.load(ruta_base + "lemon.png"))
+		pg.sprite.Sprite.__init__(self)
+		self.image =pg.transform.scale2x( pg.image.load(fun.resolve_route("image/lemon.png")))
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y 
 		self.game = game
 		self.tween = tween.easeInOutSine
-		#self.tween = tween.easeOutElastic
 		self.bob_range = 20
 		self.bob_speed = 0.5
 		self.step = 0
@@ -266,7 +244,7 @@ class Lemon(pygame.sprite.Sprite):
 
 	def update(self):
 		if self.rect.colliderect(self.game.player.rect):
-				self.game.sound.sound_object.play()
+				self.game.sound["objs"].play()
 				self.kill()
 
 		offset = self.bob_range *  (self.tween(self.step / self.bob_range) - 0.5)
@@ -277,13 +255,13 @@ class Lemon(pygame.sprite.Sprite):
 			self.step = 0
 			self.dir *=-1
 
-class Fire_Cannon(pygame.sprite.Sprite):
+class Fire_Cannon(pg.sprite.Sprite):
 	def __init__(self,x,y,game,sentido):
-		pygame.sprite.Sprite.__init__(self)
+		pg.sprite.Sprite.__init__(self)
 		self.fireball = []
 		self.limite = 1
 		self.game = game
-		self.rect = pygame.Rect(x,y,20,20)
+		self.rect = pg.Rect(x,y,20,20)
 		self.sentido = sentido
 		self.step = 0
 	def update(self):
@@ -294,31 +272,30 @@ class Fire_Cannon(pygame.sprite.Sprite):
 				self.step = 0
 
 		for fireball in self.fireball:
-			colision = pygame.sprite.collide_mask(self.game.player,fireball)
+			colision = pg.sprite.collide_mask(self.game.player,fireball)
 			if colision != None:
 				self.game.player.dead = True
 
-			colision_pared = pygame.sprite.spritecollide(fireball,self.game.plataform,False)
+			colision_pared = pg.sprite.spritecollide(fireball,self.game.plataform,False)
 			
 			if len(colision_pared) > 0:
 				
 				self.fireball.remove(fireball)
 				
-			
 			fireball.update()
 
-class Fireball(pygame.sprite.Sprite):
+class Fireball(pg.sprite.Sprite):
 
 	def __init__(self,x,y,sentido):
-		pygame.sprite.Sprite.__init__(self)
-		self.frames = [	pygame.image.load(ruta_base + "ball.png"),
-						pygame.image.load(ruta_base + "ball2.png"),
-						pygame.image.load(ruta_base + "ball3.png"),]
+		pg.sprite.Sprite.__init__(self)
+		self.frames = [	pg.image.load(fun.resolve_route("image/ball.png")),
+						pg.image.load(fun.resolve_route("image/ball2.png")),
+						pg.image.load(fun.resolve_route("image/ball3.png")),]
 		self.image = self.frames[0]
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y
-		self.mask = pygame.mask.from_surface(self.image)
+		self.mask = pg.mask.from_surface(self.image)
 		
 		if sentido == "right":
 			self.vlx = 3

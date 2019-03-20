@@ -1,20 +1,18 @@
-import pygame
-import os
-
-ruta_base =  os.path.abspath("")
-ruta_base += "/image/"
+import pygame as pg
+#import script.function_utils as fun
+from script import function_utils as fun
 
 
 class Lifes:
 	def __init__(self,x,y):
-		self.image = pygame.image.load(ruta_base + "heart1.png")
-		self.image = pygame.transform.scale(self.image,(15,15))
+		self.image = pg.image.load(fun.resolve_route("image/heart1.png"))
+		self.image = pg.transform.scale(self.image,(15,15))
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y
 		self.cont = 0
 
-class animation():
+class animation:
 	def __init__(self,sheet,scale_x,scale_y):
 		self.frame_current = 0
 		self.step = 0
@@ -28,10 +26,10 @@ class animation():
 		
 		if flip == True:
 			self.image = self.sheet[self.frame_current] 
-			self.image = pygame.transform.flip(self.image,True,False)
+			self.image = pg.transform.flip(self.image,True,False)
 		elif flip == False:
 			self.image = self.sheet[self.frame_current]				
-		self.image = pygame.transform.scale(self.image,(self.scale_x,self.scale_y))
+		self.image = pg.transform.scale(self.image,(self.scale_x,self.scale_y))
 
 		if self.frame_current < self.frame:
 			self.step +=1
@@ -44,21 +42,21 @@ class animation():
 			
 		return self.image
 
-class Sprite(pygame.sprite.Sprite):
+class Sprite(pg.sprite.Sprite):
 	def __init__(self):
-		pygame.sprite.Sprite.__init__(self)
+		pg.sprite.Sprite.__init__(self)
 		self.vlx = 0
 		self.vly = 0
 		self.element = "Sprite"
-		self.fuerza_gravitatoria = 1.3
+		self.fuerza_gravitatoria = 0.65
 		self.list_lifes = []
 		self.diffx = 0
 
 	def collided(self):
 		self.rect.x += self.vlx
 		self.rect.x += self.diffx
-		self.colision_plataform =  pygame.sprite.spritecollide(self,self.game.plataform,False)
-		self.colision_plataform_m = pygame.sprite.spritecollide(self,self.game.plataform_m,False)
+		self.colision_plataform =  pg.sprite.spritecollide(self,self.game.plataform,False)
+		self.colision_plataform_m = pg.sprite.spritecollide(self,self.game.plataform_m,False)
 		
 		if len(self.colision_plataform_m) > 0:
 			self.colision_plataform = self.colision_plataform_m
@@ -72,8 +70,8 @@ class Sprite(pygame.sprite.Sprite):
 				self.rect.left = block.rect.right
 
 		self.rect.y +=self.vly
-		self.colision_plataform =  pygame.sprite.spritecollide(self,self.game.plataform,False) #,pygame.sprite.collide_mask)
-		self.colision_plataform_m = pygame.sprite.spritecollide(self,self.game.plataform_m,False)
+		self.colision_plataform =  pg.sprite.spritecollide(self,self.game.plataform,False) #,pg.sprite.collide_mask)
+		self.colision_plataform_m = pg.sprite.spritecollide(self,self.game.plataform_m,False)
 		if len(self.colision_plataform_m) > 0:
 			self.colision_plataform = self.colision_plataform_m
 		

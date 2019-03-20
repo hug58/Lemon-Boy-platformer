@@ -5,7 +5,7 @@ executables = [ Executable("lemon_boy.py",
                 base = "Win32GUI",
                 icon = "lemon.ico")]
 
-build_exe_options ={"Packages": ["pygame","pytmx","pytweening","script","os.path","math"],
+build_exe_options ={"Packages": ["pygame","pytmx","pytweening","script","os.path","math","sys"],
                     "incluide_files": [ 
         "Pixel Digivolve.otf",
         "map/map1.tmx",
