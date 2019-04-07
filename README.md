@@ -14,10 +14,14 @@
 </div>
 
 <h2> Require: </h2>
-  <h3> pygame </h3>
-  <h3> pytweening </h3>
-  <h3> pytmx </h3>
-
+  <ol> <h3> pygame </h3></ol>
+  <ol> <h3> pytweening </h3></ol>
+  <ol> <h3> pytmx </h3></ol>
+  
+<h2> or use the compiled .exe package that is in the build folder
+</h2>
+ 
+  
 <h3> Keys </h3>
 <h4> X jump </h4>
 <h4> C Arc </h4>
