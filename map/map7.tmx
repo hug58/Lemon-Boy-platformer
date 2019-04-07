@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="61" height="22" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#2e3436" nextobjectid="137">
+ <tileset firstgid="1" source="spikes.tsx"/>
+ <tileset firstgid="9" source="pasto.tsx"/>
+ <layer name="background" width="61" height="22">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAwJcBFPgAAQ==
+  </data>
+ </layer>
+ <layer name="plts" width="61" height="22">
+  <data encoding="base64" compression="zlib">
+   eJzt0jEOwCAMQ1FWuP+Bu8CSwU1MOyD+k7IhE0tpDQAAAACAnD7nJmPOTU7u3MUoX3d293DyhxhFvXH2dfd4k+m52znmZ/3RudK10jneYcxQN5u9t2xGJdP5a715AIOjBW4=
+  </data>
+ </layer>
+ <objectgroup name="plataform">
+  <object id="11" name="plataform" x="1888.12" y="452.989" width="63.8854" height="250.511"/>
+  <object id="12" name="plataform" x="1440.08" y="548.529" width="223.875" height="155.137"/>
+  <object id="13" name="plataform" x="1343.82" y="579.697" width="96.1603" height="28.553"/>
+  <object id="14" name="plataform" x="1280" y="612.25" width="64.5" height="59.75"/>
+  <object id="17" name="plataform" x="0.00390625" y="675.455" width="160.004" height="28.5455"/>
+  <object id="18" name="plataform" x="159.979" y="611.996" width="96.0206" height="59.8217"/>
+  <object id="21" name="plataform" x="257" y="671.891" width="319" height="32.1163"/>
+  <object id="22" name="plataform" x="576.017" y="580.182" width="224.478" height="91.8402"/>
+  <object id="27" name="Door" type="YELLOW" x="1900.26" y="386.69" width="4" height="10.5"/>
+  <object id="29" name="plataform" x="160.062" y="675.478" width="32.0625" height="31.6604" rotation="180"/>
+  <object id="127" name="plataform" x="1248" y="644.727" width="32" height="27.3636"/>
+  <object id="135" name="plataform" x="798.5" y="675.318" width="449.682" height="29.6818"/>
+  <object id="136" name="plataform" x="1664" y="674.333" width="225.667" height="30"/>
+ </objectgroup>
+ <objectgroup name="wall">
+  <object id="111" name="plataform" x="-0.30303" y="527.333" width="0.363636" height="144.646"/>
+  <object id="113" name="plataform" x="1951.63" y="303.293" width="0.363636" height="144.646"/>
+ </objectgroup>
+ <objectgroup name="object">
+  <object id="53" name="Key" type="YELLOW" x="1027.67" y="622.667" width="6" height="5.66667"/>
+  <object id="90" name="jump" x="1632.04" y="512.393" width="32.2618" height="30.1874"/>
+  <object id="133" name="Lemon" x="833" y="641" width="31.5" height="29.5"/>
+ </objectgroup>
+ <objectgroup name="sprite">
+  <object id="115" name="Player" x="30.5" y="614.5" width="9" height="6"/>
+ </objectgroup>
+</map>
