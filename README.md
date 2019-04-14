@@ -3,7 +3,6 @@
 <link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css">
 
 <h1>Un juego de plataforma en desarrollo </h1>
-<h3> Mi primer "gran" proyecto de videojuego. </h3>
 
 <div class = "container">
   <div class = "card">
