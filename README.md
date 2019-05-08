@@ -17,8 +17,7 @@
   <ol> <h3> pytweening </h3></ol>
   <ol> <h3> pytmx </h3></ol>
   
-<h2> or use the compiled .exe package that is in the build folder
-</h2>
+
  
   
 <h3> Keys </h3>
