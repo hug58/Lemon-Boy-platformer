@@ -2,7 +2,7 @@ import pygame as pg
 import pytweening as tween
 
 
-from recursos import image,sound
+from script import *
 
 class plataform_m(pg.sprite.Sprite):
 	def __init__(self,x,y,vl):

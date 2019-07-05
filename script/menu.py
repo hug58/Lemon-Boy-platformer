@@ -1,6 +1,6 @@
 import pygame as pg 
 
-from recursos import image,sound 
+from script import image,sound 
 
 class Menu:
 	def __init__(self,maps):
