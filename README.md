@@ -2,6 +2,8 @@
 
 <link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css">
 
+## Nota
+Ha sido de mis primeros proyectos, problamente tenga varios errores
 
 
 <div class = "container">
