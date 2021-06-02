@@ -1,6 +1,7 @@
 from script import *
 from script.sprite import Sprite
 
+import pytweening as tween
 
 
 
@@ -35,7 +36,7 @@ class Player(Sprite):
 		self.direcciony = 0
 		self.stop = False
 
-		self.cont_jump = 2
+		self.cont_jump = 3
 		self.keys = {	'KEY_YELLOW': False,'KEY_BLUE': False,
 						'KEY_RED': False,
 					}
